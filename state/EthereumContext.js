@@ -30,7 +30,6 @@ const EthereumContextProvider = ({ children }) => {
         setChainId(await ethereum.request({ method: "eth_chainId" }))
     }
     
-
     // Update active account
 
     async function updateAccount() {
@@ -75,8 +74,8 @@ const EthereumContextProvider = ({ children }) => {
 
     return (
         <EthereumContext.Provider value={{
-            enabled,
             web3,
+            enabled,
             chainId,
             account,
             BN
