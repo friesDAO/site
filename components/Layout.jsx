@@ -1,3 +1,33 @@
+// Files and modules
+
+import Link from "next/link"
+import constants from "../data/constants.json"
+
+// Navigation link component
+
+const NavLink = ({ name, href, external, margin }) => (
+    <>
+        {external ? (
+            <a className="link" href={href} target="_blank">{name}</a>
+        ) : (
+            <Link href={href}>
+                <a className="link">{name}</a>
+            </Link>
+        )}
+        <style jsx>{`
+            .link {
+                font-size: 1.1rem;
+                color: var(--black);
+                margin: ${margin || "0 0 0 48px"};
+            }
+
+            .link:hover {
+                text-decoration: underline;
+            }
+        `}</style>
+    </>
+)
+
 // Navigation bar component
 
 const NavBar = () => (
@@ -5,6 +35,7 @@ const NavBar = () => (
         <nav className="nav">
             <img className="icon" src="/friesdao.png"></img>
             <div className="title">friesDAO</div>
+            <NavLink name="launch app ➔" href={`https://app.${constants.host}`} external margin="0 0 0 auto"></NavLink>
         </nav>
         <style jsx>{`
             .nav {
@@ -22,7 +53,7 @@ const NavBar = () => (
             }
 
             .title {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
                 margin-left: 20px;
             }
         `}</style>

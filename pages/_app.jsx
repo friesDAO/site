@@ -1,6 +1,6 @@
 // Files and modules
 
-import Layout from "../components/Layout"
+import Layout from "../components/Layout.jsx"
 import Head from "next/head"
 import Error from "next/error"
 
