@@ -18,7 +18,10 @@ const Metadata = ({ page }) => {
             <meta property="og:image" content="/friesdao.png"></meta>
             <meta property="og:description" content=""></meta>
             <title>{title}</title>
-            <link rel="icon" href="/friesdao.png"></link>
+            <link rel="icon" href="/friesdao-square.png"></link>
+            <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin></link>
+            <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"></link>
         </Head>
     )
 }
@@ -46,6 +49,7 @@ const App = ({ Component, pageProps }) => {
                 }
 
                 * {
+                    font-family: "Nunito", sans-serif;
                     color: var(--black);
                     box-sizing: border-box;
                 }
