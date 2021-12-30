@@ -6,7 +6,7 @@ const Home = () => (
             <img className="hero"></img>
             <div className="text">
                 <h1 className="title">fries, decentralized</h1>
-                <div className="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque porta non massa sed lacinia. Curabitur pellentesque, neque cursus ultricies eleifend, est lacus placerat metus, non pulvinar neque diam a metus.</div>
+                <div className="desc">creating a community driven fast food franchise empire, built on the Ethereum blockchain and governed by the friesDAO</div>
             </div>
         </div>
         <style jsx>{`

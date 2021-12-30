@@ -12,11 +12,11 @@ const Metadata = ({ page }) => {
         <Head>
             <meta charSet="UTF-8"></meta>
             <meta name="viewport" content="width=device-width"></meta>
-            <meta name="description" content=""></meta>
+            <meta name="description" content="we're pooling funds to buy a franchise or two"></meta>
             <meta property="og:title" content={title}></meta>
             <meta property="og:type" content="website"></meta>
             <meta property="og:image" content="/friesdao.png"></meta>
-            <meta property="og:description" content=""></meta>
+            <meta property="og:description" content="we're pooling funds to buy a franchise or two"></meta>
             <title>{title}</title>
             <link rel="icon" href="/friesdao-square.png"></link>
             <link rel="preconnect" href="https://fonts.googleapis.com"></link>
