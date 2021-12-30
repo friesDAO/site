@@ -1,6 +1,7 @@
 // Files and modules
 
 import Layout from "../components/Layout.jsx"
+import { EthereumContextProvider } from "../state/EthereumContext.js"
 import Head from "next/head"
 import Error from "next/error"
 
@@ -20,7 +21,7 @@ const Metadata = ({ page }) => {
             <title>{title}</title>
             <link rel="icon" href="/friesdao-square.png"></link>
             <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin></link>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"></link>
             <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"></link>
         </Head>
     )
@@ -40,9 +41,11 @@ const App = ({ Component, pageProps }) => {
     return (
         <>
             <Metadata page={pageProps.page}></Metadata>
-            <Layout>
-                <Component {...pageProps}></Component>
-            </Layout>
+            <EthereumContextProvider>
+                <Layout>
+                    <Component {...pageProps}></Component>
+                </Layout>
+            </EthereumContextProvider>
             <style jsx global>{`
                 :root {
                     --black: #16191E;
