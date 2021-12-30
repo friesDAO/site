@@ -63,7 +63,35 @@ const NavBar = () => (
 // Footer component
 
 const Footer = () => (
-    <></>
+    <>
+        <footer className="footer">
+            <a href="https://twitter.com/friesDAO" target="_blank">
+                <img className="icon" src="/twitter.svg"></img>
+            </a>
+            <a href="https://discord.gg/friesdao" target="_blank">
+                <img className="icon" src="/discord.svg"></img>
+            </a>
+            <a href="https://github.com/friesDAO" target="_blank">
+                <img className="icon" src="/github.svg"></img>
+            </a>
+        </footer>
+        <style jsx>{`
+            .footer {
+                width: 100%;
+                height: 80px;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 48px;
+                padding: 0 max(calc(50vw - 550px), 20px);
+            }
+
+            .icon {
+                height: 1.5rem;
+            }
+        `}</style>
+    </>
 )
 
 // Layout component
