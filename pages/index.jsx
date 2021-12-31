@@ -16,17 +16,19 @@ const Landing = () => (
                 justify-content: center;
                 align-items: center;
                 gap: 48px;
-                padding: 0 max(calc(50vw - 500px), 20px) 80px max(calc(50vw - 550px), 20px);
+                padding: 0 max(calc(50vw - 500px), var(--side)) 80px max(calc(50vw - 550px), var(--side));
             }
 
             .hero {
-                width: 900px;
-                height: 500px; /* temporary */
+                width: 100%;
+                height: 100%; /* temporary */
+                max-width: 900px;
+                max-height: 500px;
                 border: 1px solid #000000; /* temporary */
             }
 
             .text {
-                width: 60%;
+                width: 620px;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
@@ -40,12 +42,23 @@ const Landing = () => (
                 font-size: 4rem;
                 font-weight: bold;
                 text-align: center;
+                white-space: nowrap;
             }
             
             .desc {
                 width: 100%;
                 font-size: 1.5rem;
                 text-align: center;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .text {
+                    width: auto;
+                }
+
+                .title {
+                    font-size: 2.8rem;
+                }
             }
         `}</style>
     </>
@@ -60,14 +73,14 @@ const About = () => (
                 <img className="graphic" src="/friesdao.png" />
                 
                 <div className="right">
-                    <h2 className="step">Raise</h2>
-                    <div className="details">blah blah this is my text for raise we will raise so much money and be very rich richer than jeff bozos from scamazon</div>
+                    <h2 className="step">raise funds</h2>
+                    <div className="details">gather USDC from community contributions in a public fundraiser and distribute the $FRIES governance token proportionally to contributors</div>
 
-                    <h2 className="step">Purchase</h2>
-                    <div className="details">blah blah this is my text for purchase we will buy all of the franchises we will buy the entire earth and every subway on it we will buy out subway itself</div>
+                    <h2 className="step">purchase franchises</h2>
+                    <div className="details">negotiate with franchise owners to acquire well-known profitable fast food franchises using the friesDAO community treasury</div>
 
-                    <h2 className="step">Distribute</h2>
-                    <div className="details">blah blah this is my text for distribute token holders will get richer than richard heart and his hex scam $60 billion market cap</div>
+                    <h2 className="step">reacquire $FRIES</h2>
+                    <div className="details">using franchise revenue, buy back governance tokens for the friesDAO treasury controlled by community governance</div>
                 </div>
             </div>
         </div>
@@ -80,7 +93,6 @@ const About = () => (
                 justify-content: center;
                 align-items: center;
                 gap: 50px;
-                padding: 0 max(calc(50vw - 500px), 20px) 40px max(calc(50vw - 500px), 20px);
             }
 
             .split {
@@ -104,6 +116,7 @@ const About = () => (
                 font-size: 4rem;
                 font-weight: bold;
                 color: var(--title);
+                white-space: nowrap;
             }
 
             .graphic {
@@ -124,6 +137,52 @@ const About = () => (
 
             .details:last-child {
                 margin-bottom: 0;
+            }
+
+            @media only screen and (max-width: 1000px) {
+                .split {
+                    gap: 50px;
+                }
+
+                .graphic {
+                    width: 300px;
+                }
+
+                .details {
+                    margin-bottom: 30px;
+                }
+            }
+
+            @media only screen and (max-width: 800px) {
+                .graphic {
+                    width: 250px;
+                }
+            }
+
+            @media only screen and (max-width: 700px) {
+                .split {
+                    flex-direction: column;
+                }
+
+                .graphic {
+                    width: 300px;
+                }
+            }
+
+            @media only screen and (max-width: 600px) {
+                .title {
+                    font-size: 2.8rem;
+                }
+
+                .about {
+                    gap: 40px;
+                }
+            }
+
+            @media only screen and (max-width: 400px) {
+                .graphic {
+                    width: 250px;
+                }
             }
         `}</style>
     </>
@@ -149,12 +208,17 @@ const Home = () => (
     <>
         <Landing />
         <About />
-        <Buy />
         <style jsx global>{`
             .section {
                 width: 100%;
-                height: 100vh;
-                padding: 0 max(calc(50vw - 550px), 20px);
+                height: auto;
+                padding: 10vh max(calc(50vw - 500px), var(--side)) calc(10vh + var(--side)) max(calc(50vw - 500px), var(--side));
+            }
+
+            @media only screen and (max-width: 700px) {
+                .section {
+                    padding: 5vh max(calc(50vw - 500px), var(--side)) calc(5vh + var(--side)) max(calc(50vw - 500px), var(--side));
+                }
             }
         `}</style>
     </>

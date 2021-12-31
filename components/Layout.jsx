@@ -45,7 +45,7 @@ const NavBar = () => (
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
-                padding: 0 max(calc(50vw - 500px), 20px);
+                padding: 0 max(calc(50vw - 500px), var(--side));
             }
 
             .icon {
@@ -84,11 +84,19 @@ const Footer = () => (
                 justify-content: flex-start;
                 align-items: center;
                 gap: 48px;
-                padding: 0 max(calc(50vw - 550px), 20px);
+                padding: 0 max(calc(50vw - 500px), var(--side));
+                border-top: 1px solid var(--title);
             }
 
             .icon {
-                height: 1.5rem;
+                height: 24px;
+            }
+
+            @media only screen and (max-width: 700px) {                
+                .footer {
+                    gap: 30px;
+                    justify-content: center;
+                }
             }
         `}</style>
     </>

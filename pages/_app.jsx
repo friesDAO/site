@@ -13,11 +13,11 @@ const Metadata = ({ page }) => {
         <Head>
             <meta charSet="UTF-8"></meta>
             <meta name="viewport" content="width=device-width"></meta>
-            <meta name="description" content="we're pooling funds to buy a franchise or two"></meta>
+            <meta name="description" content="we're pooling funds to buy a fast food franchise or two"></meta>
             <meta property="og:title" content={title}></meta>
             <meta property="og:type" content="website"></meta>
             <meta property="og:image" content="/friesdao.png"></meta>
-            <meta property="og:description" content="we're pooling funds to buy a franchise or two"></meta>
+            <meta property="og:description" content="we're pooling funds to buy a fast food franchise or two"></meta>
             <title>{title}</title>
             <link rel="icon" href="/friesdao-square.png"></link>
             <link rel="preconnect" href="https://fonts.googleapis.com"></link>
@@ -50,6 +50,7 @@ const App = ({ Component, pageProps }) => {
                 :root {
                     --black: #16191E;
                     --title: #5B2100;
+                    --side: 40px;
                 }
 
                 * {
@@ -83,6 +84,28 @@ const App = ({ Component, pageProps }) => {
                     background-color: transparent;
                     border: none;
                     padding: 0;
+                }
+
+                @media only screen and (max-width: 1000px) {
+                    html {
+                        font-size: 14px;
+                    }
+                }
+
+                @media only screen and (max-width: 700px) {
+                    html {
+                        font-size: 13px;
+                    }
+
+                    :root {
+                        --side: 20px;
+                    }
+                }
+
+                @media only screen and (max-width: 400px) {
+                    html {
+                        font-size: 12px;
+                    }
                 }
             `}</style>
         </>
