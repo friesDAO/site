@@ -49,12 +49,13 @@ const NavBar = () => (
             }
 
             .icon {
-                height: 2.5rem;
+                height: 3rem;
             }
 
             .title {
                 font-size: 1.3rem;
-                margin-left: 20px;
+                margin-left: 0.75rem;
+                margin-top: 0.5rem;
             }
         `}</style>
     </>
