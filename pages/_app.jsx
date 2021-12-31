@@ -50,6 +50,7 @@ const App = ({ Component, pageProps }) => {
                 :root {
                     --black: #16191E;
                     --title: #5B2100;
+                    --gray: #afafaf;
                     --side: 40px;
                 }
 

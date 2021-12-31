@@ -5,9 +5,12 @@ import constants from "../data/constants.json"
 
 // Navigation link component
 
-const NavLink = ({ name, href, external, margin }) => (
+const NavLink = ({ name, href, external, margin , disabled}) => (
     <>
-        {external ? (
+        
+        { disabled ? (
+            <div className="link">{name}</div>
+        ) : external ? (
             <a className="link" href={href} target="_blank">{name}</a>
         ) : (
             <Link href={href}>
@@ -17,12 +20,13 @@ const NavLink = ({ name, href, external, margin }) => (
         <style jsx>{`
             .link {
                 font-size: 1.1rem;
-                color: var(--black);
+                color: var(--${disabled ? "gray" : "black"});
                 margin: ${margin || "0 0 0 48px"};
+                user-select: ${disabled ? "none" : "all"};
             }
 
             .link:hover {
-                text-decoration: underline;
+                text-decoration: ${disabled ? "none" : "underline"};
             }
         `}</style>
     </>
@@ -35,7 +39,7 @@ const NavBar = () => (
         <nav className="nav">
             <img className="icon" src="/friesdao.png"></img>
             <div className="title">friesDAO</div>
-            <NavLink name="launch app ➔" href={`https://app.${constants.host}`} external margin="0 0 0 auto"></NavLink>
+            <NavLink name="launch app ➔" disabled="true" href={`https://app.${constants.host}`} external margin="0 0 0 auto"></NavLink>
         </nav>
         <style jsx>{`
             .nav {

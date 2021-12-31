@@ -225,7 +225,7 @@ const Buy = () => (
             <h2 className="title">public raise</h2>
             <div className="content">
                 🍟
-                <div className="message">coming soon...</div>
+                <div className="message">soon™️</div>
             </div>
         </div>
 
@@ -237,13 +237,13 @@ const Buy = () => (
                 justify-content: flex-start;
                 align-items: center;
                 gap: 50px;
-                background-color: #ffebeb;
+                // background-color: #ffebeb;
             }
 
             .title {
                 font-size: 4rem;
                 font-weight: bold;
-                color: var(--title);
+                // color: var(--title);
                 text-align: center;
                 white-space: nowrap;
             }
@@ -255,7 +255,7 @@ const Buy = () => (
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
-                gap: 12px;
+                gap: 6px;
                 font-size: 2rem;
             }
 
