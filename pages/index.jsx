@@ -1,8 +1,9 @@
+// Landing section
 
 const Landing = () => (
     <>
         <div className="section landing">
-            <img className="hero"></img>
+            <img className="hero" src="/restaurant.png"></img>
             <div className="text">
                 <h1 className="title">fries, decentralized</h1>
                 <div className="desc">creating a community driven fast food franchise empire, built on the Ethereum blockchain and governed by the friesDAO</div>
@@ -20,15 +21,11 @@ const Landing = () => (
             }
 
             .hero {
-                width: 100%;
-                height: 100%; /* temporary */
-                max-width: 900px;
-                max-height: 500px;
-                border: 1px solid #000000; /* temporary */
+                width: 350px;
             }
 
             .text {
-                width: 620px;
+                max-width: 620px;
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
@@ -51,9 +48,18 @@ const Landing = () => (
                 text-align: center;
             }
 
-            @media only screen and (max-width: 600px) {
+            @media only screen and (max-width: 500px) {
+                .landing {
+                    gap: 32px;
+                    padding: 0 max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 550px), var(--side));
+                }
+
+                .hero {
+                    width: 200px;
+                }
+
                 .text {
-                    width: auto;
+                    gap: 16px;
                 }
 
                 .title {
@@ -63,6 +69,8 @@ const Landing = () => (
         `}</style>
     </>
 )
+
+// About friesDAO section
 
 const About = () => (
     <>
@@ -187,6 +195,8 @@ const About = () => (
         `}</style>
     </>
 )
+
+// Buy $FRIES section
 
 const Buy = () => (
     <>
