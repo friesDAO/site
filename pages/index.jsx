@@ -48,6 +48,27 @@ const Landing = () => (
                 text-align: center;
             }
 
+            @media only screen and (max-height: 900px) {
+                .landing {
+                    gap: 32px;
+                    padding: 0 max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 550px), var(--side));
+                }
+
+                .hero {
+                    width: 300px;
+                }
+
+                .text {
+                    gap: 16px;
+                }
+            }
+
+            @media only screen and (max-height: 750px) {
+                .hero {
+                    width: 250px;
+                }
+            }
+
             @media only screen and (max-width: 500px) {
                 .landing {
                     gap: 32px;
