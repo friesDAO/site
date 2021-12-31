@@ -202,7 +202,7 @@ const About = () => (
                 .title {
                     font-size: 2.8rem;
                 }
-
+                
                 .about {
                     gap: 40px;
                 }
@@ -222,12 +222,50 @@ const About = () => (
 const Buy = () => (
     <>
         <div className="section buy">
-
+            <h2 className="title">$FRIES public fundraiser</h2>
+            <div className="content">
+                🍟
+                <div className="message">coming soon...</div>
+            </div>
         </div>
 
         <style jsx>{`
             .buy {
+                height: 100vh; /* temporary */
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 50px;
                 background-color: #ffebeb;
+            }
+
+            .title {
+                font-size: 4rem;
+                font-weight: bold;
+                color: var(--title);
+                text-align: center;
+            }
+
+            .content {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 12px;
+                font-size: 2rem;
+            }
+
+            .message {
+                font-weight: bold;
+            }
+
+            @media only screen and (max-width: 600px) {
+                .title {
+                    font-size: 2.8rem;
+                }
             }
         `}</style>
     </>
@@ -239,6 +277,7 @@ const Home = () => (
     <>
         <Landing />
         <About />
+        <Buy />
         <style jsx global>{`
             .section {
                 width: 100%;
