@@ -49,6 +49,7 @@ const App = ({ Component, pageProps }) => {
             <style jsx global>{`
                 :root {
                     --black: #16191E;
+                    --title: #5B2100;
                 }
 
                 * {
@@ -59,14 +60,10 @@ const App = ({ Component, pageProps }) => {
 
                 body {
                     margin: 0;
+                    background-color: #FDFDFD;
                 }
 
-                h1 {
-                    font-size: initial;
-                    margin: 0;
-                }
-    
-                h2 {
+                h1, h2, h3 {
                     font-size: initial;
                     margin: 0;
                 }
