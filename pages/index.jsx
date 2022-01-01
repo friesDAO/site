@@ -24,6 +24,7 @@ const Landing = () => (
             .hero {
                 width: 350px;
                 border-radius: 20px;
+                margin-top: 20px;
             }
 
             .text {
@@ -56,7 +57,7 @@ const Landing = () => (
                 color: white;
                 border-radius: 20px;
                 font-size: 1.5rem;
-                margin-top: 8px;
+                margin-top: 24px;
                 font-weight: 600;
             }
 
