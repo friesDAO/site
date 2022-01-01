@@ -7,7 +7,7 @@ const Landing = () => (
             <div className="text">
                 <h1 className="title">fries, decentralized</h1>
                 <div className="desc">creating a community driven fast food franchise empire, built on the Ethereum blockchain and governed by the friesDAO</div>
-                <a href="https://discord.com/invite/friesdao" target="_blank" className="discord">Join the Community ➔</a>
+                <a href="https://discord.com/invite/friesdao" target="_blank" className="discord">join the community ➔</a>
             </div>
         </div>
         <style jsx>{`
