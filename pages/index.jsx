@@ -17,12 +17,13 @@ const Landing = () => (
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 32px;
+                gap: 22px;
                 padding: 0 max(calc(50vw - 500px), var(--side)) 80px max(calc(50vw - 550px), var(--side));
             }
 
             .hero {
                 width: 350px;
+                border-radius: 20px;
             }
 
             .text {
@@ -31,7 +32,7 @@ const Landing = () => (
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
-                gap: 16px;
+                gap: 10px;
                 text-align: center;
             }
 
