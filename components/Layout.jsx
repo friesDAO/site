@@ -60,6 +60,7 @@ const NavBar = () => (
                 font-size: 1.3rem;
                 margin-left: 0.75rem;
                 margin-top: 0.5rem;
+                font-weight: 600;
             }
         `}</style>
     </>

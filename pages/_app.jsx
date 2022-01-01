@@ -21,8 +21,8 @@ const Metadata = ({ page }) => {
             <title>{title}</title>
             <link rel="icon" href="/friesdao-square.png"></link>
             <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"></link>
-            <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet"></link>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
+            <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet"></link>
         </Head>
     )
 }
@@ -51,6 +51,7 @@ const App = ({ Component, pageProps }) => {
                     --black: #16191E;
                     --title: #5B2100;
                     --gray: #afafaf;
+                    --orange: #E36911;
                     --side: 40px;
                 }
 
