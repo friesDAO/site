@@ -5,16 +5,22 @@ import constants from "../data/constants.json"
 
 // Navigation link component
 
-const NavLink = ({ name, href, external, margin , disabled}) => (
+const NavLink = ({ href, external, margin, disabled, children }) => (
     <>
         
         { disabled ? (
-            <div className="link">{name}</div>
+            <div className="link">
+                {children}
+            </div>
         ) : external ? (
-            <a className="link" href={href} target="_blank">{name}</a>
+            <a className="link" href={href} target="_blank">
+                {children}
+            </a>
         ) : (
             <Link href={href}>
-                <a className="link">{name}</a>
+                <a className="link">
+                    {children}
+                </a>
             </Link>
         )}
         <style jsx>{`
@@ -23,10 +29,11 @@ const NavLink = ({ name, href, external, margin , disabled}) => (
                 color: var(--${disabled ? "gray" : "black"});
                 margin: ${margin || "0 0 0 48px"};
                 user-select: ${disabled ? "none" : "all"};
+                border-bottom: 1px solid transparent;
             }
 
             .link:hover {
-                text-decoration: ${disabled ? "none" : "underline"};
+                border-bottom: ${disabled ? "1px solid transparent" : "1px solid #000000"};
             }
         `}</style>
     </>
@@ -39,7 +46,12 @@ const NavBar = () => (
         <nav className="nav">
             <img className="icon" src="/friesdao.png"></img>
             <div className="title">friesDAO</div>
-            <NavLink name="launch app ➔" disabled="true" href={`https://app.${constants.host}`} external margin="0 0 0 auto"></NavLink>
+            <NavLink href={`https://app.${constants.host}`} external margin="0 0 0 auto" disabled={true}>
+                <div className="app-link">
+                    launch app
+                    <div className="arrow">➔</div>
+                </div>
+            </NavLink>
         </nav>
         <style jsx>{`
             .nav {
@@ -61,6 +73,32 @@ const NavBar = () => (
                 margin-left: 0.75rem;
                 margin-top: 0.5rem;
                 font-weight: 600;
+            }
+
+            .app-link {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                color: inherit;
+                cursor: inherit;
+            }
+
+            .app-link:hover .arrow {
+                left: 0.15rem;
+            }
+
+            .app-link:active {
+                user-select: none;
+            }
+
+            .arrow {
+                position: relative;
+                left: 0;
+                display: inline-block;
+                color: inherit;
+                transition-duration: 300ms;
+                margin-left: 0.5rem;
             }
         `}</style>
     </>
