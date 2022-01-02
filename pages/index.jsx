@@ -68,7 +68,7 @@ const Landing = () => (
             }
 
             .discord:hover .arrow {
-                left: 0.25rem;
+                left: 0.5rem;
             }
 
             .arrow {
@@ -76,7 +76,7 @@ const Landing = () => (
                 left: 0;
                 display: inline;
                 color: inherit;
-                transition-duration: 300ms;
+                transition-duration: 250ms;
                 margin-left: 0.5rem;
             }
 
