@@ -7,7 +7,10 @@ const Landing = () => (
             <div className="text">
                 <h1 className="title">fries, decentralized</h1>
                 <div className="desc">creating a community driven fast food franchise empire, built on the Ethereum blockchain and governed by the friesDAO</div>
-                <a href="https://discord.com/invite/friesdao" target="_blank" className="discord">join the community ➔</a>
+                <a className="discord" href="https://discord.com/invite/friesdao" target="_blank">
+                    join the community
+                    <div className="arrow">➔</div>
+                </a>
             </div>
         </div>
         <style jsx>{`
@@ -23,7 +26,6 @@ const Landing = () => (
 
             .hero {
                 width: 350px;
-                border-radius: 20px;
                 margin-top: 20px;
             }
 
@@ -52,13 +54,30 @@ const Landing = () => (
             }
 
             .discord {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
                 background-color: var(--orange);
-                padding: 1rem 2rem;
+                padding: 0.6rem 2rem;
                 color: white;
-                border-radius: 20px;
+                border-radius: 10px;
                 font-size: 1.5rem;
                 margin-top: 24px;
                 font-weight: 600;
+            }
+
+            .discord:hover .arrow {
+                left: 0.25rem;
+            }
+
+            .arrow {
+                position: relative;
+                left: 0;
+                display: inline;
+                color: inherit;
+                transition-duration: 300ms;
+                margin-left: 0.5rem;
             }
 
             @media only screen and (max-height: 900px) {
