@@ -1,3 +1,5 @@
+import Raise from "../components/Raise.jsx"
+
 // Landing section
 
 const Landing = () => (
@@ -256,14 +258,15 @@ const Buy = () => (
         <div className="section buy">
             <h2 className="title">public raise</h2>
             <div className="content">
-                🍟
-                <div className="message">soon™️</div>
+                {/* 🍟
+                <div className="message">soon™️</div> */}
+                <Raise />
             </div>
         </div>
 
         <style jsx>{`
             .buy {
-                height: 100vh; /* temporary */
+                // height: 100vh; /* temporary */
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
