@@ -258,15 +258,15 @@ const Buy = () => (
         <div className="section buy">
             <h2 className="title">public raise</h2>
             <div className="content">
-                🍟
-                <div className="message">soon™️</div>
-                {/* <Raise /> */}
+                {/* 🍟
+                <div className="message">soon™️</div> */}
+                <Raise />
             </div>
         </div>
 
         <style jsx>{`
             .buy {
-                height: 100vh; /* temporary */
+                // height: 100vh; /* temporary */
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-start;
@@ -300,7 +300,11 @@ const Buy = () => (
 
             @media only screen and (max-width: 600px) {
                 .title {
-                    font-size: 2.8rem;
+                    font-size: 3.2rem;
+                }
+
+                .buy {
+                    gap: 32px;
                 }
             }
         `}</style>
