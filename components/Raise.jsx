@@ -8,7 +8,7 @@ import { useState, useEffect, useContext, useRef } from "react"
 // Layout component
 
 const Raise = () => {
-    const raiseStartEpoch = new Date("1/22/2022 19:00:00 EST").getTime()
+    const raiseStartEpoch = new Date("1/22/2022 10:00:00 EST").getTime()
 
     const [ raiseActive, setRaiseActive ] = useState(false)
     const [ redeemActive, setRedeemActive ] = useState(false)
@@ -65,7 +65,7 @@ const Raise = () => {
                             <div className="value">$0.00</div>
 
                             <h3 className="name">target</h3>
-                            <div className="value">$18,696,969</div>
+                            <div className="value">$10,696,969</div>
 
                             
                         </div>
