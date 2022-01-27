@@ -65,7 +65,7 @@ const Raise = () => {
                             <div className="value">$0.00</div>
 
                             <h3 className="name">target</h3>
-                            <div className="value">$10,696,969</div>
+                            <div className="value">$9,696,969</div>
 
                             
                         </div>
@@ -109,9 +109,9 @@ const Raise = () => {
                         </video>
                     </div>
                 </div>
-                
-                
             </div>
+
+            <div className="disclaimer">* Contributing to the treasury is a donation, without any expectation of profit. In exchange you are receiving membership tokens entitling you to have participatory rights of governance in shaping the DAO's endeavors in franchising.</div>
 
             {/* display: flex;
                     flex-direction: row;
@@ -339,6 +339,14 @@ const Raise = () => {
                 .action.disabled {
                     background-color: var(--gray);
                     cursor: not-allowed;
+                }
+
+                .disclaimer {
+                    font-size: 1rem;
+                    text-align: center;
+                    width: 80%;
+                    color: #6b778b;
+                    margin-top: 10px;
                 }
 
                 @media only screen and (max-width: 850px) {

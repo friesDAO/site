@@ -137,13 +137,13 @@ const About = () => (
                 
                 <div className="right">
                     <h2 className="step">raise funds</h2>
-                    <div className="details">gather USDC from community contributions in a public fundraiser and distribute the $FRIES governance token proportionally to contributors</div>
+                    <div className="details">gather USDC contributions from the community in a public fundraiser and distribute the $FRIES governance token proportionally to contributors</div>
 
                     <h2 className="step">purchase franchises</h2>
                     <div className="details">negotiate with franchise owners to acquire well-known profitable fast food franchises using the friesDAO community treasury</div>
 
-                    <h2 className="step">reacquire $FRIES</h2>
-                    <div className="details">using franchise revenue, buy back governance tokens for the friesDAO treasury controlled by community governance</div>
+                    <h2 className="step">expand.</h2>
+                    <div className="details">any operating profits will go towards store improvements or expansion with additional stores, as the DAO sees fit</div>
                 </div>
             </div>
         </div>
@@ -258,8 +258,6 @@ const Buy = () => (
         <div className="section buy">
             <h2 className="title">public raise</h2>
             <div className="content">
-                {/* 🍟
-                <div className="message">soon™️</div> */}
                 <Raise />
             </div>
         </div>
@@ -287,7 +285,7 @@ const Buy = () => (
                 width: 100%;
                 height: 100%;
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 6px;
