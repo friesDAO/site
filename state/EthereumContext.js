@@ -1,16 +1,22 @@
 // Files and modules
 
 import constants from "../data/constants.json"
+import ERC20ABI from "../abis/ERC20.json"
+import FriesDAOTokenSaleABI from "../abis/FriesDAOTokenSale.json"
 import { createContext, useEffect, useState } from "react"
 import Web3 from "web3"
 
 // Ethereum context
 
 const web3 = new Web3(constants.provider)
+const USDC = new web3.eth.Contract(ERC20ABI, constants.usdc)
+const Sale = new web3.eth.Contract(FriesDAOTokenSaleABI, constants.sale)
 const BN = n => new web3.utils.BN(n)
 
 const EthereumContext = createContext({
     web3,
+    USDC,
+    Sale,
     BN
 })
 
@@ -78,6 +84,8 @@ const EthereumContextProvider = ({ children }) => {
             enabled,
             chainId,
             account,
+            USDC,
+            Sale,
             BN
         }}>
             {children}

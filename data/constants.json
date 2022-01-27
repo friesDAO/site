@@ -1,5 +1,9 @@
 {
     "host": "fries.fund",
-    "provider": "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
-    "chainId": "0x1"
+    "raiseStart": "1/29/2022 6:00:00 EST",
+    "provider": "http://localhost:8545",
+    "_provider": "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+    "chainId": "0x1",
+    "usdc": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+    "sale": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
 }

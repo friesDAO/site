@@ -2,39 +2,114 @@
 
 import SaleABI from "../abis/FriesDAOTokenSale.json"
 import tokenABI from "../abis/IFriesDAOToken.json"
+import useRaise from "../state/useRaise"
+import EthereumContext from "../state/EthereumContext.js"
+import constants from "../data/constants.json"
+import { parse, unparse, format, formatNumber } from "../components/number.js"
 import { useState, useEffect, useContext, useRef } from "react"
 
+const Contribute = () => {
+    const { enabled, account, USDC, Sale, BN } = useContext(EthereumContext)
+    const raise = useRaise(account, Sale, BN)
+
+    async function contribute() {
+        if (!enabled) return
+        if (!account) {
+            return ethereum.request({
+                method: "eth_requestAccounts"
+            })
+        }
+
+        if (isNaN(+document.getElementById("amount").value)) return
+        const amount = BN(unparse(document.getElementById("amount").value))
+        if (amount.isZero()) return
+
+        const approved = BN(await USDC.methods.allowance(account, Sale._address).call())
+        if (approved.lt(amount)) {
+            console.log("asking for an approve")
+            console.log(USDC.methods.approve(Sale._address, BN(2).pow(BN(256)).sub(BN(1))).encodeABI())
+            return ethereum.request({
+                method: "eth_sendTransaction",
+                params: [{
+                    from: account,
+                    to: USDC._address,
+                    data: USDC.methods.approve(Sale._address, BN(2).pow(BN(256)).sub(BN(1))).encodeABI()
+                }]
+            })
+        }
+
+        ethereum.request({
+            method: "eth_sendTransaction",
+            params: [{
+                from: account,
+                to: Sale._address,
+                data: Sale.methods[raise.publicSaleActive ? "buyFries" : "buyWhitelistFries"](amount).encodeABI()
+            }]
+        })
+    }
+
+    return (
+        <>
+            <div className="progress">
+                <div className="bar"><div className="percent outside">0%</div></div>
+            </div>
+
+            <div className="balance">whitelist max: 0 USDC</div>
+            <div className="amount">
+                <input id="amount" className="input" placeholder="amount (USDC)"></input>
+                <button className="max">max</button>
+            </div>
+
+            <button className="action" onClick={contribute}>contribute</button>
+        </>
+    )
+}
+
+const Redeem = () => {
+    const { enabled, account, USDC, Sale, BN } = useContext(EthereumContext)
+    const raise = useRaise(account, Sale, BN)
+
+    async function redeem() {
+        if (!enabled) return
+        if (!account) {
+            return ethereum.request({
+                method: "eth_requestAccounts"
+            })
+        }
+        ethereum.request({
+            method: "eth_sendTransaction",
+            params: [{
+                from: account,
+                to: Sale._address,
+                data: Sale.methods.redeemFries().encodeABI()
+            }]
+        })
+    }
+
+    return (
+        <>
+            <div className="balance">redeem amount: 0 $FRIES</div>
+
+            <button className="action" onClick={redeem}>redeem</button>
+        </>
+    )
+}
+
+const Refund = () => {
+    return (
+        <></>
+    )
+}
 
 // Layout component
 
 const Raise = () => {
-    const raiseStartEpoch = new Date("1/29/2022 6:00:00 EST").getTime()
+    const { enabled, account, USDC, Sale, BN } = useContext(EthereumContext)
+    const raise = useRaise(account, Sale, BN)
 
-    const [ raiseActive, setRaiseActive ] = useState(false)
-    const [ redeemActive, setRedeemActive ] = useState(false)
-    const [ refundActive, setRefundActive ] = useState(false)
-
-    const setOptions = {
-        raise: setRaiseActive,
-        redeem: setRedeemActive,
-        refund: setRefundActive
-    }
-
-    function setActiveOption(option) {
-        for (const setOption of Object.keys(setOptions)) {
-            if (setOption == option) {
-                setOptions[option](true)
-            } else {
-                setOptions[option](false)
-            }
-        }
-    }
-
-    useEffect(() => {
-        setActiveOption("raise")
-    })
-
+    const raiseStartEpoch = new Date(constants.raiseStart).getTime()
     const [ timeRemaining, setTimeRemaining ] = useState(Date.now() - raiseStartEpoch)
+    const [ sectionActive, setSectionActive ] = useState("raise")
     
     useEffect(() => {
         setInterval(() => {
@@ -62,10 +137,10 @@ const Raise = () => {
                     <div className="stats-list">
                         <div className="column">
                             <h3 className="name">total raised</h3>
-                            <div className="value">$0.00</div>
+                            <div className="value">${format(parse(raise.totalPurchased, 6))}</div>
 
                             <h3 className="name">target</h3>
-                            <div className="value">$10,696,969</div>
+                            <div className="value">${format(parse(raise.totalCap, 6))}</div>
 
                             
                         </div>
@@ -75,7 +150,7 @@ const Raise = () => {
                             <div className="value">{formatTimeRemaining(timeRemaining)}</div>
 
                             <h3 className="name">your share</h3>
-                            <div className="value">0%</div>
+                            <div className="value">{format(parse(raise.amountPurchased))}</div>
                         </div>
                     </div>
                 </div>
@@ -83,24 +158,15 @@ const Raise = () => {
                 <div className="right">
                     <div className="raise subcontainer">
                         <div className="options">
-                            <div className={"option active"}>raise</div>
-                            <div className={"option"}>redeem</div>
-                            <div className={"option"}>refund</div>
+                            <div className={"option active"} onClick={() => setSectionActive("raise")}>raise</div>
+                            <div className={"option"} onClick={() => setSectionActive("redeem")}>redeem</div>
+                            <div className={"option disabled"} onClick={() => setSectionActive("refund")}>refund</div>
                         </div>
 
                         <div className="inner">
-                            <div className="progress">
-                                <div className="bar"><div className="percent outside">0%</div></div>
-                            </div>
-
-                            <div className="balance">whitelist max: 0 USDC</div>
-                            <div className="amount">
-                                <input className="input" placeholder="amount (USDC)"></input>
-                                <button className="max">max</button>
-                            </div>
+                            {sectionActive === "raise" ? <Contribute /> : sectionActive == "redeem" ? <Redeem /> : <Refund />}
                         </div>
-
-                        <button className="action disabled">contribute</button>
+                        
                     </div>
                     
                     <div className="banner">
@@ -192,17 +258,24 @@ const Raise = () => {
                     display: block;
                 }
 
+                .option.disabled {
+                    color: var(--gray);
+                    cursor: not-allowed;
+                }
+
                 .option:not(:first-child):not(:last-child) {
                     border-left: none;
                     border-right: none;
                 }
 
                 .option:first-child {
-                    border-radius: 10px 0 0 10px;
+                    border-top-left-radius: 10px;
+                    border-bottom-left-radius: 10px;
                 }
 
                 .option:last-child {
-                    border-radius: 0 10px 10px 0;
+                    border-top-right-radius: 10px;
+                    border-bottom-right-radius: 10px;
                 }
 
                 .right {
@@ -255,6 +328,83 @@ const Raise = () => {
                     width: 100%;
                 }
 
+                @media only screen and (max-width: 850px) {
+                    .buy {
+                        gap: 32px;
+                    }
+
+                    .container {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        gap: 24px;
+                    }
+
+                    .banner {
+                        display: none;
+                    }
+
+                    .stats {
+                        padding: 24px 50px;
+                    }
+
+                    .stats-list {
+                        display: flex;
+                    }
+
+                    .stats-list > div > .value {
+                        white-space: nowrap;
+                    }
+
+                    .column {
+                        flex: 50%;
+                        padding: 0 20px;
+                    }
+                }
+
+                @media only screen and (max-width: 600px) {
+                    .raise {
+                        padding: 32px 0;
+                        width: 100%;
+                    }
+
+                    .right {
+                        width: 100%;
+                    }
+
+                    .raise > div {
+                        width: 85%;
+                    }
+
+                    .option.disabled {
+                        display: none;
+                    }
+
+                   
+
+                    .stats {
+                        width: 100%;
+                    }
+                }
+
+                @media only screen and (max-width: 480px) {
+                    .stats-list {
+                        flex-direction: column;
+                    }
+
+                    .stats {
+                        align-items: center;
+                    }
+                }
+
+                @media only screen and (max-width: 400px) {
+                    .inner {
+                        padding: 16px 12px;
+                    }
+                }
+            `}</style>
+
+            <style jsx global>{`
                 .progress {
                     border: 2px solid var(--gray);
                     width: 100%;
@@ -339,83 +489,6 @@ const Raise = () => {
                 .action.disabled {
                     background-color: var(--gray);
                     cursor: not-allowed;
-                }
-
-                @media only screen and (max-width: 850px) {
-                    .buy {
-                        gap: 32px;
-                    }
-
-                    .container {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        gap: 24px;
-                    }
-
-                    .banner {
-                        display: none;
-                    }
-
-                    .stats {
-                        padding: 24px 50px;
-                    }
-
-                    .stats-list {
-                        display: flex;
-                    }
-
-                    .stats-list > div > .value {
-                        white-space: nowrap;
-                    }
-
-                    .column {
-                        flex: 50%;
-                        padding: 0 20px;
-                    }
-                }
-
-                @media only screen and (max-width: 600px) {
-                    .raise {
-                        padding: 32px 0;
-                        width: 100%;
-                    }
-
-                    .right {
-                        width: 100%;
-                    }
-
-                    .raise > div {
-                        width: 85%;
-                    }
-
-                    .option {
-                        display: none;
-                    }
-
-                    .option.active {
-                        border-radius: 10px;
-                    }
-
-                    .stats {
-                        width: 100%;
-                    }
-                }
-
-                @media only screen and (max-width: 480px) {
-                    .stats-list {
-                        flex-direction: column;
-                    }
-
-                    .stats {
-                        align-items: center;
-                    }
-                }
-
-                @media only screen and (max-width: 400px) {
-                    .inner {
-                        padding: 16px 12px;
-                    }
                 }
             `}</style>
         </>
