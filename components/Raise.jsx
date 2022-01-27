@@ -342,7 +342,7 @@ const Raise = () => {
                 }
 
                 .disclaimer {
-                    font-size: 1rem;
+                    font-size: 1.15rem;
                     text-align: center;
                     width: 80%;
                     color: #6b778b;
