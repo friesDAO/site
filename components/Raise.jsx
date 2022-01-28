@@ -8,7 +8,7 @@ import { useState, useEffect, useContext, useRef } from "react"
 // Layout component
 
 const Raise = () => {
-    const raiseStartEpoch = new Date("1/29/2022 6:00:00 EST").getTime()
+    const raiseStartEpoch = new Date("1/29/2022 20:00:00 EST").getTime()
 
     const [ raiseActive, setRaiseActive ] = useState(false)
     const [ redeemActive, setRedeemActive ] = useState(false)
