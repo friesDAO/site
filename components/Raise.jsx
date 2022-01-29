@@ -5,12 +5,14 @@ import tokenABI from "../abis/IFriesDAOToken.json"
 import useRaise from "../state/useRaise"
 import EthereumContext from "../state/EthereumContext.js"
 import constants from "../data/constants.json"
+import { makeLeaf, makeTree } from "../util/merkle.js"
+const whitelist = require(`../data/${constants.whitelist}.json`)
 import { parse, unparse, format, formatNumber } from "../components/number.js"
 import { useState, useEffect, useContext, useRef } from "react"
 
 const Contribute = () => {
-    const { enabled, account, USDC, Sale, BN } = useContext(EthereumContext)
-    const raise = useRaise(account, Sale, BN)
+    const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
+    const raise = useRaise(account, Sale, BN, toWei, fromWei)
 
     async function contribute() {
         if (!enabled) return
@@ -38,14 +40,34 @@ const Contribute = () => {
             })
         }
 
-        ethereum.request({
-            method: "eth_sendTransaction",
-            params: [{
-                from: account,
-                to: Sale._address,
-                data: Sale.methods[raise.publicSaleActive ? "buyFries" : "buyWhitelistFries"](amount).encodeABI()
-            }]
-        })
+        if (raise.publicSaleActive) {
+            ethereum.request({
+                method: "eth_sendTransaction",
+                params: [{
+                    from: account,
+                    to: Sale._address,
+                    data: Sale.methods.buyFries(amount).encodeABI()
+                }]
+            })
+        } else {
+            let friesAmount = BN(amount.toString()).mul(BN(raise.salePrice.toString()))
+            const leaf = makeLeaf(account, amount * constants.salePrice, false, 18)
+            const proof = raise.tree.getHexProof(leaf)
+            ethereum.request({
+                method: "eth_sendTransaction",
+                params: [{
+                    from: account,
+                    to: Sale._address,
+                    data: Sale.methods.buyWhitelistFries(
+                        toWei(amount, "mwei"),
+                        friesAmount,
+                        false,
+                        proof
+                    ).encodeABI()
+                }]
+            })
+        }
+        
     }
 
     return (
@@ -54,7 +76,7 @@ const Contribute = () => {
                 <div className="bar"><div className="percent outside">0%</div></div>
             </div>
 
-            <div className="balance">whitelist max: 0 USDC</div>
+            <div className="balance">whitelist max: {raise.whitelistMax} USDC</div>
             <div className="amount">
                 <input id="amount" className="input" placeholder="amount (USDC)"></input>
                 <button className="max">max</button>
@@ -66,8 +88,8 @@ const Contribute = () => {
 }
 
 const Redeem = () => {
-    const { enabled, account, USDC, Sale, BN } = useContext(EthereumContext)
-    const raise = useRaise(account, Sale, BN)
+    const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
+    const raise = useRaise(account, Sale, BN, toWei, fromWei)
 
     async function redeem() {
         if (!enabled) return
@@ -104,8 +126,8 @@ const Refund = () => {
 // Layout component
 
 const Raise = () => {
-    const { enabled, account, USDC, Sale, BN } = useContext(EthereumContext)
-    const raise = useRaise(account, Sale, BN)
+    const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
+    const raise = useRaise(account, Sale, BN, toWei, fromWei)
 
     const raiseStartEpoch = new Date(constants.raiseStart).getTime()
     const [ timeRemaining, setTimeRemaining ] = useState(Date.now() - raiseStartEpoch)

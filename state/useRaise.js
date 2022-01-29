@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react"
+import constants from "../data/constants.json"
+import { makeLeaf, makeTree } from "../util/merkle.js"
+const whitelist = require(`../data/${constants.whitelist}.json`)
 
-function useRaise(account, Sale, BN) {
+const tree = makeTree(whitelist)
+
+function useRaise(account, Sale, BN, toWei, fromWei) {
     const [ whitelistSaleActive, setWhitelistSaleActive ] = useState(false)
     const [ publicSaleActive, setPublicSaleActive ] = useState(false)
     const [ redeemActive, setRedeemActive ] = useState(false)
@@ -12,6 +17,7 @@ function useRaise(account, Sale, BN) {
     const [ amountPurchased, setAmountPurchased ] = useState(0)
     const [ whitelistMax, setWhitelistMax ] = useState(0)
 
+
     useEffect(() => {
         updateData()
         const interval = setInterval(updateData, 5000)
@@ -19,7 +25,6 @@ function useRaise(account, Sale, BN) {
     }, [account])
 
     async function updateData() {
-        console.log(await Sale.methods.FRIES().call())
         await Promise.all([
             Sale.methods.whitelistSaleActive().call()
                 .then(setWhitelistSaleActive),
@@ -28,15 +33,22 @@ function useRaise(account, Sale, BN) {
             Sale.methods.redeemActive().call()
                 .then(setRedeemActive),
             Sale.methods.salePrice().call()
-                .then(price => setSalePrice(+price)),
+                .then(price => {
+                    setSalePrice(+price)
+                    const whitelistEntry = whitelist.find(e => e[0].toLowerCase() == account)
+                    if (whitelistEntry?.length > 0) {
+                        console.log(whitelistEntry[1], price)
+                        setWhitelistMax(Number(BN(toWei(whitelistEntry[1].toString())).div(BN(price))))
+                    } else {
+                        setWhitelistMax(0)
+                    }
+                }),
             Sale.methods.totalPurchased().call()
                 .then(purchased => setTotalPurchased(BN(purchased))),
             Sale.methods.totalCap().call()
                 .then(cap => setTotalCap(BN(cap))),
             account ? Sale.methods.purchased(account).call()
-                          .then(amount => setAmountPurchased(BN(amount))) : null,
-            account ? Sale.methods.whitelist(account).call()
-                          .then(amount => setWhitelistMax(BN(amount))) : null
+                .then(amount => setAmountPurchased(BN(amount))) : null
         ])
     }
 
@@ -48,7 +60,9 @@ function useRaise(account, Sale, BN) {
         totalPurchased,
         totalCap,
         amountPurchased,
-        setAmountPurchased
+        setAmountPurchased,
+        whitelistMax,
+        tree
     }
 }
 

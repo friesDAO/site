@@ -8,7 +8,7 @@ const Landing = () => (
             <img className="hero" src="/restaurant.png"></img>
             <div className="text">
                 <h1 className="title">fries, decentralized</h1>
-                <div className="desc">creating a community driven fast food franchise empire, built on the Ethereum blockchain and governed by the friesDAO</div>
+                <div className="desc">a social experiment where a crypto community will build and govern a fast food franchise empire</div>
                 <a className="discord" href="https://discord.com/invite/friesdao" target="_blank">
                     join the community
                     <div className="arrow">➔</div>
@@ -130,20 +130,23 @@ const Landing = () => (
 const About = () => (
     <>
         <div className="section about">
-            <h2 className="title">what is friesDAO?</h2>
+            <h2 className="title">what's friesDAO doing?</h2>
 
             <div className="split">
                 <img className="graphic" src="/friesdao.png" />
                 
                 <div className="right">
-                    <h2 className="step">raise funds</h2>
-                    <div className="details">gather USDC from community contributions in a public fundraiser and distribute the $FRIES governance token proportionally to contributors</div>
+                    <h2 className="step">form a treasury</h2>
+                    <div className="details">gather USDC contributions (on Ethereum) from  community donors and distribute $FRIES governance tokens</div>
 
                     <h2 className="step">purchase franchises</h2>
-                    <div className="details">negotiate with franchise owners to acquire well-known profitable fast food franchises using the friesDAO community treasury</div>
+                    <div className="details">negotiate with franchise owners and brands to buy well-known fast food stores using the friesDAO community treasury</div>
 
-                    <h2 className="step">reacquire $FRIES</h2>
-                    <div className="details">using franchise revenue, buy back governance tokens for the friesDAO treasury controlled by community governance</div>
+                    <h2 className="step">expand the empire</h2>
+                    <div className="details">create a reproducible framework for community governance to influence store improvements or expansions</div>
+
+                    <h2 className="step">shape the utility</h2>
+                    <div className="details">participate in serious yet memeworthy discussions like prioritizing jobs for ourselves and getting NFT coupons for free food</div>
                 </div>
             </div>
         </div>
@@ -251,15 +254,117 @@ const About = () => (
     </>
 )
 
-// Buy $FRIES section
+// FAQ section
 
-const Buy = () => (
+const FAQ = () => (
+    <>
+        <div className="section faq">
+            <h2 className="title">FAQs</h2>
+
+            <div className="list">
+                <h2 className="question">why are we doing this?</h2>
+                <div className="answer">A crypto community wondered if we could actually buy a McDonald's, the favorite employer of rekt traders. DAOs have recently began buying real world things, and we want to prove that we can bridge blockchain with fast food.</div>
+
+                <h2 className="question">will you actually pull this off?</h2>
+                <div className="answer">Turns out some community members have lots of experience in the franchising world and have now offered advisement on how we can do this properly. Once we buy the first store successfully, the gameplan will be shared so that any execution team can form within the DAO in a decentralized manner to request from the treasury to reproduce the process.</div>
+
+                <h2 className="question">do I get anything for donating?</h2>
+                <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights. Each token represents a contribution of $0.04168.</div>
+
+                <h2 className="question">do I own the stores?</h2>
+                <div className="answer">Due to regulations there is no ownership stake in the stores or its profits, but rather ownership in governance that impacts how we collectively grow and expand stores with those profits. As a decentralized community, we'll be exploring ways to create regulation compliant value accrual.</div>
+
+                <h2 className="question">what's the grand vision?</h2>
+                <div className="answer">Imagine a major fast food store in every major city, materialized because of your vote. Go to one near you, flash your barcoded friesDAO NFT, and get that free burger. Fist-bump that dude next to you who did the same. Tell him you liked that $FRIES defi strategy he posted in Discord the other day. We're going to make history.</div>
+            </div>
+
+            <a className="docs" href="https://friesdao.gitbook.io/friesdao-docs/" target="_blank">
+                    learn more
+                    <div className="arrow">➔</div>
+            </a>
+        </div>
+
+        <style jsx>{`
+            .faq {
+                background-color: #fff0f0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 50px;
+            }
+
+            .list {
+                display: flex;
+                flex-direction: column;
+                align-content: flex-start;
+            }
+
+            .title {
+                font-size: 4rem;
+                font-weight: bold;
+                color: var(--title);
+                white-space: nowrap;
+            }
+
+            .question {
+                font-size: 2.25rem;
+                color: var(--title);
+                margin-bottom: 10px;
+            }
+            
+            .answer {
+                font-size: 1.3rem;
+                margin-bottom: 40px;
+            }
+
+            .answer:last-child {
+                margin-bottom: 0;
+            }
+
+            .docs {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--orange);
+                padding: 0.6rem 2rem;
+                color: white;
+                border-radius: 10px;
+                font-size: 1.5rem;
+                margin-top: 24px;
+                font-weight: 600;
+            }
+
+            .docs:hover .arrow {
+                left: 0.5rem;
+            }
+
+            .arrow {
+                position: relative;
+                left: 0;
+                display: inline;
+                color: inherit;
+                transition-duration: 250ms;
+                margin-left: 0.5rem;
+            }
+
+            @media only screen and (max-width: 1000px) {
+                .answer {
+                    margin-bottom: 30px;
+                }
+            }
+        `}</style>
+    </>
+)
+
+// Raise $FRIES section
+
+const RaiseContainer = () => (
     <>
         <div className="section buy">
             <h2 className="title">public raise</h2>
             <div className="content">
-                {/* 🍟
-                <div className="message">soon™️</div> */}
                 <Raise />
             </div>
         </div>
@@ -287,7 +392,7 @@ const Buy = () => (
                 width: 100%;
                 height: 100%;
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 gap: 6px;
@@ -317,7 +422,8 @@ const Home = () => (
     <>
         <Landing />
         <About />
-        <Buy />
+        <FAQ />
+        {/* <RaiseContainer /> */}
         <style jsx global>{`
             .section {
                 width: 100%;
