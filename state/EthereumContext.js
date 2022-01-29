@@ -12,6 +12,9 @@ const web3 = new Web3(constants.provider)
 const USDC = new web3.eth.Contract(ERC20ABI, constants.usdc)
 const Sale = new web3.eth.Contract(FriesDAOTokenSaleABI, constants.sale)
 const BN = n => new web3.utils.BN(n)
+const toWei = web3.utils.toWei
+const fromWei = web3.utils.fromWei
+
 
 const EthereumContext = createContext({
     web3,
@@ -86,7 +89,9 @@ const EthereumContextProvider = ({ children }) => {
             account,
             USDC,
             Sale,
-            BN
+            BN,
+            toWei,
+            fromWei
         }}>
             {children}
         </EthereumContext.Provider>

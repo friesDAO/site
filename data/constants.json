@@ -1,9 +1,11 @@
 {
     "host": "fries.fund",
-    "raiseStart": "1/29/2022 6:00:00 EST",
-    "provider": "http://localhost:8545",
+    "raiseStart": "1/29/2022 20:00:00 EST",
+    "provider": "https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
     "_provider": "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
-    "chainId": "0x1",
-    "usdc": "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-    "sale": "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+    "chainId": "0x3",
+    "usdc": "0x7f4b6f10C34470ebDdF5E7ab049d8DFFb01F8A6f",
+    "sale": "0x3575Aa02Ae85D8Cd2AaE6DCaA5D8750cFc9622e6",
+    "whitelist": "whitelist1",
+    "salePrice": 43.3125031
 }
