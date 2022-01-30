@@ -265,7 +265,7 @@ const FAQ = () => (
                 <div className="answer">A crypto community wondered if we could actually buy a McDonald's, the favorite employer of rekt traders. DAOs have recently began buying real world things, and we want to prove that we can bridge blockchain with fast food.</div>
 
                 <h2 className="question">will you actually pull this off?</h2>
-                <div className="answer">Turns out some community members have lots of experience in the franchising world and have now offered advisement on how we can do this properly. Once we buy the first store successfully, the gameplan will be shared so that any execution team can form within the DAO in a decentralized manner to request from the treasury to reproduce the process.</div>
+                <div className="answer">Turns out some community members have lots of experience in the franchising world and have now offered advisement on how we can do this properly. Once we buy the first store successfully, the game plan will be shared so that any execution team can form within the DAO in a decentralized manner to request from the treasury to reproduce the process. If we fail to acquire a store in 1 year, your contribution is refundable (minus any treasury expenditures to date).</div>
 
                 <h2 className="question">do I get anything for donating?</h2>
                 <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights. Each token represents a contribution of 0.023088 USDC.</div>
