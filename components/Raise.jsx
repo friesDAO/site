@@ -15,7 +15,7 @@ const Contribute = () => {
     const raise = useRaise(account, Sale, BN, toWei, fromWei)
 
     function inputMax() {
-        
+        document.getElementById("amount").value = raise.whitelistMax
     }
 
     async function contribute() {
@@ -154,11 +154,7 @@ const Raise = () => {
     
     useEffect(() => {
         setInterval(() => {
-            if (raise.whitelistSaleActive) {
-                setTimeRemaining(raiseEndEpoch - Date.now())
-            } else {
-                setTimeRemaining(Date.now() - raiseStartEpoch)
-            }
+            setTimeRemaining(raiseEndEpoch - Date.now())
         }, 2000)
     })
 
