@@ -25,6 +25,8 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
     }, [account])
 
     async function updateData() {
+        let salePriceValue
+        let purchasedValue
         await Promise.all([
             Sale.methods.whitelistSaleActive().call()
                 .then(setWhitelistSaleActive),
@@ -35,21 +37,26 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
             Sale.methods.salePrice().call()
                 .then(price => {
                     setSalePrice(+price)
-                    const whitelistEntry = whitelist.find(e => e[0].toLowerCase() == account)
-                    if (whitelistEntry?.length > 0) {
-                        console.log(whitelistEntry[1], price)
-                        setWhitelistMax(Number(BN(toWei(whitelistEntry[1].toString())).div(BN(price))))
-                    } else {
-                        setWhitelistMax(0)
-                    }
+                    salePriceValue = price
                 }),
             Sale.methods.totalPurchased().call()
                 .then(purchased => setTotalPurchased(BN(purchased))),
             Sale.methods.totalCap().call()
                 .then(cap => setTotalCap(BN(cap))),
             account ? Sale.methods.purchased(account).call()
-                .then(amount => setAmountPurchased(BN(amount))) : null
+                .then(amount => {
+                    setAmountPurchased(BN(amount))
+                        purchasedValue = amount
+                }) : null
         ])
+        const whitelistEntry = whitelist.find(e => e[0].toLowerCase() == account)
+        if (whitelistEntry?.length > 0) {
+            console.log(whitelistEntry[1], salePriceValue)
+            console.log(purchasedValue)
+            setWhitelistMax(Math.max(Number(BN(toWei(whitelistEntry[1].toString())).div(BN(salePriceValue))) - Number(fromWei(purchasedValue)) / constants.salePrice, 0))
+        } else {
+            setWhitelistMax(0)
+        }
     }
 
     return {

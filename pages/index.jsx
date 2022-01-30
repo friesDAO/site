@@ -423,7 +423,7 @@ const Home = () => (
         <Landing />
         <About />
         <FAQ />
-        {/* <RaiseContainer /> */}
+        <RaiseContainer />
         <style jsx global>{`
             .section {
                 width: 100%;

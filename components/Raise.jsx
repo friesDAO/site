@@ -14,11 +14,23 @@ const Contribute = () => {
     const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
     const raise = useRaise(account, Sale, BN, toWei, fromWei)
 
+    function inputMax() {
+        
+    }
+
     async function contribute() {
         if (!enabled) return
         if (!account) {
             return ethereum.request({
                 method: "eth_requestAccounts"
+            })
+        }
+        const chainId = await ethereum.request({ method: "eth_chainId" })
+        console.log(chainId)
+        if (chainId !== constants.chainId) {
+            return ethereum.request({
+                method: "wallet_switchEthereumChain",
+                params: [{ chainId: constants.chainId }]
             })
         }
 
@@ -46,13 +58,19 @@ const Contribute = () => {
                 params: [{
                     from: account,
                     to: Sale._address,
-                    data: Sale.methods.buyFries(amount).encodeABI()
+                    data: Sale.methods.buyFries(toWei(amount.toString(), "mwei")).encodeABI()
                 }]
             })
         } else {
             let friesAmount = BN(amount.toString()).mul(BN(raise.salePrice.toString()))
-            const leaf = makeLeaf(account, amount * constants.salePrice, false, 18)
+            const whitelistedAmount = whitelist.find(e => e[0].toLowerCase() == account)[1]
+
+            console.log("LEAF CONTENTS:", account, whitelistedAmount, false)
+            const leaf = makeLeaf(account, whitelistedAmount, false, 18)
+            console.log("LEAF:", leaf, Buffer.from(leaf).toString("hex"))
+
             const proof = raise.tree.getHexProof(leaf)
+
             ethereum.request({
                 method: "eth_sendTransaction",
                 params: [{
@@ -60,7 +78,7 @@ const Contribute = () => {
                     to: Sale._address,
                     data: Sale.methods.buyWhitelistFries(
                         toWei(amount, "mwei"),
-                        friesAmount,
+                        toWei(whitelistedAmount.toString()),
                         false,
                         proof
                     ).encodeABI()
@@ -73,13 +91,13 @@ const Contribute = () => {
     return (
         <>
             <div className="progress">
-                <div className="bar"><div className="percent outside">0%</div></div>
+                <div className="bar"><div className="percent outside">{formatNumber(100 * parse(raise.totalPurchased, 6) / 9696969)}%</div></div>
             </div>
 
             <div className="balance">whitelist max: {raise.whitelistMax} USDC</div>
             <div className="amount">
                 <input id="amount" className="input" placeholder="amount (USDC)"></input>
-                <button className="max">max</button>
+                <button className="max" onClick={inputMax}>max</button>
             </div>
 
             <button className="action" onClick={contribute}>contribute</button>
@@ -130,12 +148,17 @@ const Raise = () => {
     const raise = useRaise(account, Sale, BN, toWei, fromWei)
 
     const raiseStartEpoch = new Date(constants.raiseStart).getTime()
+    const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
     const [ timeRemaining, setTimeRemaining ] = useState(Date.now() - raiseStartEpoch)
     const [ sectionActive, setSectionActive ] = useState("raise")
     
     useEffect(() => {
         setInterval(() => {
-            setTimeRemaining(Date.now() - raiseStartEpoch)
+            if (raise.whitelistSaleActive) {
+                setTimeRemaining(raiseEndEpoch - Date.now())
+            } else {
+                setTimeRemaining(Date.now() - raiseStartEpoch)
+            }
         }, 2000)
     })
 
@@ -171,8 +194,8 @@ const Raise = () => {
                         <h3 className="name">{timeRemaining > 0 ? "remaining" : "raise starts"}</h3>
                             <div className="value">{formatTimeRemaining(timeRemaining)}</div>
 
-                            <h3 className="name">your share</h3>
-                            <div className="value">{format(parse(raise.amountPurchased))}</div>
+                            <h3 className="name">your tokens</h3>
+                            <div className="value">{format(parse(raise.amountPurchased))} FRIES</div>
                         </div>
                     </div>
                 </div>
@@ -181,7 +204,7 @@ const Raise = () => {
                     <div className="raise subcontainer">
                         <div className="options">
                             <div className={"option active"} onClick={() => setSectionActive("raise")}>raise</div>
-                            <div className={"option"} onClick={() => setSectionActive("redeem")}>redeem</div>
+                            <div className={"option disabled"} onClick={() => setSectionActive("redeem")}>redeem</div>
                             <div className={"option disabled"} onClick={() => setSectionActive("refund")}>refund</div>
                         </div>
 
@@ -283,6 +306,7 @@ const Raise = () => {
                 .option.disabled {
                     color: var(--gray);
                     cursor: not-allowed;
+                    pointer-events: none;
                 }
 
                 .option:not(:first-child):not(:last-child) {
@@ -348,6 +372,8 @@ const Raise = () => {
                     border-radius: 10px;
                     margin: 20px 0;
                     width: 100%;
+                    display: flex;
+                    flex-direction: column;
                 }
 
                 @media only screen and (max-width: 850px) {
@@ -506,11 +532,13 @@ const Raise = () => {
                     padding: 8px 48px;
                     color: white;
                     border-radius: 10px;
+                    margin-top: 20px;
                 }
 
                 .action.disabled {
                     background-color: var(--gray);
                     cursor: not-allowed;
+                    pointer-events: none;
                 }
             `}</style>
         </>
