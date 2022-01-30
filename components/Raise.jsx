@@ -15,8 +15,10 @@ const Contribute = () => {
     const raise = useRaise(account, Sale, BN, toWei, fromWei)
     const [ contributeText, setContributeText ] = useState("contribute")
     const [ isGray, setIsGray ] = useState(false)
+    const [ received, setReceived ] = useState(0)
 
     const disclaimerDisplay = useRef(true)
+    const approvedAmount = useRef(BN(0))
     const [ disclaimerActive, setDisclaimerActive ] = useState(false)
 
     function inputMax() {
@@ -27,7 +29,12 @@ const Contribute = () => {
         if (!account) return "connect wallet"
         if (chainId !== constants.chainId) return "switch chain"
         const approved = BN(await USDC.methods.allowance(account, Sale._address).call())
-        if (approved.isZero()) return "approve"
+        approvedAmount.current = approved
+        if (approvedAmount.current.isZero()) return "approve"
+        if (!isNaN(+document.getElementById("amount").value)) {
+            const amount = BN(unparse(document.getElementById("amount").value, 6))
+            if (approvedAmount.current.lt(amount)) return "approve"
+        }
         return "contribute"
     }
 
@@ -37,6 +44,12 @@ const Contribute = () => {
         } else {
             setIsGray(false)
         }
+        if (isNaN(+event.target.value)) return
+        const amount = unparse(event.target.value, 6)
+        if (approvedAmount.current.lt(BN(amount))) {
+            setContributeText("approve")
+        }
+        setReceived(+event.target.value * constants.salePrice)
     }
 
     useEffect(() => {
@@ -75,7 +88,7 @@ const Contribute = () => {
         }
 
         const approved = BN(await USDC.methods.allowance(account, Sale._address).call())
-        if (approved.lt(amount)) {
+        if (approved.lt(BN(toWei(amount.toString(), "mwei")))) {
             console.log("asking for an approve")
             console.log(USDC.methods.approve(Sale._address, BN(2).pow(BN(256)).sub(BN(1))).encodeABI())
             return ethereum.request({
@@ -152,11 +165,12 @@ const Contribute = () => {
                 <div className="bar"><div className="percent outside">{formatNumber(100 * parse(raise.totalPurchased, 6) / 9696969)}%</div></div>
             </div>
 
-            <div className="balance">whitelist max: {raise.whitelistMax} USDC</div>
+            <div className="balance">whitelist remaining: {raise.whitelistMax} USDC</div>
             <div className="amount">
                 <input id="amount" className="input" placeholder="amount (USDC)" onChange={checkGray}></input>
                 <button className="max" onClick={inputMax}>max</button>
             </div>
+            <div id="received" className="received">you will receive: {received } FRIES</div>
 
             <button className={isGray ? "action disabled" : "action"} onClick={contribute}>{contributeText}</button>
         </>
@@ -238,17 +252,17 @@ const Raise = () => {
                             <h3 className="name">total raised</h3>
                             <div className="value">${format(parse(raise.totalPurchased, 6))}</div>
 
-                            <h3 className="name">target</h3>
+                            <h3 className="name">total target</h3>
                             <div className="value">${format(parse(raise.totalCap, 6))}</div>
 
                             
                         </div>
 
                         <div className="column">
-                        <h3 className="name">{timeRemaining > 0 ? "remaining" : "raise starts"}</h3>
+                        <h3 className="name">{timeRemaining > 0 ? "whitelist end" : "raise starts"}</h3>
                             <div className="value">{formatTimeRemaining(timeRemaining)}</div>
 
-                            <h3 className="name">your tokens</h3>
+                            <h3 className="name">pending tokens</h3>
                             <div className="value">{format(parse(raise.amountPurchased))} FRIES</div>
                         </div>
                     </div>
@@ -278,7 +292,7 @@ const Raise = () => {
                 
             </div>
             
-            <div className="disclaimer">* Contributing to the treasury is a donation, without any expectation of profit. In exchange you are receiving membership tokens entitling you to have participatory rights of governance in shaping the DAO's endeavors in franchising.</div>
+            <div className="token-information">Each FRIES token is a symbolic recognition of each donation of 0.04168 USDC. For more token information, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
 
             {/* display: flex;
                     flex-direction: row;
@@ -296,7 +310,7 @@ const Raise = () => {
                     grid-gap: 28px;
                 }
                 
-                .disclaimer {
+                .token-information {
                     font-size: 1.15rem;
                     text-align: center;
                     width: 80%;
@@ -306,7 +320,7 @@ const Raise = () => {
 
                 .subcontainer {
                     height: 100%;
-                    padding: 56px 50px;
+                    padding: 64px 50px;
                     background-color: #ffffff;
                     border: 1px solid var(--gray);
                     box-shadow: 0 0 9px -2px var(--gray);
@@ -558,6 +572,14 @@ const Raise = () => {
                     font-size: 1.2rem;
                     margin-bottom: 2px;
                     margin-left: 5px;
+                }
+
+                .received {
+                    color: var(--black);
+                    font-size: 1.2rem;
+                    margin-bottom: 2px;
+                    margin-left: 5px;
+                    margin-top: 6px;
                 }
 
                 .amount {
