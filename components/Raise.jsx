@@ -623,7 +623,7 @@ const Raise = () => {
                     white-space: normal;
                     width: 80%;
                     border-radius: 10px;
-                    padding: 32px 40px;
+                    padding: 3rem;
                     font-size: 2rem;
                     display: flex;
                     flex-direction: column;
