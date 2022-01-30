@@ -1,5 +1,6 @@
 // Files and modules
 
+import constants from "../data/constants.json"
 import Layout from "../components/Layout.jsx"
 import { EthereumContextProvider } from "../state/EthereumContext.js"
 import Head from "next/head"
@@ -16,8 +17,16 @@ const Metadata = ({ page }) => {
             <meta name="description" content="we're pooling funds to buy a fast food franchise or two"></meta>
             <meta property="og:title" content={title}></meta>
             <meta property="og:type" content="website"></meta>
-            <meta property="og:image" content="/friesdao.png"></meta>
+            <meta property="og:image" content={`https://${constants.host}/friesdao.png`}></meta>
             <meta property="og:description" content="we're pooling funds to buy a fast food franchise or two"></meta>
+
+            <meta name="twitter:card" content="summary"></meta>
+            <meta name="twitter:site" content="@friesdao"></meta>
+            <meta name="twitter:title" content={title}></meta>
+            <meta name="twitter:description" content="we're pooling funds to buy a fast food franchise or two"></meta>
+            <meta name="twitter:image" content={`https://${constants.host}/friesdao.png`}></meta>
+            <meta name="twitter:creator" content="@friesdao"></meta>
+
             <title>{title}</title>
             <link rel="icon" href="/friesdao-square.png"></link>
             <link rel="preconnect" href="https://fonts.googleapis.com"></link>

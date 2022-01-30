@@ -10,7 +10,7 @@ const Landing = () => (
                 <h1 className="title">we're buying fast food places</h1>
                 <div className="desc">a decentralized social experiment where a crypto community will build and govern a fast food franchise empire</div>
                 <a className="discord" href="#raise-container">
-                    contribute
+                    contribute to treasury
                     <div className="arrow">➔</div>
                 </a>
             </div>
@@ -268,7 +268,7 @@ const FAQ = () => (
                 <div className="answer">Turns out some community members have lots of experience in the franchising world and have now offered advisement on how we can do this properly. Once we buy the first store successfully, the gameplan will be shared so that any execution team can form within the DAO in a decentralized manner to request from the treasury to reproduce the process.</div>
 
                 <h2 className="question">do I get anything for donating?</h2>
-                <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights. Each token represents a contribution of $0.04168.</div>
+                <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights. Each token represents a contribution of $0.023088.</div>
 
                 <h2 className="question">do I own the stores?</h2>
                 <div className="answer">Due to regulations there is no ownership stake in the stores or its profits, but rather ownership in governance that impacts how we collectively grow and expand stores with those profits. As a decentralized community, we'll be exploring ways to create regulation compliant value accrual.</div>
@@ -278,7 +278,7 @@ const FAQ = () => (
             </div>
 
             <a className="docs" href="https://friesdao.gitbook.io/friesdao-docs/" target="_blank">
-                    learn more
+                    read documentation
                     <div className="arrow">➔</div>
             </a>
         </div>
