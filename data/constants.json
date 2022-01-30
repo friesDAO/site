@@ -4,8 +4,8 @@
     "provider": "https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
     "_provider": "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
     "chainId": "0x3",
-    "usdc": "0x7f4b6f10C34470ebDdF5E7ab049d8DFFb01F8A6f",
-    "sale": "0x3575Aa02Ae85D8Cd2AaE6DCaA5D8750cFc9622e6",
+    "usdc": "0xeB9BA9909BB8F84a049213ac1B2D5d5Cd08c43B0",
+    "sale": "0x19350Bf0A12fAee50AF83739B91431B846bAc815",
     "whitelist": "whitelist1",
     "salePrice": 43.3125031
 }
