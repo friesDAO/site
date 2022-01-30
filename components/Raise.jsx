@@ -149,7 +149,7 @@ const Raise = () => {
 
     const raiseStartEpoch = new Date(constants.raiseStart).getTime()
     const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
-    const [ timeRemaining, setTimeRemaining ] = useState(Date.now() - raiseStartEpoch)
+    const [ timeRemaining, setTimeRemaining ] = useState(raiseEndEpoch - Date.now())
     const [ sectionActive, setSectionActive ] = useState("raise")
     
     useEffect(() => {
