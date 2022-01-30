@@ -7,8 +7,8 @@ const Landing = () => (
         <div className="section landing">
             <img className="hero" src="/restaurant.png"></img>
             <div className="text">
-                <h1 className="title">fries, decentralized</h1>
-                <div className="desc">a social experiment where a crypto community will build and govern a fast food franchise empire</div>
+                <h1 className="title">we're buying fast food places</h1>
+                <div className="desc">a decentralized social experiment where a crypto community will build and govern a fast food franchise empire</div>
                 <a className="discord" href="https://discord.com/invite/friesdao" target="_blank">
                     join the community
                     <div className="arrow">➔</div>
@@ -43,10 +43,10 @@ const Landing = () => (
 
             .title {
                 width: 100%;
-                font-size: 4rem;
+                font-size: 2.75rem;
                 font-weight: bold;
                 text-align: center;
-                white-space: nowrap;
+                // white-space: nowrap;
             }
             
             .desc {
