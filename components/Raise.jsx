@@ -16,6 +16,9 @@ const Contribute = () => {
     const [ contributeText, setContributeText ] = useState("contribute")
     const [ isGray, setIsGray ] = useState(false)
 
+    const disclaimerDisplay = useRef(true)
+    const [ disclaimerActive, setDisclaimerActive ] = useState(false)
+
     function inputMax() {
         document.getElementById("amount").value = raise.whitelistMax
     }
@@ -62,6 +65,14 @@ const Contribute = () => {
         if (isNaN(+document.getElementById("amount").value)) return
         const amount = BN(unparse(document.getElementById("amount").value))
         if (amount.isZero()) return
+
+        console.log(disclaimerDisplay)
+        if (disclaimerDisplay.current) {
+            console.log("doing the disclaimer display")
+            disclaimerDisplay.current = false
+            setDisclaimerActive(true)
+            return
+        }
 
         const approved = BN(await USDC.methods.allowance(account, Sale._address).call())
         if (approved.lt(amount)) {
@@ -115,6 +126,28 @@ const Contribute = () => {
 
     return (
         <>
+            {disclaimerActive ? 
+            <div className="disclaimer-modal-shade">
+                <div className="disclaimer-modal" style={{ height: "auto" }}>
+                    By contributing to the friesDAO treasury, you acknowledge and agree to the following:
+                    <ol>
+                        <li>Contributions are donations and you have no expectation of profit or any material exchange. Donating to friesDAO is NOT an investment.</li>
+
+                        <li>Any FRIES tokens provided to you are symbolic recognition of your contribution, not as an exchange for your donation, and have no intrinsic or monetary value.</li>
+
+                        <li>Any FRIES tokens provided to you may provide you with membership participatory rights or governance rights in a non-binding manner for various friesDAO community endeavors but is subject to peer decision-making, proposals, and voting from which the resulting outcome might not successfully be realized.</li>
+
+                        <li>Any FRIES tokens provided to you do not grant you any ownership rights, equity, dividend, or share in any restaurants that are acquired by the DAO or parties contracted by the DAO.</li>
+
+                        <li>Any FRIES tokens provided to you may be illiquid or highly volatile if you choose to trade the token on any DEX or secondary market. Any losses incurred shall be of no responsibility of friesDAO or its members, organizers, agents, advisors, employees, contractors, and/or affiliates.</li>
+
+                        <li>This endeavor is a research-driven social experiment intended to explore and understand the capacity of a decentralized community in engaging with real world businesses.</li>
+                    </ol>
+                    <br></br>
+                    <button className="close-button" onClick={() => setDisclaimerActive(false)} style={{ display: "inline" }}>Acknowledge</button>
+                </div>
+            </div>
+            : <></>}
             <div className="progress">
                 <div className="bar"><div className="percent outside">{formatNumber(100 * parse(raise.totalPurchased, 6) / 9696969)}%</div></div>
             </div>
@@ -225,7 +258,7 @@ const Raise = () => {
                     <div className="raise subcontainer">
                         <div className="options">
                             <div className={"option active"} onClick={() => setSectionActive("raise")}>raise</div>
-                            <div className={"option disabled"} onClick={() => setSectionActive("redeem")}>redeem</div>
+                            <div className={"option disabled"} onClick={() => setSectionActive("redeem")}>claim</div>
                             <div className={"option disabled"} onClick={() => setSectionActive("refund")}>refund</div>
                         </div>
 
@@ -244,6 +277,8 @@ const Raise = () => {
                 
                 
             </div>
+            
+            <div className="disclaimer">* Contributing to the treasury is a donation, without any expectation of profit. In exchange you are receiving membership tokens entitling you to have participatory rights of governance in shaping the DAO's endeavors in franchising.</div>
 
             {/* display: flex;
                     flex-direction: row;
@@ -259,6 +294,14 @@ const Raise = () => {
                     grid-template-columns: auto 1fr;
                     grid-template-rows: 1fr;
                     grid-gap: 28px;
+                }
+                
+                .disclaimer {
+                    font-size: 1.15rem;
+                    text-align: center;
+                    width: 80%;
+                    color: #6b778b;
+                    margin-top: 10px;
                 }
 
                 .subcontainer {
@@ -560,6 +603,50 @@ const Raise = () => {
                     background-color: var(--gray);
                     cursor: not-allowed;
                     pointer-events: none;
+                }
+
+                .disclaimer-modal-shade {
+                    position: fixed;
+                    z-index: 100;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100vh;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: #000000aa
+                }
+
+                .disclaimer-modal {
+                    background-color: white;
+                    white-space: normal;
+                    width: 80%;
+                    border-radius: 10px;
+                    padding: 32px 40px;
+                    font-size: 2rem;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    max-width: 900px;
+                    max-height: 80%;
+                    overflow: auto;
+                    text-align: center;
+                }
+
+                .disclaimer-modal > ol > li {
+                    font-size: 1.3rem;
+                    margin-bottom: 1rem;
+                    white-space: normal;
+                    text-align: left;
+                }
+
+                .close-button {
+                    background-color: var(--orange);
+                    border-radius: 10px;
+                    color: white;
+                    font-size: 1.75rem;
+                    padding: 8px 48px;
                 }
             `}</style>
         </>
