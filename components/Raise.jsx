@@ -162,10 +162,14 @@ const Contribute = () => {
             </div>
             : <></>}
             <div className="progress">
-                <div className="bar"><div className="percent outside">{formatNumber(100 * parse(raise.totalPurchased, 6) / 9696969)}%</div></div>
+                <div className="bar">
+                    <div className={(100 * parse(raise.totalPurchased, 6) / 9696969) > 19 ? "percent" : "percent outside"}>
+                        {formatNumber(100 * parse(raise.totalPurchased, 6) / 9696969)}%
+                    </div>
+                </div>
             </div>
 
-            <div className="balance">whitelist remaining: {raise.whitelistMax} USDC</div>
+            <div className="balance">whitelist remaining: {raise.whitelistMax > 1e-6 ? raise.whitelistMax : 0} USDC</div>
             <div className="amount">
                 <input id="amount" className="input" placeholder="amount (USDC)" onChange={checkGray}></input>
                 <button className="max" onClick={inputMax}>max</button>
@@ -544,7 +548,7 @@ const Raise = () => {
                     position: absolute;
                     top: 0;
                     left: 0;
-                    width: 0%;
+                    width: ${100 * parse(raise.totalPurchased, 6) / 9696969}%;
                     padding: 0 10px 0 0;
                     background-color: var(--orange);
                     height: 100%;
