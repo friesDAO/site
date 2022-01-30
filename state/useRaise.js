@@ -51,8 +51,6 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
         ])
         const whitelistEntry = whitelist.find(e => e[0].toLowerCase() == account)
         if (whitelistEntry?.length > 0) {
-            console.log(whitelistEntry[1], salePriceValue)
-            console.log(purchasedValue)
             setWhitelistMax(Math.max(Number(BN(toWei(whitelistEntry[1].toString())).div(BN(salePriceValue))) - Number(fromWei(purchasedValue)) / constants.salePrice, 0))
         } else {
             setWhitelistMax(0)

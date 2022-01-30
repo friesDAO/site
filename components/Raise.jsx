@@ -23,6 +23,12 @@ const Contribute = () => {
 
     function inputMax() {
         document.getElementById("amount").value = raise.whitelistMax
+        const amount = BN(unparse(document.getElementById("amount").value, 6))
+        if (!isNaN(+document.getElementById("amount").value)) {
+            setReceived(+document.getElementById("amount").value * constants.salePrice)
+            setIsGray(false)
+        }
+        
     }
 
     async function getContributeText() {
@@ -67,7 +73,6 @@ const Contribute = () => {
                 method: "eth_requestAccounts"
             })
         }
-        console.log(chainId)
         if (chainId !== constants.chainId) {
             return ethereum.request({
                 method: "wallet_switchEthereumChain",
@@ -76,21 +81,17 @@ const Contribute = () => {
         }
 
         if (isNaN(+document.getElementById("amount").value)) return
-        const amount = BN(unparse(document.getElementById("amount").value))
+        const amount = BN(unparse(document.getElementById("amount").value, 6))
         if (amount.isZero()) return
 
-        console.log(disclaimerDisplay)
         if (disclaimerDisplay.current) {
-            console.log("doing the disclaimer display")
             disclaimerDisplay.current = false
             setDisclaimerActive(true)
             return
         }
 
         const approved = BN(await USDC.methods.allowance(account, Sale._address).call())
-        if (approved.lt(BN(toWei(amount.toString(), "mwei")))) {
-            console.log("asking for an approve")
-            console.log(USDC.methods.approve(Sale._address, BN(2).pow(BN(256)).sub(BN(1))).encodeABI())
+        if (approved.lt(amount)) {
             return ethereum.request({
                 method: "eth_sendTransaction",
                 params: [{
@@ -107,26 +108,20 @@ const Contribute = () => {
                 params: [{
                     from: account,
                     to: Sale._address,
-                    data: Sale.methods.buyFries(toWei(amount.toString(), "mwei")).encodeABI()
+                    data: Sale.methods.buyFries(amount).encodeABI()
                 }]
             })
         } else {
-            let friesAmount = BN(amount.toString()).mul(BN(raise.salePrice.toString()))
             const whitelistedAmount = whitelist.find(e => e[0].toLowerCase() == account)[1]
-
-            console.log("LEAF CONTENTS:", account, whitelistedAmount, false)
             const leaf = makeLeaf(account, whitelistedAmount, false, 18)
-            console.log("LEAF:", leaf, Buffer.from(leaf).toString("hex"))
-
             const proof = raise.tree.getHexProof(leaf)
-
             ethereum.request({
                 method: "eth_sendTransaction",
                 params: [{
                     from: account,
                     to: Sale._address,
                     data: Sale.methods.buyWhitelistFries(
-                        toWei(amount, "mwei"),
+                        amount,
                         toWei(whitelistedAmount.toString()),
                         false,
                         proof
@@ -254,10 +249,10 @@ const Raise = () => {
                     <div className="stats-list">
                         <div className="column">
                             <h3 className="name">total raised</h3>
-                            <div className="value">${format(parse(raise.totalPurchased, 6))}</div>
+                            <div className="value">${format(parse(raise.totalPurchased, 6), 0)}</div>
 
                             <h3 className="name">total target</h3>
-                            <div className="value">${format(parse(raise.totalCap, 6))}</div>
+                            <div className="value">${format(parse(raise.totalCap, 6), 0)}</div>
 
                             
                         </div>
