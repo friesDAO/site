@@ -9,8 +9,8 @@ const Landing = () => (
             <div className="text">
                 <h1 className="title">we're buying fast food places</h1>
                 <div className="desc">a decentralized social experiment where a crypto community will build and govern a fast food franchise empire</div>
-                <a className="discord" href="https://discord.com/invite/friesdao" target="_blank">
-                    join the community
+                <a className="discord" href="#raise-container">
+                    contribute
                     <div className="arrow">➔</div>
                 </a>
             </div>
@@ -362,7 +362,7 @@ const FAQ = () => (
 
 const RaiseContainer = () => (
     <>
-        <div className="section buy">
+        <div className="section buy" id="raise-container">
             <h2 className="title">contribute to treasury</h2>
             <div className="content">
                 <Raise />

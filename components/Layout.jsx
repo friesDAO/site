@@ -46,9 +46,9 @@ const NavBar = () => (
         <nav className="nav">
             <img className="icon" src="/friesdao.png"></img>
             <div className="title">friesDAO</div>
-            <NavLink href={`https://app.${constants.host}`} external margin="0 0 0 auto" disabled={true}>
+            <NavLink href={`https://discord.gg/friesdao`} external margin="0 0 0 auto">
                 <div className="app-link">
-                    launch app
+                    join discord
                     <div className="arrow">➔</div>
                 </div>
             </NavLink>
