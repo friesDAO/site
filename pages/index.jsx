@@ -46,7 +46,6 @@ const Landing = () => (
                 font-size: 2.75rem;
                 font-weight: bold;
                 text-align: center;
-                // white-space: nowrap;
             }
             
             .desc {
@@ -182,7 +181,7 @@ const About = () => (
                 font-size: 4rem;
                 font-weight: bold;
                 color: var(--title);
-                white-space: nowrap;
+                text-align: center;
             }
 
             .graphic {
