@@ -268,7 +268,7 @@ const FAQ = () => (
                 <div className="answer">Turns out some community members have lots of experience in the franchising world and have now offered advisement on how we can do this properly. Once we buy the first store successfully, the gameplan will be shared so that any execution team can form within the DAO in a decentralized manner to request from the treasury to reproduce the process.</div>
 
                 <h2 className="question">do I get anything for donating?</h2>
-                <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights. Each token represents a contribution of $0.023088.</div>
+                <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights. Each token represents a contribution of 0.023088 USDC.</div>
 
                 <h2 className="question">do I own the stores?</h2>
                 <div className="answer">Due to regulations there is no ownership stake in the stores or its profits, but rather ownership in governance that impacts how we collectively grow and expand stores with those profits. As a decentralized community, we'll be exploring ways to create regulation compliant value accrual.</div>
@@ -363,6 +363,7 @@ const RaiseContainer = () => (
     <>
         <div className="section buy" id="raise-container">
             <h2 className="title">contribute to treasury</h2>
+            <div className="notice">currently open to whitelisted addresses and will be open to all after Feb 5th</div>
             <div className="content">
                 <Raise />
             </div>
@@ -375,7 +376,6 @@ const RaiseContainer = () => (
                 flex-direction: column;
                 justify-content: flex-start;
                 align-items: center;
-                gap: 50px;
                 // background-color: #ffebeb;
             }
 
@@ -401,13 +401,15 @@ const RaiseContainer = () => (
                 font-weight: bold;
             }
 
+            .notice {
+                margin-bottom: 50px;
+                font-size: 1.5rem;
+                text-align: center;
+            }
+
             @media only screen and (max-width: 600px) {
                 .title {
                     font-size: 3.2rem;
-                }
-
-                .buy {
-                    gap: 32px;
                 }
             }
         `}</style>

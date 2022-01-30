@@ -259,7 +259,7 @@ const Raise = () => {
                         </div>
 
                         <div className="column">
-                        <h3 className="name">{timeRemaining > 0 ? "whitelist end" : "raise starts"}</h3>
+                        <h3 className="name">{timeRemaining > 0 ? "whitelist ends" : "raise starts"}</h3>
                             <div className="value">{formatTimeRemaining(timeRemaining)}</div>
 
                             <h3 className="name">pending tokens</h3>
@@ -292,7 +292,7 @@ const Raise = () => {
                 
             </div>
             
-            <div className="token-information">Each FRIES token is a symbolic recognition of each donation of 0.04168 USDC. For more token information, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
+            <div className="token-information">Each FRIES token is a symbolic recognition of each donation of 0.023088 USDC. For more token information, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
 
             {/* display: flex;
                     flex-direction: row;
