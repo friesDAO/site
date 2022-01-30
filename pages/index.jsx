@@ -363,7 +363,7 @@ const FAQ = () => (
 const RaiseContainer = () => (
     <>
         <div className="section buy">
-            <h2 className="title">public raise</h2>
+            <h2 className="title">contribute to treasury</h2>
             <div className="content">
                 <Raise />
             </div>
@@ -385,7 +385,6 @@ const RaiseContainer = () => (
                 font-weight: bold;
                 // color: var(--title);
                 text-align: center;
-                white-space: nowrap;
             }
 
             .content {
