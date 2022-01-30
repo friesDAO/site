@@ -11,12 +11,29 @@ import { parse, unparse, format, formatNumber } from "../components/number.js"
 import { useState, useEffect, useContext, useRef } from "react"
 
 const Contribute = () => {
-    const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
+    const { enabled, chainId, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
     const raise = useRaise(account, Sale, BN, toWei, fromWei)
+    const [ contributeText, setContributeText ] = useState("contribute")
 
     function inputMax() {
         document.getElementById("amount").value = raise.whitelistMax
     }
+
+    async function getContributeText() {
+        if (!account) return "connect wallet"
+        if (chainId !== constants.chainId) return "switch chain"
+        const approved = BN(await USDC.methods.allowance(account, Sale._address).call())
+        if (approved.isZero()) return "approve"
+        return "contribute"
+    }
+
+    useEffect(() => {
+        getContributeText().then(setContributeText)
+        const interval = setInterval(async () => {
+            setContributeText(await getContributeText())
+        }, 2000)
+        return () => clearInterval(interval)
+    }, [account, chainId])
 
     async function contribute() {
         if (!enabled) return
@@ -25,7 +42,6 @@ const Contribute = () => {
                 method: "eth_requestAccounts"
             })
         }
-        const chainId = await ethereum.request({ method: "eth_chainId" })
         console.log(chainId)
         if (chainId !== constants.chainId) {
             return ethereum.request({
@@ -100,7 +116,7 @@ const Contribute = () => {
                 <button className="max" onClick={inputMax}>max</button>
             </div>
 
-            <button className="action" onClick={contribute}>contribute</button>
+            <button className="action" onClick={contribute}>{contributeText}</button>
         </>
     )
 }
