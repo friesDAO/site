@@ -14,6 +14,7 @@ const Contribute = () => {
     const { enabled, chainId, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
     const raise = useRaise(account, Sale, BN, toWei, fromWei)
     const [ contributeText, setContributeText ] = useState("contribute")
+    const [ isGray, setIsGray ] = useState(false)
 
     function inputMax() {
         document.getElementById("amount").value = raise.whitelistMax
@@ -25,6 +26,14 @@ const Contribute = () => {
         const approved = BN(await USDC.methods.allowance(account, Sale._address).call())
         if (approved.isZero()) return "approve"
         return "contribute"
+    }
+
+    function checkGray(event) {
+        if (isNaN(+event.target.value)) {
+            setIsGray(true)
+        } else {
+            setIsGray(false)
+        }
     }
 
     useEffect(() => {
@@ -112,11 +121,11 @@ const Contribute = () => {
 
             <div className="balance">whitelist max: {raise.whitelistMax} USDC</div>
             <div className="amount">
-                <input id="amount" className="input" placeholder="amount (USDC)"></input>
+                <input id="amount" className="input" placeholder="amount (USDC)" onChange={checkGray}></input>
                 <button className="max" onClick={inputMax}>max</button>
             </div>
 
-            <button className="action" onClick={contribute}>{contributeText}</button>
+            <button className={isGray ? "action disabled" : "action"} onClick={contribute}>{contributeText}</button>
         </>
     )
 }
