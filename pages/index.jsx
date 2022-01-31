@@ -9,7 +9,7 @@ const Landing = () => (
             <div className="text">
                 <h1 className="title">we're buying fast food places</h1>
                 <div className="desc">a decentralized social experiment where a crypto community will build and govern a fast food franchise empire</div>
-                <a className="discord" href="#raise-container">
+                <a className="discord" href="#raise">
                     contribute to treasury
                     <div className="arrow">➔</div>
                 </a>
@@ -253,6 +253,44 @@ const About = () => (
     </>
 )
 
+// graphic section
+
+const Graphic = () => (
+    <>
+        <div className="section graphic">
+            {/* <img className="graphic-img" src="/banner.png" /> */}
+        </div>
+
+        <style jsx>{`
+            .graphic {
+                width: 100%;
+                height: 30vh;
+                position: relative;
+                background-image: url("/banner2.png");
+                background-attachment: fixed;
+                background-position: right;
+                background-repeat: no-repeat;
+                background-size: cover;
+                filter: opacity(0.35) saturate(1) blur(2px) sepia(0.4);
+            }
+
+            .graphic-img {
+                position: fixed;
+                width: 100%;
+                top: 0;
+                left: 0;
+            }
+
+            @media only screen and (max-width: 550px) {
+                .graphic {
+                    background-image: url("/banner1.png");
+                    background-position: center;
+                }
+            }
+        `}</style>
+    </>
+)
+
 // FAQ section
 
 const FAQ = () => (
@@ -271,7 +309,7 @@ const FAQ = () => (
                 <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights. Each token represents a contribution of 0.023088 USDC.</div>
 
                 <h2 className="question">do I own the stores?</h2>
-                <div className="answer">Due to regulations there is no ownership stake in the stores or its profits, but rather ownership in governance that impacts how we collectively grow and expand stores with those profits. As a decentralized community, we'll be exploring ways to create regulation compliant value accrual.</div>
+                <div className="answer">Due to regulations there is no ownership stake in the stores or its profits, but rather ownership in governance that impacts how we collectively grow and expand stores with those profits (stored in a public multisig wallet). As a decentralized community, we'll be exploring ways to create regulation compliant value accrual.</div>
 
                 <h2 className="question">what's the grand vision?</h2>
                 <div className="answer">Imagine a major fast food store in every major city, materialized because of your vote. Go to one near you, flash your barcoded friesDAO NFT, and get that free burger. Fist-bump that dude next to you who did the same. Tell him you liked that $FRIES defi strategy he posted in Discord the other day. We're going to make history.</div>
@@ -361,7 +399,7 @@ const FAQ = () => (
 
 const RaiseContainer = () => (
     <>
-        <div className="section buy" id="raise-container">
+        <div className="section raise-container" id="raise">
             <h2 className="title">contribute to treasury</h2>
             <div className="notice">currently open to whitelisted addresses and will be open to all after Feb 5th</div>
             <div className="content">
@@ -370,7 +408,7 @@ const RaiseContainer = () => (
         </div>
 
         <style jsx>{`
-            .buy {
+            .raise-container {
                 // height: 100vh; /* temporary */
                 display: flex;
                 flex-direction: column;
@@ -422,6 +460,7 @@ const Home = () => (
     <>
         <Landing />
         <About />
+        <Graphic />
         <FAQ />
         <RaiseContainer />
         <style jsx global>{`
