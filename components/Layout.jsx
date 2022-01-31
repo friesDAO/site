@@ -118,6 +118,9 @@ const Footer = () => (
             <a href="https://github.com/friesDAO" target="_blank">
                 <img className="icon" src="/github.svg"></img>
             </a>
+            <a href="https://friesdao.gitbook.io/friesdao-docs/" target="_blank">
+                <img className="icon" src="/docs.svg"></img>
+            </a>
         </footer>
         <style jsx>{`
             .footer {

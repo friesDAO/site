@@ -45,7 +45,7 @@ const Contribute = () => {
     }
 
     function checkGray(event) {
-        if (isNaN(+event.target.value)) {
+        if (isNaN(+event.target.value) || +event.target.value > raise.whitelistMax) {
             setIsGray(true)
         } else {
             setIsGray(false)
@@ -143,7 +143,7 @@ const Contribute = () => {
 
                         <li>Any FRIES tokens provided to you are symbolic recognition of your contribution, not as an exchange for your donation, and have no intrinsic or monetary value.</li>
 
-                        <li>Any FRIES tokens provided to you may provide you with membership participatory rights or governance rights in a non-binding manner for various friesDAO community endeavors but is subject to peer decision-making, proposals, and voting from which the resulting outcome might not successfully be realized.</li>
+                        <li>Any FRIES tokens provided to you may provide you with membership participatory rights or governance rights in a non-binding manner for various friesDAO community endeavors but are subject to peer decision-making, proposals, and voting from which the resulting outcome might not successfully be realized.</li>
 
                         <li>Any FRIES tokens provided to you do not grant you any ownership rights, equity, dividend, or share in any restaurants that are acquired by the DAO or parties contracted by the DAO.</li>
 
@@ -291,7 +291,7 @@ const Raise = () => {
                 
             </div>
             
-            <div className="token-information">Each FRIES token is a symbolic recognition of each donation of 0.023088 USDC. For more token information, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
+            <div className="token-information">Each FRIES token is a symbolic recognition of each donation of 0.023088 USDC. Tokens will be claimable after the raise is complete. For more token information, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
 
             {/* display: flex;
                     flex-direction: row;
