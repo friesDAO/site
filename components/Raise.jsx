@@ -249,10 +249,10 @@ const Raise = () => {
                     <div className="stats-list">
                         <div className="column">
                             <h3 className="name">total raised</h3>
-                            <div className="value">${format(parse(raise.totalPurchased, 6), 0)}</div>
+                            <div className="value">${(+Number(fromWei(raise.totalPurchased.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
 
                             <h3 className="name">total target</h3>
-                            <div className="value">${format(parse(raise.totalCap, 6), 0)}</div>
+                            <div className="value">${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
 
                             
                         </div>
