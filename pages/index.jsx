@@ -158,6 +158,7 @@ const About = () => (
                 justify-content: center;
                 align-items: center;
                 gap: 50px;
+                border-bottom: 4px solid var(--orange)
             }
 
             .split {
@@ -271,7 +272,7 @@ const Graphic = () => (
                 background-position: right;
                 background-repeat: no-repeat;
                 background-size: cover;
-                filter: opacity(0.35) saturate(1) blur(2px) sepia(0.4);
+                filter: opacity(0.35) saturate(1) sepia(0.4);
             }
 
             .graphic-img {
@@ -302,7 +303,7 @@ const FAQ = () => (
                 <h2 className="question">why are we doing this?</h2>
                 <div className="answer">A crypto community wondered if we could actually buy a McDonald's, the favorite employer of rekt traders. DAOs have recently began buying real world things, and we want to prove that we can bridge blockchain with fast food.</div>
 
-                <h2 className="question">will you actually pull this off?</h2>
+                <h2 className="question">will we actually pull this off?</h2>
                 <div className="answer">Turns out some community members have lots of experience in the franchising world and have now offered advisement on how we can do this properly. Once we buy the first store successfully, the game plan will be shared so that any execution team can form within the DAO in a decentralized manner to request from the treasury to reproduce the process. If we fail to acquire a store in 1 year, your contribution is refundable (minus any treasury expenditures to date).</div>
 
                 <h2 className="question">do I get anything for donating?</h2>
@@ -329,6 +330,7 @@ const FAQ = () => (
                 justify-content: center;
                 align-items: center;
                 gap: 50px;
+                border-top: 4px solid var(--orange)
             }
 
             .list {
