@@ -152,7 +152,7 @@ const Contribute = () => {
                         <li>This endeavor is a research-driven social experiment intended to explore and understand the capacity of a decentralized community in engaging with real world businesses.</li>
                     </ol>
                     <br></br>
-                    <button className="close-button" onClick={() => setDisclaimerActive(false)} style={{ display: "inline" }}>Acknowledge</button>
+                    <button className="close-button" onClick={() => setDisclaimerActive(false)} style={{ display: "inline" }}>Accept</button>
                 </div>
             </div>
             : <></>}
