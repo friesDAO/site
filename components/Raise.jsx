@@ -158,7 +158,7 @@ const Contribute = () => {
             : <></>}
             <div className="progress">
                 <div className="bar">
-                    <div className={(100 * parse(raise.totalPurchased, 6) / 9696969) > 19 ? "percent" : "percent outside"}>
+                    <div className={(100 * parse(raise.totalPurchased, 6) / 9696969) > 50 ? "percent" : "percent outside"}>
                         {formatNumber(100 * parse(raise.totalPurchased, 6) / 9696969)}%
                     </div>
                 </div>
