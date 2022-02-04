@@ -472,6 +472,8 @@ const NFT = () => (
                     <div className="nft-rarity">for all participants</div>
                 </div>
             </div>
+
+            <h3 className="subsubtitle">Minting will be made available shortly after raise completes.</h3>
         </div>
 
         <style jsx>{`
@@ -502,6 +504,13 @@ const NFT = () => (
 
             .subtitle {
                 font-size: 1.75rem;
+                color: var(--text);
+                font-weight: 400;
+                text-align: center;
+            }
+
+            .subsubtitle {
+                font-size: 1.25rem;
                 color: var(--text);
                 font-weight: 400;
                 text-align: center;
