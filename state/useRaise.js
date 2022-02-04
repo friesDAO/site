@@ -69,7 +69,7 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
         const contributions = await fetch(`https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=${constants.startBlock}&toBlock=latest&address=${constants.sale}&topic0=${constants.purchaseTopic}&apikey=${constants.etherscanAPI}`).then(res => res.json())
         if (contributions.status == 1) {
             console.log(contributions.result.length)
-            setNftsRemaining(250 - contributions.result.length)
+            setNftsRemaining(200 - contributions.result.length)
         }
     }
 
