@@ -10,7 +10,7 @@
     "whitelist": "whitelist2",
     "currentNFTPhase": "pre-release",
     "currentNFTAmount": 200,
-    "nftCutoff": 2500,
+    "nftCutoff": 0,
     "salePrice": 43.3125031,
     "etherscanAPI": "FZ1MKV339VKCUDQTMK1GESXZNA8Y9MA8P4",
     "purchaseTopic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
