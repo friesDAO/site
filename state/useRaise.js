@@ -66,10 +66,29 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
     }
 
     async function updateNFTsRemaining() {
-        const contributions = await fetch(`https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=${constants.startBlock}&toBlock=latest&address=${constants.usdc}&topic0=${constants.purchaseTopic}&topic2=${constants.treasuryTopic}&apikey=${constants.etherscanAPI}`).then(res => res.json())
-        if (contributions.status == 1) {
-            const uniqueContributions = new Set(contributions.result.map(c => c.topics[1])).size
-            setNftsRemaining(constants.currentNFTAmount - uniqueContributions)
+        const logs = await fetch(`https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=${constants.startBlock}&toBlock=latest&address=${constants.usdc}&topic0=${constants.purchaseTopic}&topic2=${constants.treasuryTopic}&apikey=${constants.etherscanAPI}`).then(res => res.json())
+        if (logs.status == 1) {
+            const contributions = {
+
+            }
+
+            for (const log of logs.result) {
+                const address = log.topics[1]
+                const amount = parseInt(log.data, 16)
+                if (contributions[address]) {
+                    contributions[address] += Number(fromWei(amount.toString(), "mwei"))
+                } else {
+                    contributions[address] = Number(fromWei(amount.toString(), "mwei"))
+                }
+            }
+
+            for (const [address, amount] of Object.entries(contributions)) {
+                if (amount < constants.nftCutoff) {
+                    delete contributions[address]
+                }
+            }
+
+            setNftsRemaining(constants.currentNFTAmount - Object.keys(contributions).length)
         }
     }
 

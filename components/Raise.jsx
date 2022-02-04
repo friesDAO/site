@@ -263,7 +263,7 @@ const Raise = () => {
                             <div className="value">{format(parse(raise.amountPurchased))} FRIES</div>
 
                             <h3 className="name">NFT reserved</h3>
-                            <div className="value">{raise.amountPurchased > 0 ? "yes" : "no"}</div>
+                            <div className="value">{parse(raise.amountPurchased) > constants.nftCutoff * constants.salePrice ? "yes" : "no"}</div>
                             
                             <h3 className="name">NFTs remaining</h3>
                             <div className="value">{raise.nftsRemaining} {constants.currentNFTPhase}</div>
