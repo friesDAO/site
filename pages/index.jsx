@@ -440,20 +440,12 @@ const NFT = () => (
             <h3 className="subtitle">We're seeking to evolve NFT membership cards, complete with beautiful art and assorted traits, into perks such as food or discounts at our friesDAO network stores.</h3>
 
             <div className="nft-list">
-                <div className="nft-container standard">
-                    <div className="nft-name">standard edition</div>
-                    <div className="nft-count">5959 total</div>
+                <div className="nft-container pre-release">
+                    <div className="nft-name">pre-release edition</div>
+                    <div className="nft-count">250 total</div>
                     <img className="nft-img" src="nft.png" />
-                    <div className="nft-price">via staking</div>
-                    <div className="nft-rarity">for all participants</div>
-                </div>
-                
-                <div className="nft-container genesis">
-                    <div className="nft-name">genesis edition</div>
-                    <div className="nft-count">400 total</div>
-                    <img className="nft-img" src="nft.png" />
-                    <div className="nft-price">0.06 ETH</div>
-                    <div className="nft-rarity">for early participants</div>
+                    <div className="nft-price">0 ETH</div>
+                    <div className="nft-rarity">for whitelist contributors</div>
                 </div>
 
                 <div className="nft-container limited">
@@ -464,12 +456,20 @@ const NFT = () => (
                     <div className="nft-rarity">for general contributors</div>
                 </div>
 
-                <div className="nft-container pre-release">
-                    <div className="nft-name">pre-release edition</div>
-                    <div className="nft-count">250 total</div>
+                <div className="nft-container genesis">
+                    <div className="nft-name">genesis edition</div>
+                    <div className="nft-count">400 total</div>
                     <img className="nft-img" src="nft.png" />
-                    <div className="nft-price">free</div>
-                    <div className="nft-rarity">for whitelist contributors</div>
+                    <div className="nft-price">0.06 ETH</div>
+                    <div className="nft-rarity">for early participants</div>
+                </div>
+
+                <div className="nft-container standard">
+                    <div className="nft-name">standard edition</div>
+                    <div className="nft-count">5959 total</div>
+                    <img className="nft-img" src="nft.png" />
+                    <div className="nft-price">via staking</div>
+                    <div className="nft-rarity">for all participants</div>
                 </div>
             </div>
         </div>
