@@ -439,8 +439,38 @@ const NFT = () => (
             <h2 className="title">NFT memberships</h2>
             <h3 className="subtitle">We're seeking to evolve NFT membership cards, complete with beautiful art and assorted traits, into perks such as food or discounts at our friesDAO network stores.</h3>
 
-            <div className="list">
+            <div className="nft-list">
+                <div className="nft-container standard">
+                    <div className="nft-name">standard edition</div>
+                    <div className="nft-count">5959 total</div>
+                    <img className="nft-img" src="nft.png" />
+                    <div className="nft-price">via staking</div>
+                    <div className="nft-rarity">for all participants</div>
+                </div>
                 
+                <div className="nft-container genesis">
+                    <div className="nft-name">genesis edition</div>
+                    <div className="nft-count">400 total</div>
+                    <img className="nft-img" src="nft.png" />
+                    <div className="nft-price">0.06 ETH</div>
+                    <div className="nft-rarity">for early participants</div>
+                </div>
+
+                <div className="nft-container limited">
+                    <div className="nft-name">limited edition</div>
+                    <div className="nft-count">350 total</div>
+                    <img className="nft-img" src="nft.png" />
+                    <div className="nft-price">0.03 ETH</div>
+                    <div className="nft-rarity">for general contributors</div>
+                </div>
+
+                <div className="nft-container pre-release">
+                    <div className="nft-name">pre-release edition</div>
+                    <div className="nft-count">250 total</div>
+                    <img className="nft-img" src="nft.png" />
+                    <div className="nft-price">free</div>
+                    <div className="nft-rarity">for whitelist contributors</div>
+                </div>
             </div>
         </div>
 
@@ -454,25 +484,93 @@ const NFT = () => (
                 gap: 24px;
             }
 
-            .list {
+            .nft-list {
                 display: flex;
                 flex-direction: row;
-                justify-content: space-evenly;
-                width: 100%
+                gap: 20px;
+                justify-content: center;
+                width: 100%;
+                flex-wrap: wrap;
             }
 
             .title {
                 font-size: 4rem;
                 font-weight: bold;
-                color: var(--title);
+                color: var(--text);
                 white-space: nowrap;
             }
 
             .subtitle {
                 font-size: 1.75rem;
-                color: var(--title);
+                color: var(--text);
                 font-weight: 400;
                 text-align: center;
+            }
+
+            .nft-container {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                color: var(--text);
+                border: 3px solid var(--orange);
+                border-radius: 10px;
+                padding: 24px 40px;
+            }
+
+            .nft-img {
+                height: 185px;
+                margin: 24px 0;
+            }
+
+            .nft-name {
+                font-size: 1.65rem;
+                font-weight: bold;
+                color: var(--orange);
+                line-height: 1em;
+            }
+
+            .nft-count {
+                font-size: 1.5rem;
+                line-height: 1em;
+                margin-top: 8px;
+            }
+
+            .nft-price {
+                font-size: 1.5rem;
+                line-height: 1em;
+                font-weight: bold;
+            }
+
+            .nft-rarity {
+                font-size: 1.5rem;
+                line-height: 1em;
+                margin-top: 4px;
+            }
+
+            .standard > .nft-img {
+                filter: drop-shadow(0 0 8px #ff4747)
+            }
+
+            .genesis > .nft-img {
+                filter: drop-shadow(0 0 10px #479aff)
+            }
+
+            .limited > .nft-img {
+                filter: drop-shadow(0 0 12px #944dff)
+            }
+
+            .pre-release > .nft-img {
+                animation: 3s infinite alternate cycle
+            }
+
+            @keyframes cycle {
+                0% { filter: drop-shadow(0 0 16px #944dff) }
+                17% { filter: drop-shadow(0 0 16px #479aff) }
+                33% { filter: drop-shadow(0 0 16px #47ffb8) }
+                50% { filter: drop-shadow(0 0 16px #d7ff47) }
+                67% { filter: drop-shadow(0 0 16px #fc782b) }
+                83% { filter: drop-shadow(0 0 16px #ff4747) }
+                100% { filter: drop-shadow(0 0 16px #ff47f9) }
             }
         `}</style>
     </>
@@ -546,7 +644,7 @@ const Home = () => (
         <About />
         <Graphic />
         <FAQ />
-        {/* <NFT /> */}
+        <NFT />
         <RaiseContainer />
         <style jsx global>{`
             .section {
