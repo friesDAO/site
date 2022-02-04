@@ -9,8 +9,10 @@
     "sale": "0x437A28214cBeCFb51188b6CA2A3998Df28fb5678",
     "whitelist": "whitelist2",
     "currentNFTPhase": "pre-release",
+    "currentNFTAmount": 200,
     "salePrice": 43.3125031,
     "etherscanAPI": "FZ1MKV339VKCUDQTMK1GESXZNA8Y9MA8P4",
-    "purchaseTopic": "0xa512fb2532ca8587f236380171326ebb69670e86a2ba0c4412a3fcca4c3ada9b",
+    "purchaseTopic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+    "treasuryTopic": "0x0000000000000000000000007163bee2a0a4c75d1236bf053e429f86eb45426e",
     "startBlock": 14104538
 }
