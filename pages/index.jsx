@@ -497,7 +497,7 @@ const NFT = () => (
                 font-size: 4rem;
                 font-weight: bold;
                 color: var(--text);
-                white-space: nowrap;
+                text-align: center;
             }
 
             .subtitle {
@@ -571,6 +571,17 @@ const NFT = () => (
                 67% { filter: drop-shadow(0 0 16px #fc782b) }
                 83% { filter: drop-shadow(0 0 16px #ff4747) }
                 100% { filter: drop-shadow(0 0 16px #ff47f9) }
+            }
+
+            @media only screen and (max-width: 400px) {
+                .nft-container {
+                    width: 95%;
+                }
+
+                .nft-img {
+                    height: auto;
+                    width: 95%;
+                }
             }
         `}</style>
     </>
