@@ -442,7 +442,7 @@ const NFT = () => (
             <div className="nft-list">
                 <div className="nft-container pre-release">
                     <div className="nft-name">pre-release edition</div>
-                    <div className="nft-count">250 total</div>
+                    <div className="nft-count">200 total</div>
                     <img className="nft-img" src="nft.png" />
                     <div className="nft-price">0 ETH</div>
                     <div className="nft-rarity">for whitelist contributors</div>
@@ -466,7 +466,7 @@ const NFT = () => (
 
                 <div className="nft-container standard">
                     <div className="nft-name">standard edition</div>
-                    <div className="nft-count">5959 total</div>
+                    <div className="nft-count">6969 total</div>
                     <img className="nft-img" src="nft.png" />
                     <div className="nft-price">via staking</div>
                     <div className="nft-rarity">for all participants</div>
