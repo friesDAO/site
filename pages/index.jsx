@@ -432,6 +432,52 @@ const FAQ = () => (
     </>
 )
 
+// NFT section
+const NFT = () => (
+    <>
+        <div className="section faq">
+            <h2 className="title">NFT memberships</h2>
+            <h3 className="subtitle">We're seeking to evolve NFT membership cards, complete with beautiful art and assorted traits, into perks such as food or discounts at our friesDAO network stores.</h3>
+
+            <div className="list">
+                
+            </div>
+        </div>
+
+        <style jsx>{`
+            .faq {
+                background-color: #faf0ff;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 24px;
+            }
+
+            .list {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                width: 100%
+            }
+
+            .title {
+                font-size: 4rem;
+                font-weight: bold;
+                color: var(--title);
+                white-space: nowrap;
+            }
+
+            .subtitle {
+                font-size: 1.75rem;
+                color: var(--title);
+                font-weight: 400;
+                text-align: center;
+            }
+        `}</style>
+    </>
+)
+
 // Raise $FRIES section
 
 const RaiseContainer = () => (
@@ -500,6 +546,7 @@ const Home = () => (
         <About />
         <Graphic />
         <FAQ />
+        {/* <NFT /> */}
         <RaiseContainer />
         <style jsx global>{`
             .section {

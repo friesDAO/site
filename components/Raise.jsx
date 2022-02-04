@@ -235,9 +235,9 @@ const Raise = () => {
         const hours = Math.floor(time / (60 * 60 * 1000)) - (days * 24)
         if (days == 0) {
             const minutes = Math.floor(time / (60 * 1000)) - (hours * 60)
-            return `${hours} hours, ${minutes} minutes`
+            return `${hours} hour${hours > 1 ? "s" : ""}, ${minutes} minute${minutes > 1 ? "s" : ""}`
         }
-        return `${days} days, ${hours} hours`
+        return `${days} day${days > 1 ? "s" : ""}, ${hours} hour${hours > 1 ? "s" : ""}`
     }
 
     return (
@@ -254,15 +254,19 @@ const Raise = () => {
                             <h3 className="name">total target</h3>
                             <div className="value">${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
 
-                            
+                            <h3 className="name">{timeRemaining > 0 ? "whitelist ends" : "raise starts"}</h3>
+                            <div className="value">{formatTimeRemaining(timeRemaining)}</div>
                         </div>
 
                         <div className="column">
-                        <h3 className="name">{timeRemaining > 0 ? "whitelist ends" : "raise starts"}</h3>
-                            <div className="value">{formatTimeRemaining(timeRemaining)}</div>
-
                             <h3 className="name">pending tokens</h3>
                             <div className="value">{format(parse(raise.amountPurchased))} FRIES</div>
+
+                            <h3 className="name">NFT reserved</h3>
+                            <div className="value">{raise.amountPurchased > 0 ? "yes" : "no"}</div>
+                            
+                            <h3 className="name">NFTs remaining</h3>
+                            <div className="value">{raise.nftsRemaining} {constants.currentNFTPhase}</div>
                         </div>
                     </div>
                 </div>
@@ -319,7 +323,7 @@ const Raise = () => {
 
                 .subcontainer {
                     height: 100%;
-                    padding: 64px 50px;
+                    padding: 32px 50px;
                     background-color: #ffffff;
                     border: 1px solid var(--gray);
                     box-shadow: 0 0 9px -2px var(--gray);
@@ -343,12 +347,12 @@ const Raise = () => {
 
                 .name {
                     font-weight: 600;
-                    font-size: 1.75rem;
+                    font-size: 1.6rem;
                 }
 
                 .value {
-                    font-size: 1.5rem;
-                    margin-bottom: 16px;
+                    font-size: 1.4rem;
+                    margin-bottom: 15px;
                 }
 
                 .column:last-child > .value:last-child {

@@ -7,6 +7,10 @@
     "chainId": "0x1",
     "usdc": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     "sale": "0x437A28214cBeCFb51188b6CA2A3998Df28fb5678",
-    "whitelist": "whitelist1",
-    "salePrice": 43.3125031
+    "whitelist": "whitelist2",
+    "currentNFTPhase": "pre-release",
+    "salePrice": 43.3125031,
+    "etherscanAPI": "FZ1MKV339VKCUDQTMK1GESXZNA8Y9MA8P4",
+    "purchaseTopic": "0xa512fb2532ca8587f236380171326ebb69670e86a2ba0c4412a3fcca4c3ada9b",
+    "startBlock": 14104538
 }
