@@ -458,7 +458,7 @@ const NFT = () => (
 
                 <div className="nft-container genesis">
                     <div className="nft-name">genesis edition</div>
-                    <div className="nft-count">400 total</div>
+                    <div className="nft-count">450 total</div>
                     <img className="nft-img" src="nft.png" />
                     <div className="nft-price">0.06 ETH</div>
                     <div className="nft-rarity">for early participants</div>
