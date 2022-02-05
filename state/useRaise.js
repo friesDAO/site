@@ -88,7 +88,9 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
                 }
             }
 
-            setNftsRemaining(constants.currentNFTAmount - Object.keys(contributions).length)
+            const remaining = constants.currentNFTAmount - Object.keys(contributions).length
+
+            setNftsRemaining(remaining > 0 ? remaining : 0)
         }
     }
 
