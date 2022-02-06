@@ -98,20 +98,22 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
                 }
             }
 
-            console.log(contributions)
-            console.log(addresses)
-
             const remaining = constants.nftPhases[constants.currentNFTPhase].amount - addresses[constants.currentNFTPhase].length
 
             setNftsRemaining(remaining > 0 ? remaining : 0)
 
-            const formattedAddresses = addresses[constants.currentNFTPhase].slice(0, constants.nftPhases[constants.currentNFTPhase].amount).map(a => a.slice(26).toLowerCase())
+            let reserved = false
 
-            if (account && formattedAddresses.includes(account.slice(2).toLowerCase())) {
-                setNftReserved(true)
-            } else {
-                setNftReserved(false)
+            for (const [i, nftPhase] of constants.nftPhases.entries()) {
+                const formattedAddresses = addresses[i].slice(0, constants.nftPhases[i].amount).map(a => a.slice(26).toLowerCase())
+
+                if (account && formattedAddresses.includes(account.slice(2).toLowerCase())) {
+                    reserved = true
+                }
             }
+
+            setNftReserved(reserved)
+            
         } else {
             console.log("ratelimited!")
         }
