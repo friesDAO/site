@@ -1,128 +1,175 @@
 import Raise from "../components/Raise.jsx"
+import useProgress from "../state/useProgress.js"
+import { useContext } from "react"
+import { parse, unparse, format, formatNumber } from "../components/number.js"
+import EthereumContext from "../state/EthereumContext.js"
 
 // Landing section
 
-const Landing = () => (
-    <>
-        <div className="section landing">
-            <img className="hero" src="/restaurant.png"></img>
-            <div className="text">
-                <h1 className="title">we're buying fast food places</h1>
-                <div className="desc">a decentralized social experiment where a crypto community will build and govern a fast food franchise empire</div>
-                <a className="discord" href="#raise">
-                    contribute to treasury
-                    <div className="arrow">➔</div>
-                </a>
+const Landing = () => {
+    // const { Sale, BN } = useContext(EthereumContext)
+    // const raiseProgress = useProgress(Sale, BN)
+    return (
+        <>
+            <div className="section landing">
+                <img className="hero" src="/restaurant.png"></img>
+                <div className="text">
+                    <h1 className="title">we're buying fast food places</h1>
+                    <div className="desc">a decentralized social experiment where a crypto community will build and govern a fast food franchise empire</div>
+                    
+                    {/* <div className="progress">
+                        <div className="bar">
+                            <div className="amount">
+                                ${formatNumber(parse(raiseProgress.totalPurchased, 6))}
+                            </div>
+                        </div>
+                    </div> */}
+
+                    <a className="discord" href="#raise">
+                        contribute to treasury
+                        <div className="arrow">➔</div>
+                    </a>
+                </div>
             </div>
-        </div>
-        <style jsx>{`
-            .landing {
-                min-height: calc(100vh - 80px);
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 22px;
-                padding: 0 max(calc(50vw - 500px), var(--side)) 80px max(calc(50vw - 550px), var(--side));
-            }
-
-            .hero {
-                width: 350px;
-                margin-top: 20px;
-            }
-
-            .text {
-                max-width: 620px;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                gap: 10px;
-                text-align: center;
-            }
-
-            .title {
-                width: 100%;
-                font-size: 2.75rem;
-                font-weight: bold;
-                text-align: center;
-            }
-            
-            .desc {
-                width: 100%;
-                font-size: 1.5rem;
-                text-align: center;
-            }
-
-            .discord {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                background-color: var(--orange);
-                padding: 0.6rem 2rem;
-                color: white;
-                border-radius: 10px;
-                font-size: 1.5rem;
-                margin-top: 24px;
-                font-weight: 600;
-            }
-
-            .discord:hover .arrow {
-                left: 0.5rem;
-            }
-
-            .arrow {
-                position: relative;
-                left: 0;
-                display: inline;
-                color: inherit;
-                transition-duration: 250ms;
-                margin-left: 0.5rem;
-            }
-
-            @media only screen and (max-height: 900px) {
+            <style jsx>{`
                 .landing {
-                    gap: 32px;
-                    padding: 0 max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 550px), var(--side));
+                    min-height: calc(100vh - 80px);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 22px;
+                    padding: 0 max(calc(50vw - 500px), var(--side)) 80px max(calc(50vw - 550px), var(--side));
                 }
 
                 .hero {
-                    width: 300px;
+                    width: 350px;
+                    margin-top: 20px;
                 }
 
                 .text {
-                    gap: 16px;
-                }
-            }
-
-            @media only screen and (max-height: 750px) {
-                .hero {
-                    width: 250px;
-                }
-            }
-
-            @media only screen and (max-width: 500px) {
-                .landing {
-                    gap: 32px;
-                    padding: 0 max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 550px), var(--side));
-                }
-
-                .hero {
-                    width: 200px;
-                }
-
-                .text {
-                    gap: 16px;
+                    max-width: 620px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: center;
+                    gap: 10px;
+                    text-align: center;
                 }
 
                 .title {
-                    font-size: 2.8rem;
+                    width: 100%;
+                    font-size: 2.75rem;
+                    font-weight: bold;
+                    text-align: center;
                 }
-            }
-        `}</style>
-    </>
-)
+                
+                .desc {
+                    width: 100%;
+                    font-size: 1.5rem;
+                    text-align: center;
+                }
+
+                .discord {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: var(--orange);
+                    padding: 0.6rem 2rem;
+                    color: white;
+                    border-radius: 10px;
+                    font-size: 1.5rem;
+                    margin-top: 24px;
+                    font-weight: 600;
+                }
+
+                .discord:hover .arrow {
+                    left: 0.5rem;
+                }
+
+                .arrow {
+                    position: relative;
+                    left: 0;
+                    display: inline;
+                    color: inherit;
+                    transition-duration: 250ms;
+                    margin-left: 0.5rem;
+                }
+
+                @media only screen and (max-height: 900px) {
+                    .landing {
+                        gap: 32px;
+                        padding: 0 max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 550px), var(--side));
+                    }
+
+                    .hero {
+                        width: 300px;
+                    }
+
+                    .text {
+                        gap: 16px;
+                    }
+                }
+
+                .progress {
+                    border: 2px solid var(--gray);
+                    width: 100%;
+                    height: 42px;
+                    border-radius: 10px;
+                    margin-bottom: 20px;
+                    position: relative;
+                }
+
+                .bar {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    padding: 0 10px 0 0;
+                    background-color: var(--orange);
+                    height: 100%;
+                    border-radius: 10px;
+                    font-size: 1.25rem;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    align-items: center;
+                    border: 2px solid white;
+                }
+
+                .amount {
+                    color: white;
+                    font-weight: 600;
+                }
+
+                @media only screen and (max-height: 750px) {
+                    .hero {
+                        width: 250px;
+                    }
+                }
+
+                @media only screen and (max-width: 500px) {
+                    .landing {
+                        gap: 32px;
+                        padding: 0 max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 550px), var(--side));
+                    }
+
+                    .hero {
+                        width: 200px;
+                    }
+
+                    .text {
+                        gap: 16px;
+                    }
+
+                    .title {
+                        font-size: 2.8rem;
+                    }
+                }
+            `}</style>
+        </>
+    )
+}
 
 // Media coverage section
 const Coverage = () => (

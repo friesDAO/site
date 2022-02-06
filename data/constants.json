@@ -1,7 +1,7 @@
 {
     "host": "fries.fund",
     "raiseStart": "2/6/2022 12:00:00 EST",
-    "raiseEnd": "2/5/2022 22:00:00 EST",
+    "raiseEnd": "2/13/2022 12:00:00 EST",
     "provider": "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
     "_provider": "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
     "chainId": "0x1",

@@ -307,12 +307,6 @@ const Raise = () => {
             
             <div className="token-information">Each FRIES token is a symbolic recognition of each donation of 0.023088 USDC. Tokens will be claimable after the raise is complete. For more token information, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
 
-            {/* display: flex;
-                    flex-direction: row;
-                    justify-content: flex-start;
-                    align-items: center;
-                    gap: 32px; */}
-
             <style jsx>{`
                 .container {
                     height: 100%;
