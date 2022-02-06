@@ -600,6 +600,7 @@ const NFT = () => (
                 border: 3px solid var(--orange);
                 border-radius: 10px;
                 padding: 24px 40px;
+                background-color: white;
             }
 
             .nft-img {
