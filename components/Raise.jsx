@@ -235,9 +235,9 @@ const Raise = () => {
         const hours = Math.floor(time / (60 * 60 * 1000)) - (days * 24)
         if (days == 0) {
             const minutes = Math.floor(time / (60 * 1000)) - (hours * 60)
-            return `${hours} hour${hours > 1 ? "s" : ""}, ${minutes} minute${minutes > 1 ? "s" : ""}`
+            return `${hours} hour${hours !== 1 ? "s" : ""}, ${minutes} minute${minutes !== 1 ? "s" : ""}`
         }
-        return `${days} day${days > 1 ? "s" : ""}, ${hours} hour${hours > 1 ? "s" : ""}`
+        return `${days} day${days !== 1 ? "s" : ""}, ${hours} hour${hours !== 1 ? "s" : ""}`
     }
 
     return (
