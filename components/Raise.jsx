@@ -221,11 +221,13 @@ const Raise = () => {
     const raiseStartEpoch = new Date(constants.raiseStart).getTime()
     const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
     const [ timeRemaining, setTimeRemaining ] = useState(raiseEndEpoch - Date.now())
+    const [ timeToNext, setTimeToNext ] = useState(raiseStartEpoch - Date.now())
     const [ sectionActive, setSectionActive ] = useState("raise")
     
     useEffect(() => {
         setInterval(() => {
             setTimeRemaining(raiseEndEpoch - Date.now())
+            setTimeToNext(raiseStartEpoch - Date.now())
         }, 2000)
     })
 
@@ -254,8 +256,8 @@ const Raise = () => {
                             <h3 className="name">total target</h3>
                             <div className="value">${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
 
-                            <h3 className="name">{timeRemaining > 0 ? "whitelist ends" : "raise starts"}</h3>
-                            <div className="value">{formatTimeRemaining(timeRemaining)}</div>
+                            <h3 className="name">{timeRemaining > 0 ? `${constants.currentRaisePhase} ends` : `${constants.nextRaisePhase} starts`}</h3>
+                            <div className="value">{timeRemaining > 0 ? formatTimeRemaining(timeRemaining) : formatTimeRemaining(timeToNext)}</div>
                         </div>
 
                         <div className="column">

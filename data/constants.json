@@ -1,6 +1,6 @@
 {
     "host": "fries.fund",
-    "raiseStart": "1/29/2022 22:00:00 EST",
+    "raiseStart": "2/6/2022 12:00:00 EST",
     "raiseEnd": "2/5/2022 22:00:00 EST",
     "provider": "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
     "_provider": "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
@@ -8,6 +8,8 @@
     "usdc": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     "sale": "0x437A28214cBeCFb51188b6CA2A3998Df28fb5678",
     "whitelist": "whitelist2",
+    "currentRaisePhase": "whitelist",
+    "nextRaisePhase": "public raise",
     "currentNFTPhase": "pre-release",
     "currentNFTAmount": 200,
     "nftAmountCutoff": 0,
