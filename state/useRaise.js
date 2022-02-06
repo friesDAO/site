@@ -6,7 +6,7 @@ const whitelist = require(`../data/${constants.whitelist}.json`)
 
 const tree = makeTree(whitelist)
 
-function useRaise(account, Sale, BN, toWei, fromWei) {
+function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
     const [ whitelistSaleActive, setWhitelistSaleActive ] = useState(false)
     const [ publicSaleActive, setPublicSaleActive ] = useState(false)
     const [ redeemActive, setRedeemActive ] = useState(false)
@@ -14,6 +14,7 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
     const [ salePrice, setSalePrice ] = useState(0)
     const [ totalPurchased, setTotalPurchased ] = useState(0)
     const [ totalCap, setTotalCap ] = useState(0)
+    const [ usdcBalance, setUsdcBalance ] = useState(0)
 
     const [ amountPurchased, setAmountPurchased ] = useState(0)
     const [ whitelistMax, setWhitelistMax ] = useState(0)
@@ -56,7 +57,9 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
                 .then(amount => {
                     setAmountPurchased(BN(amount))
                         purchasedValue = amount
-                }) : null
+                }) : null,
+            account ? USDC.methods.balanceOf(account).call()
+                .then(setUsdcBalance) : null
         ])
         const whitelistEntry = whitelist.find(e => e[0].toLowerCase() == account)
         if (whitelistEntry?.length > 0) {
@@ -131,7 +134,8 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
         whitelistMax,
         tree,
         nftsRemaining,
-        nftReserved
+        nftReserved,
+        usdcBalance
     }
 }
 

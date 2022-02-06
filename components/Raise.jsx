@@ -12,7 +12,7 @@ import { useState, useEffect, useContext, useRef } from "react"
 
 const Contribute = () => {
     const { enabled, chainId, account, USDC, Sale, BN, toWei, fromWei} = useContext(EthereumContext)
-    const raise = useRaise(account, Sale, BN, toWei, fromWei)
+    const raise = useRaise(account, Sale, USDC, BN, toWei, fromWei)
     const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
     const [ timeRemaining, setTimeRemaining ] = useState(raiseEndEpoch - Date.now())
     const [ contributeText, setContributeText ] = useState("contribute")
@@ -23,9 +23,15 @@ const Contribute = () => {
     const approvedAmount = useRef(BN(0))
     const [ disclaimerActive, setDisclaimerActive ] = useState(false)
 
+    useEffect(() => {
+        setInterval(() => {
+            setTimeRemaining(raiseEndEpoch - Date.now())
+        }, 2000)
+    })
+
     function inputMax() {
-        document.getElementById("amount").value = raise.whitelistMax
-        const amount = BN(unparse(document.getElementById("amount").value, 6))
+        document.getElementById("amount").value = raise.publicSaleActive ? parse(raise.usdcBalance, 6) : raise.whitelistMax
+        // const amount = BN(unparse(document.getElementById("amount").value, 6))
         if (!isNaN(+document.getElementById("amount").value)) {
             setReceived(+document.getElementById("amount").value * constants.salePrice)
             setIsGray(false)
@@ -166,12 +172,12 @@ const Contribute = () => {
                 </div>
             </div>
 
-            <div className="balance">whitelist remaining: {raise.whitelistMax > 1e-6 ? raise.whitelistMax : 0} USDC</div>
+            <div className="balance">{!raise.publicSaleActive ? `whitelist remaining: ${raise.whitelistMax > 1e-6 ? raise.whitelistMax : 0}` : `balance: ${raise.usdcBalance > 1e-6 ? parse(raise.usdcBalance, 6) : 0}`} USDC</div>
             <div className="amount">
                 <input id="amount" className="input" placeholder="amount (USDC)" onChange={checkGray}></input>
                 <button className="max" onClick={inputMax}>max</button>
             </div>
-            <div id="received" className="received">you will receive: {received } FRIES</div>
+            <div id="received" className="received">you will receive: { received } FRIES</div>
 
             <button className={isGray || timeRemaining < 0 ? "action disabled" : "action"} onClick={contribute}>{contributeText}</button>
         </>
@@ -180,7 +186,7 @@ const Contribute = () => {
 
 const Redeem = () => {
     const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
-    const raise = useRaise(account, Sale, BN, toWei, fromWei)
+    const raise = useRaise(account, Sale, USDC, BN, toWei, fromWei)
 
     async function redeem() {
         if (!enabled) return
@@ -218,7 +224,7 @@ const Refund = () => {
 
 const Raise = () => {
     const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
-    const raise = useRaise(account, Sale, BN, toWei, fromWei)
+    const raise = useRaise(account, Sale, USDC, BN, toWei, fromWei)
 
     const raiseStartEpoch = new Date(constants.raiseStart).getTime()
     const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
