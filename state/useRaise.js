@@ -19,7 +19,7 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
     const [ amountPurchased, setAmountPurchased ] = useState(0)
     const [ whitelistMax, setWhitelistMax ] = useState(0)
     const [ nftsRemaining, setNftsRemaining] = useState(0)
-    const [ nftReserved, setNftReserved ] = useState(false)
+    const [ nftReserved, setNftReserved ] = useState(0)
 
 
     useEffect(() => {
@@ -73,7 +73,6 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
         const logs = await fetch(`https://api.etherscan.io/api?module=logs&action=getLogs&fromBlock=${constants.nftPhases[0].startBlock}&toBlock=latest&address=${constants.usdc}&topic0=${constants.purchaseTopic}&topic2=${constants.treasuryTopic}&apikey=${constants.etherscanAPI}`).then(res => res.json())
         if (logs.status == 1) {
             const contributions = constants.nftPhases.map(p => ({}))
-
             const addresses = constants.nftPhases.map(p => ([]))
 
             for (const [i, nftPhase] of constants.nftPhases.entries()) {
@@ -102,21 +101,18 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
             }
 
             const remaining = constants.nftPhases[constants.currentNFTPhase].amount - addresses[constants.currentNFTPhase].length
-
             setNftsRemaining(remaining > 0 ? remaining : 0)
 
-            let reserved = false
-
+            let reserved = 0
             for (const [i, nftPhase] of constants.nftPhases.entries()) {
                 const formattedAddresses = addresses[i].slice(0, constants.nftPhases[i].amount).map(a => a.slice(26).toLowerCase())
 
                 if (account && formattedAddresses.includes(account.slice(2).toLowerCase())) {
-                    reserved = true
+                    reserved++
                 }
             }
 
             setNftReserved(reserved)
-            
         } else {
             console.log("ratelimited!")
         }
