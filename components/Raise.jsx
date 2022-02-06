@@ -53,7 +53,7 @@ const Contribute = () => {
     }
 
     function checkGray(event) {
-        if (isNaN(+event.target.value)) {
+        if (isNaN(+event.target.value) || +event.target.value > parse(raise.usdcBalance, 6)) {
             setIsGray(true)
         } else {
             setIsGray(false)
