@@ -602,7 +602,7 @@ const RaiseContainer = () => (
     <>
         <div className="section raise-container" id="raise">
             <h2 className="title">contribute to treasury</h2>
-            <div className="notice">currently open to whitelisted addresses and will be open to all after Feb 5th</div>
+            <div className="notice">min 5000 USDC qualifies for limited edition NFT while supply lasts</div>
             <div className="content">
                 <Raise />
             </div>

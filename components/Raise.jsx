@@ -270,7 +270,7 @@ const Raise = () => {
                             <div className="value">{raise.nftReserved ? "yes" : "no"}</div>
                             
                             <h3 className="name">NFTs remaining</h3>
-                            <div className="value">{raise.nftsRemaining} {constants.currentNFTPhase}</div>
+                            <div className="value">{raise.nftsRemaining} {constants.nftPhases[constants.currentNFTPhase].name}</div>
                         </div>
                     </div>
                 </div>

@@ -10,12 +10,23 @@
     "whitelist": "whitelist2",
     "currentRaisePhase": "whitelist",
     "nextRaisePhase": "public raise",
-    "currentNFTPhase": "pre-release",
-    "currentNFTAmount": 200,
-    "nftAmountCutoff": 0,
+    "nftPhases": [
+        {
+            "name": "pre-release",
+            "amount": 200,
+            "startBlock": 14104538,
+            "cutoff": 0
+        },
+        {
+            "name": "limited edition",
+            "amount": 350,
+            "startBlock": 14150185,
+            "cutoff": 5000
+        }
+    ],
+    "currentNFTPhase": 1,
     "salePrice": 43.3125031,
     "etherscanAPI": "FZ1MKV339VKCUDQTMK1GESXZNA8Y9MA8P4",
     "purchaseTopic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
-    "treasuryTopic": "0x0000000000000000000000007163bee2a0a4c75d1236bf053e429f86eb45426e",
-    "startBlock": 14104538
+    "treasuryTopic": "0x0000000000000000000000007163bee2a0a4c75d1236bf053e429f86eb45426e"
 }
