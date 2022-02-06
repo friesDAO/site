@@ -11,7 +11,7 @@ import { parse, unparse, format, formatNumber } from "../components/number.js"
 import { useState, useEffect, useContext, useRef } from "react"
 
 const Contribute = () => {
-    const { enabled, chainId, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
+    const { enabled, chainId, account, USDC, Sale, BN, toWei, fromWei} = useContext(EthereumContext)
     const raise = useRaise(account, Sale, BN, toWei, fromWei)
     const [ contributeText, setContributeText ] = useState("contribute")
     const [ isGray, setIsGray ] = useState(false)
@@ -263,7 +263,7 @@ const Raise = () => {
                             <div className="value">{format(parse(raise.amountPurchased))} FRIES</div>
 
                             <h3 className="name">NFT reserved</h3>
-                            <div className="value">{parse(raise.amountPurchased) > constants.nftCutoff * constants.salePrice ? "yes" : "no"}</div>
+                            <div className="value">{raise.nftReserved ? "yes" : "no"}</div>
                             
                             <h3 className="name">NFTs remaining</h3>
                             <div className="value">{raise.nftsRemaining} {constants.currentNFTPhase}</div>

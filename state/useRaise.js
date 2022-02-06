@@ -18,6 +18,7 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
     const [ amountPurchased, setAmountPurchased ] = useState(0)
     const [ whitelistMax, setWhitelistMax ] = useState(0)
     const [ nftsRemaining, setNftsRemaining] = useState(0)
+    const [ nftReserved, setNftReserved ] = useState(false)
 
 
     useEffect(() => {
@@ -71,9 +72,14 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
             const contributions = {
 
             }
+            
+            const addresses = []
 
             for (const log of logs.result) {
                 const address = log.topics[1]
+                if (!addresses.includes(address)) {
+                    addresses.push(address)
+                }
                 const amount = parseInt(log.data, 16)
                 if (contributions[address]) {
                     contributions[address] += Number(fromWei(amount.toString(), "mwei"))
@@ -83,7 +89,7 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
             }
 
             for (const [address, amount] of Object.entries(contributions)) {
-                if (amount < constants.nftCutoff) {
+                if (amount < constants.nftAmountCutoff) {
                     delete contributions[address]
                 }
             }
@@ -91,6 +97,17 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
             const remaining = constants.currentNFTAmount - Object.keys(contributions).length
 
             setNftsRemaining(remaining > 0 ? remaining : 0)
+
+
+            const formattedAddresses = addresses.slice(0, constants.currentNFTAmount).map(a => a.slice(26).toLowerCase())
+            console.log(formattedAddresses)
+            console.log(account?.slice(2).toLowerCase())
+
+            if (account && formattedAddresses.includes(account.slice(2).toLowerCase())) {
+                setNftReserved(true)
+            } else {
+                setNftReserved(false)
+            }
         }
     }
 
@@ -105,7 +122,8 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
         setAmountPurchased,
         whitelistMax,
         tree,
-        nftsRemaining
+        nftsRemaining,
+        nftReserved
     }
 }
 
