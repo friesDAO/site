@@ -53,7 +53,7 @@ const Contribute = () => {
     }
 
     function checkGray(event) {
-        if (isNaN(+event.target.value) || +event.target.value > raise.whitelistMax) {
+        if (isNaN(+event.target.value)) {
             setIsGray(true)
         } else {
             setIsGray(false)
