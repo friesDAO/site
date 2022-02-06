@@ -13,6 +13,8 @@ import { useState, useEffect, useContext, useRef } from "react"
 const Contribute = () => {
     const { enabled, chainId, account, USDC, Sale, BN, toWei, fromWei} = useContext(EthereumContext)
     const raise = useRaise(account, Sale, BN, toWei, fromWei)
+    const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
+    const [ timeRemaining, setTimeRemaining ] = useState(raiseEndEpoch - Date.now())
     const [ contributeText, setContributeText ] = useState("contribute")
     const [ isGray, setIsGray ] = useState(false)
     const [ received, setReceived ] = useState(0)
@@ -171,7 +173,7 @@ const Contribute = () => {
             </div>
             <div id="received" className="received">you will receive: {received } FRIES</div>
 
-            <button className={isGray ? "action disabled" : "action"} onClick={contribute}>{contributeText}</button>
+            <button className={isGray || timeRemaining < 0 ? "action disabled" : "action"} onClick={contribute}>{contributeText}</button>
         </>
     )
 }
