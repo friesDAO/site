@@ -100,6 +100,8 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
                 }
             }
 
+            console.log(contributions)
+
             const remaining = constants.nftPhases[constants.currentNFTPhase].amount - addresses[constants.currentNFTPhase].length
             setNftsRemaining(remaining > 0 ? remaining : 0)
 

@@ -1,5 +1,6 @@
 import Raise from "../components/Raise.jsx"
 import useProgress from "../state/useProgress.js"
+import useRaise from "../state/useRaise.js"
 import { useContext } from "react"
 import { parse, unparse, format, formatNumber } from "../components/number.js"
 import EthereumContext from "../state/EthereumContext.js"
@@ -7,23 +8,24 @@ import EthereumContext from "../state/EthereumContext.js"
 // Landing section
 
 const Landing = () => {
-    // const { Sale, BN } = useContext(EthereumContext)
-    // const raiseProgress = useProgress(Sale, BN)
+    const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
+    const raiseProgress = useRaise(account, Sale, USDC, BN, toWei, fromWei)
     return (
         <>
             <div className="section landing">
                 <img className="hero" src="/restaurant.png"></img>
                 <div className="text">
                     <h1 className="title">we're buying fast food places</h1>
-                    <div className="desc">a decentralized social experiment where a crypto community will build and govern a fast food franchise empire</div>
+                    <div className="desc">a decentralized social experiment where a crypto community builds and governs a fast food franchise empire</div>
                     
-                    {/* <div className="progress">
-                        <div className="bar">
-                            <div className="amount">
-                                ${formatNumber(parse(raiseProgress.totalPurchased, 6))}
-                            </div>
+                    <div className="progress">
+                        <div className="amount">
+                            ${formatNumber(parse(raiseProgress.totalPurchased, 6))} raised
                         </div>
-                    </div> */}
+                        <div className="bar">
+                            
+                        </div>
+                    </div>
 
                     <a className="discord" href="#raise">
                         contribute to treasury
@@ -115,21 +117,26 @@ const Landing = () => {
                 .progress {
                     border: 2px solid var(--gray);
                     width: 100%;
-                    height: 42px;
+                    height: 56px;
                     border-radius: 10px;
-                    margin-bottom: 20px;
+                    margin-bottom: 0px;
+                    margin-top: 20px;
                     position: relative;
+                    max-width: 450px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
                 }
 
                 .bar {
                     position: absolute;
                     top: 0;
                     left: 0;
+                    width: ${100 * parse(raiseProgress.totalPurchased, 6) / 9696969}%;
                     padding: 0 10px 0 0;
-                    background-color: var(--orange);
+                    background-color: #7A83EA;
                     height: 100%;
                     border-radius: 10px;
-                    font-size: 1.25rem;
                     display: flex;
                     flex-direction: row;
                     justify-content: flex-end;
@@ -138,8 +145,14 @@ const Landing = () => {
                 }
 
                 .amount {
-                    color: white;
-                    font-weight: 600;
+                    font-size: 1.6rem;
+                    z-index: 99;
+                    color: var(--black);
+                    font-weight: 700;
+                    text-shadow: -1px 1px 2px #fff,
+                    1px 1px 2px #fff,
+                    1px -1px 2px #fff,
+                    -1px -1px 2px #fff;
                 }
 
                 @media only screen and (max-height: 750px) {

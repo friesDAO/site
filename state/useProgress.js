@@ -11,7 +11,7 @@ function useProgress(Sale, BN) {
         return () => {
             clearInterval(interval)
         }
-    })
+    }, [])
 
     async function updateData() {
         await Promise.all([
