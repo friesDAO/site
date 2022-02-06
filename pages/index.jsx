@@ -152,6 +152,22 @@ const Landing = () => {
                     text-shadow: -1px 1px 2px #fff,
                     1px 1px 2px #fff,
                     1px -1px 2px #fff,
+                    -1px -1px 2px #fff,
+                    -1px 1px 2px #fff,
+                    1px 1px 2px #fff,
+                    1px -1px 2px #fff,
+                    -1px -1px 2px #fff,
+                    -1px 1px 2px #fff,
+                    1px 1px 2px #fff,
+                    1px -1px 2px #fff,
+                    -1px -1px 2px #fff,
+                    -1px 1px 2px #fff,
+                    1px 1px 2px #fff,
+                    1px -1px 2px #fff,
+                    -1px -1px 2px #fff,
+                    -1px 1px 2px #fff,
+                    1px 1px 2px #fff,
+                    1px -1px 2px #fff,
                     -1px -1px 2px #fff;
                 }
 
