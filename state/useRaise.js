@@ -26,7 +26,7 @@ function useRaise(account, Sale, BN, toWei, fromWei) {
         const interval = setInterval(updateData, 5000)
 
         updateNFTsRemaining()
-        const interval2 = setInterval(updateData, 20000)
+        const interval2 = setInterval(updateNFTsRemaining, 20000)
         return () => {
             clearInterval(interval)
             clearInterval(interval2)
