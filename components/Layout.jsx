@@ -65,7 +65,7 @@ const NavBar = () => (
             }
 
             .icon {
-                height: 2.8rem;
+                height: 3rem;
             }
 
             .title {
