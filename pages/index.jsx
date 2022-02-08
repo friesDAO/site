@@ -208,8 +208,12 @@ const Coverage = () => (
 "><img src="/coindesk.png"></img></a>
             <a href="https://www.investing.com/news/cryptocurrency-news/friesdao-bags-13m-usdc-in-first-48-hours-of-ongoing-whitelist-sale-2753354
 "><img src="/investing.png"></img></a>
+<a href="https://www.yahoo.com/now/friesdao-crypto-community-mission-acquire-093005643.html
+"><img src="/yahoo.png"></img></a>
             <a href="https://hackernoon.com/restaurant-focussed-dao-called-friesdao-is-raising-$969-million-to-run-a-fast-food-enterprise
 "><img src="/hackernoon.png"></img></a>
+<a href="https://thespoon.tech/it-started-as-a-meme-now-friesdao-is-on-track-to-buy-a-restaurant-after-raising-over-4m-selling-nfts/
+"><img src="/spoon.png"></img></a>
             <a href="https://www.coinspeaker.com/friesdao-seeks-acquire-fast-food-restaurants/
 "><img src="/coinspeaker.png"></img></a>
             <a href="https://techstartups.com/2022/01/28/crypto-community-friesdao-wants-acquire-fast-food-restaurants/
@@ -221,7 +225,7 @@ const Coverage = () => (
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
-                gap: 20px 40px;
+                gap: 20px 30px;
                 padding: 40px;
                 border-top: 3px solid var(--orange);
                 border-bottom: 3px solid var(--orange);
@@ -229,7 +233,7 @@ const Coverage = () => (
             }
 
             .coverage > a > img {
-                height: 32px;
+                height: 30px;
             }
         `}</style>
     </>

@@ -65,13 +65,13 @@ const NavBar = () => (
             }
 
             .icon {
-                height: 3rem;
+                height: 2.8rem;
             }
 
             .title {
-                font-size: 1.3rem;
-                margin-left: 0.75rem;
-                margin-top: 0.5rem;
+                font-size: 1.5rem;
+                margin-left: 0.7rem;
+                margin-top: 0.2rem;
                 font-weight: 600;
             }
 
