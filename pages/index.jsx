@@ -558,7 +558,7 @@ const NFT = () => (
 
         <style jsx>{`
             .faq {
-                background-color: #faf0ff;
+                background-color: #fcf6ff;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
