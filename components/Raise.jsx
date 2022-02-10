@@ -170,6 +170,11 @@ const Contribute = () => {
                         {formatNumber(100 * parse(raise.totalPurchased, 6) / 9696969)}%
                     </div>
                 </div>
+
+                <div className="notch n-top"></div>
+                <div className="notch n-bottom">
+                    <div className="notch-text">min</div>
+                </div>
             </div>
 
             <div className="balance">{!raise.publicSaleActive ? `whitelist remaining: ${raise.whitelistMax > 1e-6 ? raise.whitelistMax : 0}` : `balance: ${raise.usdcBalance > 1e-6 ? parse(raise.usdcBalance, 6) : 0}`} USDC</div>
@@ -261,8 +266,8 @@ const Raise = () => {
                             <h3 className="name">total raised</h3>
                             <div className="value">${(+Number(fromWei(raise.totalPurchased.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
 
-                            <h3 className="name">total target</h3>
-                            <div className="value">${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
+                            <h3 className="name">raise goal</h3>
+                            <div className="value">min: ${constants.raiseMin.toLocaleString()}<br />max: ${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
 
                             <h3 className="name">{timeRemaining > 0 ? `${constants.currentRaisePhase} ends` : `${constants.nextRaisePhase} starts`}</h3>
                             <div className="value">{timeRemaining > 0 ? formatTimeRemaining(timeRemaining) : formatTimeRemaining(timeToNext)}</div>
@@ -572,6 +577,38 @@ const Raise = () => {
                 .percent.outside {
                     transform: translateX(calc(100% + 18px));
                     color: var(--text);
+                }
+
+                .notch {
+                    position: absolute;
+                    left: ${(constants.raiseMin * 100) / 9696969}%;
+                    height: 7px;
+                    width: 2px;
+                    background-color: var(--orange);
+                }    
+
+                .n-top {
+                    top: 0;
+                    border-radius: 0 0 9999px 9999px;
+                }
+
+
+                .n-bottom {
+                    bottom: 0;
+                    border-radius: 9999px 9999px 0 0;
+                }
+
+                .notch-text {
+                    position: absolute;
+                    bottom: 0px;
+                    font-size: 1.1rem;
+                    color: var(--orange);
+                    text-align: center;
+                    left: 50%;
+                    line-height: 1em;
+                    padding-top: 1px;
+                    border-top: 3px solid var(--orange);
+                    transform: translate(-50%, 100%);
                 }
 
                 .balance {
