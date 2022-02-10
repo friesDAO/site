@@ -518,7 +518,9 @@ const Raise = () => {
                         display: none;
                     }
 
-                   
+                    .option.active {
+                        border-radius: 10px;
+                    }
 
                     .stats {
                         width: 100%;
