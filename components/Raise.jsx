@@ -273,7 +273,7 @@ const Raise = () => {
                             <div className="value">{format(parse(raise.amountPurchased))} FRIES</div>
 
                             <h3 className="name">NFT reserved</h3>
-                            <div className="value">{raise.nftReserved == -1 ? "loading..." : (raise.nftReserved > 0 ? `yes (${raise.nftReserved})` : "no")}</div>
+                            <div className="value">{raise.nftReserved > 0 ? `yes (${raise.nftReserved})` : "no"}</div>
                             
                             <h3 className="name">NFTs remaining</h3>
                             <div className="value">{raise.nftsRemaining} {constants.nftPhases[constants.currentNFTPhase].name}</div>

@@ -19,7 +19,7 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
     const [ amountPurchased, setAmountPurchased ] = useState(0)
     const [ whitelistMax, setWhitelistMax ] = useState(0)
     const [ nftsRemaining, setNftsRemaining] = useState(0)
-    const [ nftReserved, setNftReserved ] = useState(-1)
+    const [ nftReserved, setNftReserved ] = useState(0)
 
 
     useEffect(() => {
