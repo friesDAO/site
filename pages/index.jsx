@@ -4,6 +4,7 @@ import useRaise from "../state/useRaise.js"
 import { useContext } from "react"
 import { parse, unparse, format, formatNumber } from "../components/number.js"
 import EthereumContext from "../state/EthereumContext.js"
+import constants from "../data/constants.json"
 
 // Landing section
 
@@ -24,6 +25,11 @@ const Landing = () => {
                         </div>
                         <div className="bar">
                             
+                        </div>
+
+                        <div className="notch n-top"></div>
+                        <div className="notch n-bottom">
+                            {/* <div className="notch-text">min</div> */}
                         </div>
                     </div>
 
@@ -169,6 +175,27 @@ const Landing = () => {
                     1px 1px 2px #fff,
                     1px -1px 2px #fff,
                     -1px -1px 2px #fff;
+                }
+
+                .notch {
+                    position: absolute;
+                    left: ${(constants.raiseMin * 100) / 9696969}%;
+                    height: 10px;
+                    width: 2px;
+                    background-color: #7A83EA;
+                }    
+
+                .notch-text {
+                    position: absolute;
+                    bottom: 0px;
+                    font-size: 1.2rem;
+                    color: #7A83EA;
+                    text-align: center;
+                    left: 50%;
+                    line-height: 1em;
+                    padding-top: 1px;
+                    border-top: 3px solid #7A83EA;
+                    transform: translate(-50%, 100%);
                 }
 
                 @media only screen and (max-height: 750px) {
