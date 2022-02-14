@@ -9,8 +9,8 @@
     "usdc": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
     "sale": "0x437A28214cBeCFb51188b6CA2A3998Df28fb5678",
     "whitelist": "whitelist2",
-    "currentRaisePhase": "public raise",
-    "nextRaisePhase": "public raise",
+    "currentRaisePhase": "final raise",
+    "nextRaisePhase": "final raise",
     "raiseMin": 5000000,
     "nftPhases": [
         {

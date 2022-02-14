@@ -13,6 +13,7 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
 
     const [ salePrice, setSalePrice ] = useState(0)
     const [ totalPurchased, setTotalPurchased ] = useState(0)
+    const [ maxCap, setMaxCap ] = useState(0)
     const [ totalCap, setTotalCap ] = useState(0)
     const [ usdcBalance, setUsdcBalance ] = useState(0)
 
@@ -28,12 +29,25 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
 
         const timeout1 = setTimeout(() => updateNFTsRemaining(), 500)
         const interval2 = setInterval(updateNFTsRemaining, 10000)
+        updateCap()
+        const interval3 = setInterval(() => updateCap(), 79)
         return () => {
             clearInterval(interval)
             clearInterval(interval2)
             clearTimeout(timeout1)
+            clearInterval(interval3)
         }
     }, [account])
+
+    async function updateCap() {
+        const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
+        const dripStartEpoch = new Date(constants.dripStart).getTime()
+        const duration = raiseEndEpoch - dripStartEpoch;
+        const elapsed = raiseEndEpoch - Date.now()
+        const remaining = (Number(fromWei("9696969000000", "mwei")) - constants.raiseMin) * (elapsed/duration)
+        const remainingCap = Number(toWei(constants.raiseMin.toString(), "mwei")) + Number(toWei(remaining.toFixed(0), "mwei"))
+        setTotalCap(BN(remainingCap))
+    }
 
     async function updateData() {
         let salePriceValue
@@ -54,14 +68,7 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
                 .then(purchased => setTotalPurchased(BN(purchased))),
             Sale.methods.totalCap().call()
                 .then(cap => {
-                    const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
-                    const dripStartEpoch = new Date(constants.dripStart).getTime()
-                    const duration = raiseEndEpoch - dripStartEpoch;
-                    const elapsed = raiseEndEpoch - Date.now()
-                    console.log(Number(fromWei(cap, "mwei")))
-                    const remaining = (Number(fromWei(cap, "mwei")) - constants.raiseMin) * (elapsed/duration)
-                    const remainingCap = Number(toWei(constants.raiseMin.toString(), "mwei")) + Number(toWei(remaining.toFixed(0), "mwei"))
-                    setTotalCap(BN(remainingCap))
+                    setMaxCap(BN(cap))
                 }),
             account ? Sale.methods.purchased(account).call()
                 .then(amount => {
@@ -143,6 +150,7 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
         salePrice,
         totalPurchased,
         totalCap,
+        maxCap,
         amountPurchased,
         setAmountPurchased,
         whitelistMax,

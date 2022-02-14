@@ -238,11 +238,13 @@ const Raise = () => {
     const [ sectionActive, setSectionActive ] = useState("raise")
     
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             setTimeRemaining(raiseEndEpoch - Date.now())
             setTimeToNext(raiseStartEpoch - Date.now())
         }, 2000)
-    })
+
+        return () => {clearInterval(interval)}
+    }, [])
 
     function formatTimeRemaining(time) {
         time = Math.abs(time)
