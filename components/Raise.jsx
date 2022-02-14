@@ -171,7 +171,6 @@ const Contribute = () => {
 
                         <li>This endeavor is a research-driven social experiment intended to explore and understand the capacity of a decentralized community in engaging with real world businesses.</li>
                     </ol>
-                    <br></br>
                     <button className="close-button" onClick={() => setDisclaimerActive(false)} style={{ display: "inline" }}>Accept</button>
                 </div>
             </div>
@@ -705,7 +704,7 @@ const Raise = () => {
                     white-space: normal;
                     width: 80%;
                     border-radius: 10px;
-                    padding: 3rem;
+                    padding: 2.5rem;
                     font-size: 2rem;
                     display: flex;
                     flex-direction: column;
@@ -717,10 +716,14 @@ const Raise = () => {
                 }
 
                 .disclaimer-modal > ol > li {
-                    font-size: 1.3rem;
-                    margin-bottom: 1rem;
+                    font-size: 1.15rem;
+                    margin-bottom: 0.5rem;
                     white-space: normal;
                     text-align: left;
+                }
+
+                .disclaimer-modal > ol {
+                    margin: 1rem 0;
                 }
 
                 .close-button {
