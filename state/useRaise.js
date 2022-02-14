@@ -53,7 +53,16 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
             Sale.methods.totalPurchased().call()
                 .then(purchased => setTotalPurchased(BN(purchased))),
             Sale.methods.totalCap().call()
-                .then(cap => setTotalCap(BN(cap))),
+                .then(cap => {
+                    const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
+                    const dripStartEpoch = new Date(constants.dripStart).getTime()
+                    const duration = raiseEndEpoch - dripStartEpoch;
+                    const elapsed = raiseEndEpoch - Date.now()
+                    console.log(Number(fromWei(cap, "mwei")))
+                    const remaining = (Number(fromWei(cap, "mwei")) - constants.raiseMin) * (elapsed/duration)
+                    const remainingCap = Number(toWei(constants.raiseMin.toString(), "mwei")) + Number(toWei(remaining.toFixed(0), "mwei"))
+                    setTotalCap(BN(remainingCap))
+                }),
             account ? Sale.methods.purchased(account).call()
                 .then(amount => {
                     setAmountPurchased(BN(amount))

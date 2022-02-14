@@ -166,8 +166,8 @@ const Contribute = () => {
             : <></>}
             <div className="progress">
                 <div className="bar">
-                    <div className={(100 * parse(raise.totalPurchased, 6) / 9696969) > 50 ? "percent" : "percent outside"}>
-                        {formatNumber(100 * parse(raise.totalPurchased, 6) / 9696969)}%
+                    <div className={(100 * parse(raise.totalPurchased, 6) / parse(raise.totalCap, 6)) > 50 ? "percent" : "percent outside"}>
+                        {formatNumber(100 * parse(raise.totalPurchased, 6) / parse(raise.totalCap, 6))}%
                     </div>
                 </div>
 
@@ -558,7 +558,7 @@ const Raise = () => {
                     position: absolute;
                     top: 0;
                     left: 0;
-                    width: ${100 * parse(raise.totalPurchased, 6) / 9696969}%;
+                    width: ${100 * parse(raise.totalPurchased, 6) / parse(raise.totalCap, 6)}%;
                     padding: 0 10px 0 0;
                     background-color: var(--orange);
                     height: 100%;
@@ -583,7 +583,7 @@ const Raise = () => {
 
                 .notch {
                     position: absolute;
-                    left: ${(constants.raiseMin * 100) / 9696969}%;
+                    left: ${(constants.raiseMin * 100) / parse(raise.totalCap, 6)}%;
                     height: 7px;
                     width: 2px;
                     background-color: var(--orange);

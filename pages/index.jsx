@@ -138,7 +138,7 @@ const Landing = () => {
                     position: absolute;
                     top: 0;
                     left: 0;
-                    width: ${100 * parse(raiseProgress.totalPurchased, 6) / 9696969}%;
+                    width: ${100 * parse(raiseProgress.totalPurchased, 6) / parse(raiseProgress.totalCap, 6)}%;
                     padding: 0 10px 0 0;
                     background-color: #7A83EA;
                     height: 100%;
@@ -179,7 +179,7 @@ const Landing = () => {
 
                 .notch {
                     position: absolute;
-                    left: ${(constants.raiseMin * 100) / 9696969}%;
+                    left: ${(constants.raiseMin * 100) / parse(raiseProgress.totalCap, 6)}%;
                     height: 10px;
                     width: 2px;
                     background-color: #7A83EA;
