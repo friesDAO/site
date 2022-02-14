@@ -24,10 +24,12 @@ const Contribute = () => {
     const [ disclaimerActive, setDisclaimerActive ] = useState(false)
 
     useEffect(() => {
-        setInterval(() => {
+        const interval = setInterval(() => {
             setTimeRemaining(raiseEndEpoch - Date.now())
         }, 2000)
-    })
+
+        return () => {clearInterval(interval)}
+    }, [])
 
     function inputMax() {
         document.getElementById("amount").value = raise.publicSaleActive ? parse(raise.usdcBalance, 6) : raise.whitelistMax
