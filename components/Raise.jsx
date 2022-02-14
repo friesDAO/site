@@ -27,6 +27,7 @@ const Contribute = () => {
         const interval = setInterval(() => {
             setTimeRemaining(raiseEndEpoch - Date.now())
         }, 2000)
+        checkGray({target: document.getElementById("amount")})
 
         return () => {clearInterval(interval)}
     }, [])
@@ -52,10 +53,16 @@ const Contribute = () => {
             if (approvedAmount.current.lt(amount)) return "approve"
         }
         return "contribute"
+
     }
 
     function checkGray(event) {
-        if (isNaN(+event.target.value) || +event.target.value > parse(raise.usdcBalance, 6)) {
+        if (!account || chainId !== constants.chainId) {
+            setIsGray(false)
+            return
+        }
+
+        if ((isNaN(+event.target.value) || BN(unparse(event.target.value, 6)).isZero()) || +event.target.value > parse(raise.usdcBalance, 6)) {
             setIsGray(true)
         } else {
             setIsGray(false)
@@ -70,8 +77,10 @@ const Contribute = () => {
 
     useEffect(() => {
         getContributeText().then(setContributeText)
+        checkGray({target: document.getElementById("amount")})
         const interval = setInterval(async () => {
             setContributeText(await getContributeText())
+            checkGray({target: document.getElementById("amount")})
         }, 2000)
         return () => clearInterval(interval)
     }, [account, chainId])
