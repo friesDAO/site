@@ -55,7 +55,9 @@ const Contribute = () => {
     }
 
     function checkGray(event) {
-        if (isNaN(+event.target.value) || +event.target.value > parse(raise.usdcBalance, 6)) {
+        console.log("bal", raise.usdcBalance)
+
+        if (isNaN(+event.target.value) || BN(event.target.value).isZero() || +event.target.value > parse(raise.usdcBalance, 6)) {
             setIsGray(true)
         } else {
             setIsGray(false)
@@ -70,10 +72,14 @@ const Contribute = () => {
 
     useEffect(() => {
         getContributeText().then(setContributeText)
+        checkGray({target: document.getElementById("amount")})
+
         const interval = setInterval(async () => {
             setContributeText(await getContributeText())
         }, 2000)
-        return () => clearInterval(interval)
+        return () => {
+            clearInterval(interval)
+        }
     }, [account, chainId])
 
     async function contribute() {
