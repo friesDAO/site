@@ -269,8 +269,8 @@ const Raise = () => {
                             <h3 className="name">raise goal</h3>
                             <div className="value">min: ${constants.raiseMin.toLocaleString()}<br />max: ${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
 
-                            <h3 className="name">{timeRemaining > 0 ? `${constants.currentRaisePhase} ends` : `${constants.nextRaisePhase} starts`}</h3>
-                            <div className="value">{timeRemaining > 0 ? formatTimeRemaining(timeRemaining) : formatTimeRemaining(timeToNext)}</div>
+                            <h3 className="name">{timeRemaining > 0 ? `${constants.currentRaisePhase} ends` : (constants.currentNFTPhase >= constants.nftPhases.length - 1 ? `${constants.currentRaisePhase} ended` : `${constants.nextRaisePhase} starts`)}</h3>
+                            <div className="value">{timeRemaining > 0 ? formatTimeRemaining(timeRemaining) : (constants.currentNFTPhase >= constants.nftPhases.length - 1 ? "" : formatTimeRemaining(timeToNext))}</div>
                         </div>
 
                         <div className="column">
