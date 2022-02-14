@@ -56,6 +56,10 @@ const Contribute = () => {
 
     function checkGray(event) {
         console.log("bal", raise.usdcBalance)
+        if (!account || chainId !== constants.chainId) {
+            setIsGray(false)
+            return
+        }
 
         if (isNaN(+event.target.value) || BN(event.target.value).isZero() || +event.target.value > parse(raise.usdcBalance, 6)) {
             setIsGray(true)
