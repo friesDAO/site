@@ -582,6 +582,7 @@ const Raise = () => {
                     justify-content: flex-end;
                     align-items: center;
                     border: 2px solid white;
+                    border-right: none;
                 }
 
                 .percent {
