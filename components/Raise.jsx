@@ -276,14 +276,23 @@ const Raise = () => {
                     
                     <div className="stats-list">
                         <div className="column">
+
+                            <h3 className="name">min goal</h3>
+                            <div className="value">${constants.raiseMin.toLocaleString()}</div>
+                            
                             <h3 className="name">total raised</h3>
                             <div className="value">${(+Number(fromWei(raise.totalPurchased.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
 
-                            <h3 className="name">raise goal</h3>
+                            {/* <h3 className="name">raise goal</h3>
                             <div className="value">min: ${constants.raiseMin.toLocaleString()}<br />max: ${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
 
                             <h3 className="name">{timeRemaining > 0 ? `${constants.currentRaisePhase} ends` : (constants.currentNFTPhase >= constants.nftPhases.length - 1 ? `${constants.currentRaisePhase} ended` : `${constants.nextRaisePhase} starts`)}</h3>
-                            <div className="value">{timeRemaining > 0 ? formatTimeRemaining(timeRemaining) : (constants.currentNFTPhase >= constants.nftPhases.length - 1 ? "" : formatTimeRemaining(timeToNext))}</div>
+                            <div className="value">{timeRemaining > 0 ? formatTimeRemaining(timeRemaining) : (constants.currentNFTPhase >= constants.nftPhases.length - 1 ? "" : formatTimeRemaining(timeToNext))}</div> */}
+
+                            
+
+                            <h3 className="name">raise ends at</h3>
+                            <div className="value">${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
                         </div>
 
                         <div className="column">
