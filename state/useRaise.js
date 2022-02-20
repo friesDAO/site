@@ -25,19 +25,26 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
 
     useEffect(() => {
         updateData()
-        const interval = setInterval(updateData, 5000)
+        const interval = setInterval(() => updateData(), 5000)
 
         const timeout1 = setTimeout(() => updateNFTsRemaining(), 500)
-        const interval2 = setInterval(updateNFTsRemaining, 10000)
-        updateCap()
-        const interval3 = setInterval(() => updateCap(), 79)
+        const interval2 = setInterval(() => updateNFTsRemaining(), 10000)
+        
         return () => {
             clearInterval(interval)
             clearInterval(interval2)
             clearTimeout(timeout1)
-            clearInterval(interval3)
         }
     }, [account])
+
+    useEffect(() => {
+        updateCap()
+        const interval3 = setInterval(() => updateCap(), 79)
+
+        return () => {
+            clearInterval(interval3)
+        }
+    }, [account, totalPurchased])
 
     async function updateCap() {
         const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
@@ -45,7 +52,10 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
         const duration = raiseEndEpoch - dripStartEpoch;
         const elapsed = raiseEndEpoch - Date.now()
         const remaining = (Number(fromWei("9696969000000", "mwei")) - constants.raiseMin) * (elapsed/duration)
-        const remainingCap = Number(toWei(constants.raiseMin.toString(), "mwei")) + Number(toWei(remaining.toFixed(0), "mwei"))
+        let remainingCap = Number(toWei(constants.raiseMin.toString(), "mwei")) + Number(toWei(remaining.toFixed(0), "mwei"))
+        if (remainingCap < totalPurchased) {
+            remainingCap = totalPurchased
+        }
         setTotalCap(BN(remainingCap))
     }
 

@@ -55,7 +55,6 @@ const Contribute = () => {
     }
 
     function checkGray(event) {
-        console.log("bal", raise.usdcBalance)
         if (!account || chainId !== constants.chainId) {
             setIsGray(false)
             return
@@ -195,7 +194,7 @@ const Contribute = () => {
             </div>
             <div id="received" className="received">you will receive: { received } FRIES</div>
 
-            <button className={isGray || timeRemaining < 0 ? "action disabled" : "action"} onClick={contribute}>{contributeText}</button>
+            <button className={isGray || timeRemaining < 0 || raise.totalCap <= raise.totalPurchased ? "action disabled" : "action"} onClick={contribute}>{contributeText}</button>
         </>
     )
 }
@@ -285,8 +284,8 @@ const Raise = () => {
                             <h3 className="name">{timeRemaining > 0 ? `${constants.currentRaisePhase} ends` : (constants.currentNFTPhase >= constants.nftPhases.length - 1 ? `${constants.currentRaisePhase} ended` : `${constants.nextRaisePhase} starts`)}</h3>
                             <div className="value">{timeRemaining > 0 ? formatTimeRemaining(timeRemaining) : (constants.currentNFTPhase >= constants.nftPhases.length - 1 ? "" : formatTimeRemaining(timeToNext))}</div> */}
 
-                            <h3 className="name">raise ends at</h3>
-                            <div className="value">${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}</div>
+                            <h3 className="name">{raise.totalCap <= raise.totalPurchased ? "raise ended" : `raise ends at`}</h3>
+                            <div className="value">{raise.totalCap <= raise.totalPurchased ? "" : `$${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}`}</div>
                         
                             <h3 className="name">min goal</h3>
                             <div className="value">${constants.raiseMin.toLocaleString()}</div>
@@ -592,7 +591,6 @@ const Raise = () => {
                     justify-content: flex-end;
                     align-items: center;
                     border: 2px solid white;
-                    border-right: none;
                 }
 
                 .percent {

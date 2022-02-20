@@ -10,7 +10,7 @@ import constants from "../data/constants.json"
 
 const Landing = () => {
     const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
-    const raiseProgress = useRaise(account, Sale, USDC, BN, toWei, fromWei)
+    const raiseProgress = useProgress(Sale, BN, toWei, fromWei)
     return (
         <>
             <div className="section landing">
@@ -148,7 +148,6 @@ const Landing = () => {
                     justify-content: flex-end;
                     align-items: center;
                     border: 2px solid white;
-                    border-right: none;
                 }
 
                 .amount {

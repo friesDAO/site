@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import constants from "../data/constants.json"
 
-function useProgress(Sale, BN) {
+function useProgress(Sale, BN, toWei, fromWei) {
     const [ totalPurchased, setTotalPurchased ] = useState(0)
     const [ totalCap, setTotalCap ] = useState(0)
     const [ maxCap, setMaxCap ] = useState(0)
@@ -17,7 +17,7 @@ function useProgress(Sale, BN) {
             clearInterval(interval)
             clearInterval(interval2)
         }
-    }, [])
+    }, [totalPurchased])
 
     async function updateCap() {
         const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
@@ -25,7 +25,10 @@ function useProgress(Sale, BN) {
         const duration = raiseEndEpoch - dripStartEpoch;
         const elapsed = raiseEndEpoch - Date.now()
         const remaining = (Number(fromWei("9696969000000", "mwei")) - constants.raiseMin) * (elapsed/duration)
-        const remainingCap = Number(toWei(constants.raiseMin.toString(), "mwei")) + Number(toWei(remaining.toFixed(0), "mwei"))
+        let remainingCap = Number(toWei(constants.raiseMin.toString(), "mwei")) + Number(toWei(remaining.toFixed(0), "mwei"))
+        if (remainingCap < totalPurchased) {
+            remainingCap = totalPurchased
+        }
         setTotalCap(BN(remainingCap))
     }
 
