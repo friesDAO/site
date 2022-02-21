@@ -1,10 +1,11 @@
 import Raise from "../components/Raise.jsx"
 import useProgress from "../state/useProgress.js"
 import useRaise from "../state/useRaise.js"
-import { useContext } from "react"
+import { useContext, useEffect } from "react"
 import { parse, unparse, format, formatNumber } from "../components/number.js"
 import EthereumContext from "../state/EthereumContext.js"
 import constants from "../data/constants.json"
+import Zooming from "../public/zooming.min.js"
 
 // Landing section
 
@@ -268,137 +269,144 @@ const Coverage = () => (
 
 // About friesDAO section
 
-const About = () => (
-    <>
-        <div className="section about">
-            <h2 className="title">what's friesDAO doing?</h2>
+const About = () => {
 
-            <div className="split">
-                <img className="graphic" src="/flowchart.png" />
-                
-                <div className="right">
-                    <h2 className="step">form a treasury</h2>
-                    <div className="details">gather USDC contributions (on Ethereum) from  community donors and distribute $FRIES governance tokens</div>
+    useEffect(() => {
+        new Zooming().listen('img')
+    }, [])
 
-                    <h2 className="step">purchase franchises</h2>
-                    <div className="details">negotiate with franchise owners and brands to buy well-known fast food stores using the friesDAO community treasury</div>
+    return (
+        <>
+            <div className="section about">
+                <h2 className="title">what's friesDAO doing?</h2>
 
-                    <h2 className="step">expand the empire</h2>
-                    <div className="details">create a reproducible framework for community governance to influence store improvements or expansions</div>
+                <div className="split">
+                    <img className="graphic" src="/flowchart.png" data-action="zoom" data-original="/flowchart.png" />
+                    
+                    <div className="right">
+                        <h2 className="step">form a treasury</h2>
+                        <div className="details">gather USDC contributions (on Ethereum) from  community donors and distribute $FRIES governance tokens</div>
 
-                    <h2 className="step">shape the utility</h2>
-                    <div className="details">participate in serious yet memeworthy discussions like prioritizing jobs for ourselves and getting NFT coupons for free food</div>
+                        <h2 className="step">purchase franchises</h2>
+                        <div className="details">negotiate with franchise owners and brands to buy well-known fast food stores using the friesDAO community treasury</div>
+
+                        <h2 className="step">expand the empire</h2>
+                        <div className="details">create a reproducible framework for community governance to influence store improvements or expansions</div>
+
+                        <h2 className="step">shape the utility</h2>
+                        <div className="details">participate in serious yet memeworthy discussions like prioritizing jobs for ourselves and getting NFT coupons for free food</div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <style jsx>{`
-            .about {
-                background-color: #fff5f0;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                gap: 50px;
-                border-bottom: 4px solid var(--orange)
-            }
-
-            .split {
-                width: 100%;
-                display: flex;
-                gap: 64px;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-            }
-            
-            .right {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-            }
-
-            .title {
-                font-size: 4rem;
-                font-weight: bold;
-                color: var(--title);
-                text-align: center;
-            }
-
-            .graphic {
-                width: 500px;
-            }
-            
-            .step {
-                font-size: 2.25rem;
-                color: var(--title);
-                margin-bottom: 10px;
-                text-align: center;
-            }
-            
-            .details {
-                font-size: 1.3rem;
-                margin-bottom: 40px;
-            }
-
-            .details:last-child {
-                margin-bottom: 0;
-            }
-
-            @media only screen and (max-width: 1000px) {
-                .split {
-                    gap: 50px;
-                }
-
-                .graphic {
-                    width: 400px;
-                }
-
-                .details {
-                    margin-bottom: 30px;
-                }
-            }
-
-            @media only screen and (max-width: 800px) {
-                .graphic {
-                    width: 300px;
-                }
-            }
-
-            @media only screen and (max-width: 700px) {
-                .split {
+            <style jsx>{`
+                .about {
+                    background-color: #fff5f0;
+                    display: flex;
                     flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 50px;
+                    border-bottom: 4px solid var(--orange)
+                }
+
+                .split {
+                    width: 100%;
+                    display: flex;
+                    gap: 64px;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                }
+                
+                .right {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                }
+
+                .title {
+                    font-size: 4rem;
+                    font-weight: bold;
+                    color: var(--title);
+                    text-align: center;
                 }
 
                 .graphic {
                     width: 500px;
                 }
-            }
-
-            @media only screen and (max-width: 600px) {
-                .title {
-                    font-size: 2.8rem;
+                
+                .step {
+                    font-size: 2.25rem;
+                    color: var(--title);
+                    margin-bottom: 10px;
+                    text-align: center;
                 }
                 
-                .about {
-                    gap: 40px;
+                .details {
+                    font-size: 1.3rem;
+                    margin-bottom: 40px;
                 }
 
-                .graphic {
-                    width: 350px;
+                .details:last-child {
+                    margin-bottom: 0;
                 }
-            }
 
-            @media only screen and (max-width: 400px) {
-                .graphic {
-                    width: 300px;
+                @media only screen and (max-width: 1000px) {
+                    .split {
+                        gap: 50px;
+                    }
+
+                    .graphic {
+                        width: 400px;
+                    }
+
+                    .details {
+                        margin-bottom: 30px;
+                    }
                 }
-            }
-        `}</style>
-    </>
-)
+
+                @media only screen and (max-width: 800px) {
+                    .graphic {
+                        width: 300px;
+                    }
+                }
+
+                @media only screen and (max-width: 700px) {
+                    .split {
+                        flex-direction: column;
+                    }
+
+                    .graphic {
+                        width: 500px;
+                    }
+                }
+
+                @media only screen and (max-width: 600px) {
+                    .title {
+                        font-size: 2.8rem;
+                    }
+                    
+                    .about {
+                        gap: 40px;
+                    }
+
+                    .graphic {
+                        width: 350px;
+                    }
+                }
+
+                @media only screen and (max-width: 400px) {
+                    .graphic {
+                        width: 300px;
+                    }
+                }
+            `}</style>
+        </>
+    )
+}
 
 // graphic section
 
