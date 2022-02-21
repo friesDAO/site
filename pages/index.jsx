@@ -34,7 +34,7 @@ const Landing = () => {
                     </div>
 
                     <a className="discord" href="#raise">
-                        contribute to treasury
+                        claim $FRIES tokens
                         <div className="arrow">➔</div>
                     </a>
                 </div>
@@ -274,7 +274,7 @@ const About = () => (
             <h2 className="title">what's friesDAO doing?</h2>
 
             <div className="split">
-                <img className="graphic" src="/friesdao.png" />
+                <img className="graphic" src="/flowchart.png" />
                 
                 <div className="right">
                     <h2 className="step">form a treasury</h2>
@@ -306,7 +306,7 @@ const About = () => (
             .split {
                 width: 100%;
                 display: flex;
-                gap: 80px;
+                gap: 64px;
                 flex-direction: row;
                 justify-content: center;
                 align-items: center;
@@ -328,7 +328,7 @@ const About = () => (
             }
 
             .graphic {
-                width: 400px;
+                width: 500px;
             }
             
             .step {
@@ -353,7 +353,7 @@ const About = () => (
                 }
 
                 .graphic {
-                    width: 300px;
+                    width: 400px;
                 }
 
                 .details {
@@ -363,7 +363,7 @@ const About = () => (
 
             @media only screen and (max-width: 800px) {
                 .graphic {
-                    width: 250px;
+                    width: 300px;
                 }
             }
 
@@ -373,7 +373,7 @@ const About = () => (
                 }
 
                 .graphic {
-                    width: 300px;
+                    width: 500px;
                 }
             }
 
@@ -385,11 +385,15 @@ const About = () => (
                 .about {
                     gap: 40px;
                 }
+
+                .graphic {
+                    width: 350px;
+                }
             }
 
             @media only screen and (max-width: 400px) {
                 .graphic {
-                    width: 250px;
+                    width: 300px;
                 }
             }
         `}</style>
@@ -709,14 +713,18 @@ const NFT = () => (
 const RaiseContainer = () => (
     <>
         <div className="section raise-container" id="raise">
-            <h2 className="title">contribute to treasury</h2>
-            <div className="notice">min 5000 USDC qualifies for limited edition NFT while supply lasts</div>
+            <h2 className="title">treasury raise</h2>
+            <div className="notice">raise has ended, claiming opens after <a href="https://snapshot.org/#/friesdao.eth/proposal/0x7dc1a3367bf7a5f6569544837177cebd623d1081d538b8787b277a51d34f6b8f">vote</a></div>
             <div className="content">
                 <Raise />
             </div>
         </div>
 
         <style jsx>{`
+            .notice > a {
+                text-decoration: underline;
+            }
+
             .raise-container {
                 // height: 100vh; /* temporary */
                 display: flex;
