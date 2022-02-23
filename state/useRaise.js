@@ -104,7 +104,7 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
     
                 for (const [i, nftPhase] of constants.nftPhases.entries()) {
                     for (const log of logs.result) {
-                        if (log.blockNumber > nftPhase.startBlock && log.blockNumber < (i + 1 > constants.nftPhases.length - 1 ? Infinity : constants.nftPhases[i + 1].startBlock)) {
+                        if (log.blockNumber > nftPhase.startBlock && log.blockNumber < (i + 1 > constants.nftPhases.length - 1 ? Infinity : constants.nftPhases[i + 1].startBlock) && !constants.ignoredTxs.includes(log.transactionHash)) {
                             const address = log.topics[1]
                             if (!addresses[i].includes(address)) {
                                 addresses[i].push(address)
@@ -134,6 +134,7 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
     
                 const remaining = constants.nftPhases[constants.currentNFTPhase].amount - addresses[constants.currentNFTPhase].length
                 setNftsRemaining(remaining > 0 ? remaining : 0)
+
 
                 if (account) {
                     let reserved = 0
