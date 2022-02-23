@@ -272,7 +272,7 @@ const Coverage = () => (
 const About = () => {
 
     useEffect(() => {
-        new Zooming().listen('img')
+        new Zooming().listen('#flowchart')
     }, [])
 
     return (
@@ -281,7 +281,7 @@ const About = () => {
                 <h2 className="title">what's friesDAO doing?</h2>
 
                 <div className="split">
-                    <img className="graphic" src="/flowchart.svg" data-action="zoom" data-original="/flowchart.svg" />
+                    <img className="graphic" id="flowchart" src="/flowchart.svg" data-action="zoom" data-original="/flowchart.svg" />
                     
                     <div className="right">
                         <h2 className="step">form a treasury</h2>
