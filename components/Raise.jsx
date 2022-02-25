@@ -202,6 +202,9 @@ const Contribute = () => {
 const Redeem = () => {
     const { enabled, account, USDC, Sale, BN, toWei, fromWei, chainId } = useContext(EthereumContext)
     const raise = useRaise(account, Sale, USDC, BN, toWei, fromWei)
+    const disclaimerDisplay = useRef(true)
+    const [ disclaimerActive, setDisclaimerActive ] = useState(false)
+
 
     async function redeem() {
         if (!enabled) return
@@ -217,6 +220,12 @@ const Redeem = () => {
             })
         }
 
+        if (disclaimerDisplay.current) {
+            disclaimerDisplay.current = false
+            setDisclaimerActive(true)
+            return
+        }
+
         ethereum.request({
             method: "eth_sendTransaction",
             params: [{
@@ -229,6 +238,16 @@ const Redeem = () => {
 
     return (
         <>
+            {disclaimerActive ? 
+            <div className="disclaimer-modal-shade">
+                <div className="disclaimer-modal" style={{ height: "auto" }}>
+                    By redeeming your FRIES governance tokens, you agree to the Operating Agreement:
+                    <iframe className="pdf" src="/friesDAO_Operating_Agreement.pdf" />
+                    <button className="close-button" onClick={() => setDisclaimerActive(false)} style={{ display: "inline" }}>Accept</button>
+                </div>
+            </div>
+            : <></>}
+
             <div className="to-redeem balance">you will receive: {format(parse(raise.amountPurchased, 18) - parse(raise.amountRedeemed, 18))} FRIES</div>
             <button className={`action redeem-action`} onClick={redeem}>redeem</button>
         </>
@@ -695,6 +714,12 @@ const Raise = () => {
 
                 .redeem-action {
                     margin-top: 10px !important;
+                }
+
+                .pdf {
+                    width: 100%;
+                    height: 600px;
+                    margin: 12px 0;
                 }
 
                 .action {
