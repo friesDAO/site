@@ -200,7 +200,7 @@ const Contribute = () => {
 }
 
 const Redeem = () => {
-    const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
+    const { enabled, account, USDC, Sale, BN, toWei, fromWei, chainId } = useContext(EthereumContext)
     const raise = useRaise(account, Sale, USDC, BN, toWei, fromWei)
 
     async function redeem() {
