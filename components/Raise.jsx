@@ -359,8 +359,8 @@ const Raise = () => {
                         </div>
 
                         <div className="column">
-                            <h3 className={`name${parse(raise.amountPurchased) > 0 ? " highlight" : ""}`}>pending tokens</h3>
-                            <div className={`value${parse(raise.amountPurchased) > 0 ? " highlight" : ""}`}>{format(parse(raise.amountPurchased) - parse(raise.amountRedeemed))} FRIES</div>
+                            <h3 className={`name${parse(raise.amountPurchased) - parse(raise.amountRedeemed) > 0 ? " highlight" : ""}`}>pending tokens</h3>
+                            <div className={`value${parse(raise.amountPurchased) - parse(raise.amountRedeemed) > 0 ? " highlight" : ""}`}>{format(parse(raise.amountPurchased) - parse(raise.amountRedeemed))} FRIES</div>
 
                             <h3 className="name">NFT reserved</h3>
                             <div className="value">{raise.nftReserved > 0 ? `yes (${raise.nftReserved})` : "no"}</div>
