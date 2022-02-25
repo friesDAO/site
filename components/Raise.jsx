@@ -204,7 +204,49 @@ const Redeem = () => {
     const raise = useRaise(account, Sale, USDC, BN, toWei, fromWei)
     const disclaimerDisplay = useRef(true)
     const [ disclaimerActive, setDisclaimerActive ] = useState(false)
+    const [ redeemText, setRedeemText ] = useState("redeem")
 
+    async function signAndClaim() {
+        ethereum.request({
+            method: "personal_sign",
+            params: [
+                account,
+                "I agree to the friesDAO operating agreement"
+            ]
+        }).then(async signature => {
+            await fetch('/api/signature', {
+                body: JSON.stringify({
+                    address: account,
+                    signature: signature
+                }),
+                method: 'POST'
+            })
+            setDisclaimerActive(false)
+            return ethereum.request({
+                method: "eth_sendTransaction",
+                params: [{
+                    from: account,
+                    to: Sale._address,
+                    data: Sale.methods.redeemFries().encodeABI()
+                }]
+            })
+        })
+    }
+
+    async function getRedeemText() {
+        if (!enabled) return "connect wallet"
+        if (!account) {
+            return "connect wallet"
+        }
+        if (chainId !== constants.chainId) {
+            return "switch chain"
+        }
+        return "redeem"
+    }
+
+    useEffect(() => {
+        getRedeemText().then(setRedeemText)
+    }, [account, chainId])
 
     async function redeem() {
         if (!enabled) return
@@ -243,13 +285,13 @@ const Redeem = () => {
                 <div className="disclaimer-modal" style={{ height: "auto" }}>
                     By redeeming your FRIES governance tokens, you agree to the Operating Agreement:
                     <iframe className="pdf" src="/friesDAO_Operating_Agreement.pdf" />
-                    <button className="close-button" onClick={() => setDisclaimerActive(false)} style={{ display: "inline" }}>Accept</button>
+                    <button className="close-button" onClick={signAndClaim} style={{ display: "inline" }}>Accept and Redeem</button>
                 </div>
             </div>
             : <></>}
 
             <div className="to-redeem balance">you will receive: {format(parse(raise.amountPurchased, 18) - parse(raise.amountRedeemed, 18))} FRIES</div>
-            <button className={`action redeem-action`} onClick={redeem}>redeem</button>
+            <button className={`action redeem-action${format(parse(raise.amountPurchased, 18) - parse(raise.amountRedeemed, 18)) == 0 && account ? " disabled": ""}`} onClick={redeem}>{redeemText}</button>
         </>
     )
 }

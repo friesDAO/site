@@ -174,7 +174,8 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
         tree,
         nftsRemaining,
         nftReserved,
-        usdcBalance
+        usdcBalance,
+        updateData
     }
 }
 
