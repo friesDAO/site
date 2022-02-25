@@ -176,7 +176,7 @@ const Contribute = () => {
             : <></>}
             <div className="progress">
                 <div className="bar">
-                    <div className={(100 * parse(raise.totalPurchased, 6) / parse(raise.totalCap, 6)) > 50 ? "percent" : "percent outside"}>
+                    <div className="percent">{/*(100 * parse(raise.totalPurchased, 6) / parse(raise.totalCap, 6)) > 50 ? "percent" : "percent outside"}>*/}
                         {formatNumber(100 * parse(raise.totalPurchased, 6) / parse(raise.totalCap, 6))}%
                     </div>
                 </div>
@@ -222,9 +222,8 @@ const Redeem = () => {
 
     return (
         <>
-            <div className="balance">redeem amount: 0 $FRIES</div>
-
-            <button className="action" onClick={redeem}>redeem</button>
+            <div className="to-redeem balance">you will receive: {format(parse(raise.amountPurchased, 18) - parse(raise.amountRedeemed, 18))} FRIES</div>
+            <button className={`action redeem-action${parse(raise.amountPurchased, 18) - parse(raise.amountRedeemed, 18) <= 0 ? " disabled": ""}`} onClick={redeem}>redeem</button>
         </>
     )
 }
@@ -307,9 +306,9 @@ const Raise = () => {
                 <div className="right">
                     <div className="raise subcontainer">
                         <div className="options">
-                            <div className={"option active"} onClick={() => setSectionActive("raise")}>raise</div>
-                            <div className={"option disabled"} onClick={() => setSectionActive("redeem")}>claim</div>
-                            <div className={"option disabled"} onClick={() => setSectionActive("refund")}>refund</div>
+                            <div className={`option${sectionActive === "raise" ? " active" : ""}`} onClick={() => setSectionActive("raise")}>raise</div>
+                            <div className={`option${raise.redeemActive ? "": " disabled"}${sectionActive === "redeem" ? " active" : ""}`} onClick={() => setSectionActive("redeem")}>claim</div>
+                            <div className={`option disabled${sectionActive === "refund" ? " active" : ""}`} onClick={() => setSectionActive("refund")}>refund</div>
                         </div>
 
                         <div className="inner">
@@ -406,6 +405,7 @@ const Raise = () => {
                     text-align: center;
                     padding: 5px 20px;
                     border: 2px solid var(--gray);
+                    cursor: pointer;
                 }
 
                 .option.active {
@@ -638,8 +638,14 @@ const Raise = () => {
                 .balance {
                     color: var(--gray);
                     font-size: 1.2rem;
-                    margin-bottom: 2px;
                     margin-left: 5px;
+                    margin-bottom: 2px;
+                }
+
+                .to-redeem {
+                    color: var(--text);
+                    font-size: 1.3rem;
+                    text-align: center;
                 }
 
                 .received {
@@ -678,6 +684,10 @@ const Raise = () => {
                     margin-left: 8px;
                     color: white;
                     font-size: 1.25rem;                  
+                }
+
+                .redeem-action {
+                    margin-top: 10px !important;
                 }
 
                 .action {

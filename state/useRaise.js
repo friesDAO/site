@@ -18,6 +18,7 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
     const [ usdcBalance, setUsdcBalance ] = useState(0)
 
     const [ amountPurchased, setAmountPurchased ] = useState(0)
+    const [ amountRedeemed, setAmountRedeemed ] = useState(0)
     const [ whitelistMax, setWhitelistMax ] = useState(0)
     const [ nftsRemaining, setNftsRemaining] = useState(0)
     const [ nftReserved, setNftReserved ] = useState(0)
@@ -84,6 +85,10 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
                 .then(amount => {
                     setAmountPurchased(BN(amount))
                         purchasedValue = amount
+                }) : null,
+            account ? Sale.methods.redeemed(account).call()
+                .then(amount => {
+                    setAmountRedeemed(BN(amount))
                 }) : null,
             account ? USDC.methods.balanceOf(account).call()
                 .then(setUsdcBalance) : null
@@ -163,6 +168,7 @@ function useRaise(account, Sale, USDC, BN, toWei, fromWei) {
         totalCap,
         maxCap,
         amountPurchased,
+        amountRedeemed,
         setAmountPurchased,
         whitelistMax,
         tree,
