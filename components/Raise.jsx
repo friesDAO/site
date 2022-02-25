@@ -210,6 +210,13 @@ const Redeem = () => {
                 method: "eth_requestAccounts"
             })
         }
+        if (chainId !== constants.chainId) {
+            return ethereum.request({
+                method: "wallet_switchEthereumChain",
+                params: [{ chainId: constants.chainId }]
+            })
+        }
+
         ethereum.request({
             method: "eth_sendTransaction",
             params: [{
@@ -223,7 +230,7 @@ const Redeem = () => {
     return (
         <>
             <div className="to-redeem balance">you will receive: {format(parse(raise.amountPurchased, 18) - parse(raise.amountRedeemed, 18))} FRIES</div>
-            <button className={`action redeem-action${parse(raise.amountPurchased, 18) - parse(raise.amountRedeemed, 18) <= 0 ? " disabled": ""}`} onClick={redeem}>redeem</button>
+            <button className={`action redeem-action`} onClick={redeem}>redeem</button>
         </>
     )
 }
