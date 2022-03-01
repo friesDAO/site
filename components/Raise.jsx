@@ -312,7 +312,7 @@ const Raise = () => {
     const raiseEndEpoch = new Date(constants.raiseEnd).getTime()
     const [ timeRemaining, setTimeRemaining ] = useState(raiseEndEpoch - Date.now())
     const [ timeToNext, setTimeToNext ] = useState(raiseStartEpoch - Date.now())
-    const [ sectionActive, setSectionActive ] = useState("raise")
+    const [ sectionActive, setSectionActive ] = useState("redeem")
     
     useEffect(() => {
         const interval = setInterval(() => {
@@ -395,7 +395,7 @@ const Raise = () => {
                 
             </div>
             
-            <div className="token-information">Each FRIES token is a symbolic recognition of each donation of 0.023088 USDC. Tokens will be claimable after the raise is complete. For more token information, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
+            <div className="token-information">Tokens are claimable, the raise is complete. For more token information, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
 
             <style jsx>{`
                 .container {

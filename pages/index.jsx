@@ -6,6 +6,7 @@ import { parse, unparse, format, formatNumber } from "../components/number.js"
 import EthereumContext from "../state/EthereumContext.js"
 import constants from "../data/constants.json"
 import Zooming from "../public/zooming.min.js"
+import Marquee from "react-fast-marquee";
 
 // Landing section
 
@@ -42,18 +43,18 @@ const Landing = () => {
             </div>
             <style jsx>{`
                 .landing {
-                    min-height: calc(100vh - 80px);
+                    height: calc(100vh - 80px);
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    gap: 22px;
+                    gap: 16px;
                     padding: 0 max(calc(50vw - 500px), var(--side)) 80px max(calc(50vw - 550px), var(--side));
                 }
 
                 .hero {
                     width: 350px;
-                    margin-top: 20px;
+                    margin-top: 12px;
                 }
 
                 .text {
@@ -89,7 +90,7 @@ const Landing = () => {
                     color: white;
                     border-radius: 10px;
                     font-size: 1.5rem;
-                    margin-top: 24px;
+                    margin-top: 4px;
                     font-weight: 600;
                 }
 
@@ -108,7 +109,7 @@ const Landing = () => {
 
                 @media only screen and (max-height: 900px) {
                     .landing {
-                        gap: 32px;
+                        gap: 16px;
                         padding: 0 max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 550px), var(--side));
                     }
 
@@ -127,7 +128,6 @@ const Landing = () => {
                     height: 56px;
                     border-radius: 10px;
                     margin-bottom: 0px;
-                    margin-top: 20px;
                     position: relative;
                     max-width: 450px;
                     display: flex;
@@ -208,6 +208,8 @@ const Landing = () => {
                 @media only screen and (max-width: 500px) {
                     .landing {
                         gap: 32px;
+                        height: unset;
+                        min-height: calc(100vh - 80px);
                         padding: 0 max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 550px), var(--side));
                     }
 
@@ -232,36 +234,39 @@ const Landing = () => {
 const Coverage = () => (
     <>
         <div className="section coverage">
-            <a href="https://www.coindesk.com/business/2022/01/28/friesdao-wants-to-start-a-crypto-crowdfunded-fast-food-franchise/
-"><img src="/coindesk.png"></img></a>
-            <a href="https://www.investing.com/news/cryptocurrency-news/friesdao-bags-13m-usdc-in-first-48-hours-of-ongoing-whitelist-sale-2753354
-"><img src="/investing.png"></img></a>
-<a href="https://www.yahoo.com/now/friesdao-crypto-community-mission-acquire-093005643.html
-"><img src="/yahoo.png"></img></a>
-            <a href="https://hackernoon.com/restaurant-focussed-dao-called-friesdao-is-raising-$969-million-to-run-a-fast-food-enterprise
-"><img src="/hackernoon.png"></img></a>
-<a href="https://thespoon.tech/it-started-as-a-meme-now-friesdao-is-on-track-to-buy-a-restaurant-after-raising-over-4m-selling-nfts/
-"><img src="/spoon.png"></img></a>
-            <a href="https://www.coinspeaker.com/friesdao-seeks-acquire-fast-food-restaurants/
-"><img src="/coinspeaker.png"></img></a>
-            <a href="https://techstartups.com/2022/01/28/crypto-community-friesdao-wants-acquire-fast-food-restaurants/
-"><img src="/techstartups.png"></img></a>
+            <Marquee speed={50} gradientWidth={40}>
+                <a target="_blank" href="https://www.coindesk.com/business/2022/01/28/friesdao-wants-to-start-a-crypto-crowdfunded-fast-food-franchise/"><img src="/coindesk.png"></img></a>
+                <a target="_blank" href="https://www.investing.com/news/cryptocurrency-news/friesdao-bags-13m-usdc-in-first-48-hours-of-ongoing-whitelist-sale-2753354"><img src="/investing.png"></img></a>
+                <a target="_blank" href="https://www.yahoo.com/now/friesdao-crypto-community-mission-acquire-093005643.html"><img src="/yahoo.png"></img></a>
+                <a target="_blank" href="https://hackernoon.com/restaurant-focussed-dao-called-friesdao-is-raising-$969-million-to-run-a-fast-food-enterprise"><img src="/hackernoon.png"></img></a>
+                <a target="_blank" href="https://thespoon.tech/it-started-as-a-meme-now-friesdao-is-on-track-to-buy-a-restaurant-after-raising-over-4m-selling-nfts/"><img src="/spoon.png"></img></a>
+                <a target="_blank" href="https://www.coinspeaker.com/friesdao-seeks-acquire-fast-food-restaurants/"><img src="/coinspeaker.png"></img></a>
+                <a target="_blank" href="https://techstartups.com/2022/01/28/crypto-community-friesdao-wants-acquire-fast-food-restaurants/"><img src="/techstartups.png"></img></a>
+                <a target="_blank" href="https://www.theblockcrypto.com/post/135610/friesdao-raises-5-4-million-with-plan-to-buy-fast-food-restaurants"><img src="theblock.svg"></img></a>
+                <a target="_blank" href="https://www.thestreet.com/investing/friesdao-crypto-enthusiasts-want-to-buy-mcdonalds-subway"><img src="/thestreet.png"></img></a>
+                <a target="_blank" href="https://decrypt.co/92591/former-dominos-pizza-vp-joins-friesdao-advisor"><img src="./decrypt.png"></img></a>
+                <a target="_blank" href="https://www.nrn.com/quick-service/are-daos-new-restaurant-franchising-fundraising-model"><img src="./nrn.jpg"></img></a>
+                <a target="_blank" href="https://cointelegraph.com/news/friesdao-scoops-up-fast-food-franchises-as-part-of-its-crypto-governance-experiment"><img src="./cointelegraph.png"></img></a>
+                <a target="_blank" href="https://news.bitcoin.com/a-project-called-fries-dao-raises-5-4-million-to-purchase-fast-food-restaurants/"><img src="./bitcoincom.png"></img></a>
+                <a target="_blank" href="https://cryptonews.com/news/9-daos-pay-attention-right-now.htm"><img src="./cryptonews.png"></img></a>
+                <a target="_blank" href="https://bitcoinist.com/daos-are-having-a-moment-but-are-they-ready-for-the-mainstream/"><img src="./bitcoinist.png"></img></a>
+            </Marquee>
         </div>
         <style jsx>{`
             .coverage {
-                display: flex;
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                gap: 20px 30px;
-                padding: 40px;
+                padding: 40px 0px;
                 border-top: 3px solid var(--orange);
                 border-bottom: 3px solid var(--orange);
-                flex-wrap: wrap;
+                overflow: hidden;
             }
 
-            .coverage > a > img {
+            .coverage a {
                 height: 30px;
+            }
+
+            .coverage img {
+                height: 100%;
+                margin: 0px 30px;
             }
         `}</style>
     </>
@@ -461,7 +466,7 @@ const FAQ = () => (
                 <div className="answer">Turns out some community members have lots of experience in the franchising world and have now offered advisement on how we can do this properly. Once we buy the first store successfully, the game plan will be shared so that any execution team can form within the DAO in a decentralized manner to request from the treasury to reproduce the process. If we fail to acquire a store in 1 year, your contribution is refundable (minus any treasury expenditures to date).</div>
 
                 <h2 className="question">do I get anything for donating?</h2>
-                <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights. Each token represents a contribution of 0.023088 USDC.</div>
+                <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights.</div>
 
                 <h2 className="question">do I own the stores?</h2>
                 <div className="answer">Due to regulations there is no ownership stake in the stores or its profits, but rather ownership in governance that impacts how we collectively grow and expand stores with those profits (stored in a public multisig wallet). As a decentralized community, we'll be exploring ways to create regulation compliant value accrual.</div>
@@ -722,7 +727,7 @@ const RaiseContainer = () => (
     <>
         <div className="section raise-container" id="raise">
             <h2 className="title">treasury raise</h2>
-            <div className="notice">raise has ended, claiming opens after <a href="https://snapshot.org/#/friesdao.eth/proposal/0x7dc1a3367bf7a5f6569544837177cebd623d1081d538b8787b277a51d34f6b8f">vote</a></div>
+            <div className="notice">raise has ended, claiming is open</div>
             <div className="content">
                 <Raise />
             </div>
