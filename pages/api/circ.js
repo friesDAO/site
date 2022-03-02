@@ -4,6 +4,7 @@ export default async (req, res) => {
 
         const circAllocations = {
             raise: 233961218.37375628719,
+            lp: 10000000
         }
 
         res.status(200).send(Object.values(circAllocations).reduce((c, i) => c + i));
