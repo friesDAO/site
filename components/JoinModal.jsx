@@ -7,11 +7,11 @@ const JoinModal = ({ modalActive, setModalActive }) => {
 					<div className="join-options">
 						<div className="join-option">
 							<a className="option-title underline" href="https://discord.gg/friesdao">guest access</a>
-							<div className="option-desc">hang out with the community in public channels on <a className="underline" href="https://discord.com/">Discord</a></div>
+							<div className="option-desc">hang out with the community in public channels on <a className="underline" href="https://discord.com/" target="_blank">Discord</a></div>
 						</div>
 
 						<div className="join-option">
-							<a className="option-title underline" href="https://app.uniswap.org/#/swap?exactField=output&exactAmount=5000&outputCurrency=0xFA57F00D948bb6a28072f5416fCbF7836C3d62dD&chain=mainnet">get membership</a>
+							<a className="option-title underline" href="https://app.uniswap.org/#/swap?exactField=output&exactAmount=5000&outputCurrency=0xFA57F00D948bb6a28072f5416fCbF7836C3d62dD&chain=mainnet" target="_blank">get membership</a>
 							<div className="option-desc">purchase 5000+ FRIES tokens, then access the <a className="underline" href="https://discord.gg/friesdao">members-only Discord</a></div>
 						</div>
 
