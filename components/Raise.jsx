@@ -204,7 +204,7 @@ const Redeem = () => {
     const raise = useRaise(account, Sale, USDC, BN, toWei, fromWei)
     const disclaimerDisplay = useRef(true)
     const [ disclaimerActive, setDisclaimerActive ] = useState(false)
-    const [ redeemText, setRedeemText ] = useState("redeem")
+    const [ redeemText, setRedeemText ] = useState("claim")
 
     async function signAndClaim() {
         ethereum.request({
@@ -241,7 +241,7 @@ const Redeem = () => {
         if (chainId !== constants.chainId) {
             return "switch chain"
         }
-        return "redeem"
+        return "claim"
     }
 
     useEffect(() => {

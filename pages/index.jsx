@@ -439,7 +439,7 @@ const Franchisees = () => {
 					<div className="detail">If there is an existing store in your area available for sale, we can help you acquire the store in exchange for the rights to dictate how you spend a portion of the business's profits for a period of time. Afterwards, you will be "gifted" full ownership of the store.</div>
 
 					<h2 className="point">0% fee cash advance</h2>
-					<div className="detail">Apply for up to a $1M merchant cash advance in exchange for some free food promos to our community. To qualify for this offer, you will need to become a friesDAO store community member by purchasing vested FRIES tokens over the duration of the repayment period</div>
+					<div className="detail">Apply for up to a $1M merchant cash advance in exchange for some free food promos to our community. To qualify for this offer, you will need to become a friesDAO store community member by purchasing vested FRIES tokens over the duration of the repayment period.</div>
 				</div>
 
 				<button className="inquire" onClick={() => { copyTextToClipboard("friesdao@protonmail.com") }} href="https://friesdao.gitbook.io/friesdao-docs/">
