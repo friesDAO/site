@@ -1,7 +1,7 @@
 const JoinModal = ({ modalActive, setModalActive }) => {
 	return (
 		<>
-			<div className="blind" onClick={() => {setModalActive(false)}}>
+			<div className="blind">
 				<div className="modal">
 					<div className="title">join friesDAO</div>
 					<div className="join-options">
@@ -58,7 +58,6 @@ const JoinModal = ({ modalActive, setModalActive }) => {
 					flex-direction: column;
 					justify-content: center;
 					align-items: center;
-					cursor: pointer;
 				}
 
 				.underline {
@@ -86,7 +85,6 @@ const JoinModal = ({ modalActive, setModalActive }) => {
 					flex-direction: column;
 					align-items: center;
 					padding: 24px;
-					cursor: pointer;
 				}
 
 				.join-option.disabled {

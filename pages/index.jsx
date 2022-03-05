@@ -24,12 +24,12 @@ const Landing = () => {
 					<div className="jump-links">
 						<a className="jump-link" href="#about">
 							for members
-							<div className="arrow">🡳</div>
+							<i className="arrow fas fa-arrow-down"></i>
 						</a>
 
 						<a className="jump-link" href="#franchisees">
 							for franchisees
-							<div className="arrow">🡳</div>
+							<i className="arrow fas fa-arrow-down"></i>
 						</a>
 					</div>
 				</div>
@@ -106,7 +106,6 @@ const Landing = () => {
                     display: inline;
                     color: inherit;
 					transition: 0.25s top;
-					transform: translateY(2px);
                     margin-left: 0.5rem;
                 }
 
@@ -558,7 +557,7 @@ const NFT = () => (
 				</div>
 			</div>
 
-			<h3 className="subsubtitle">Minting will be made available shortly after raise completes.</h3>
+			<h3 className="subsubtitle">Minting will be made available in early March.</h3>
 		</div>
 
 		<style jsx>{`
