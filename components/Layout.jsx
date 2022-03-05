@@ -8,8 +8,8 @@ import JoinModal from "./JoinModal"
 // Navigation bar component
 
 const NavBar = () => {
-	const [ modalActive, setModalActive ] = useState(false)
-	const [ dropdownExpanded, setDropdownExpanded ] = useState(false)
+	const [modalActive, setModalActive] = useState(false)
+	const [dropdownExpanded, setDropdownExpanded] = useState(false)
 
 	return (
 		<>
@@ -25,7 +25,7 @@ const NavBar = () => {
 				<div className="dropdown">
 					<i className={`dropdown-button fas fa-bars${dropdownExpanded ? " active" : ""}`} onClick={() => setDropdownExpanded(!dropdownExpanded)}></i>
 					<div className={`dropdown-contents${dropdownExpanded ? " shown" : ""}`}>
-						<div className="dropdown-link" onClick={() => {setModalActive(true)}}>join friesDAO<div className="arrow">➔</div></div>
+						<div className="dropdown-link" onClick={() => { setModalActive(true) }}>join friesDAO<div className="arrow">➔</div></div>
 
 						<a href="https://app.fries.fund/" className="dropdown-link disabled">member app<div className="arrow">➔</div></a>
 
@@ -158,48 +158,71 @@ const NavBar = () => {
 const Footer = () => (
 	<>
 		<footer className="footer">
-			<a href="https://twitter.com/friesDAO" target="_blank">
-				<img className="icon" src="/twitter.svg"></img>
-			</a>
-			<a href="https://discord.gg/friesdao" target="_blank">
-				<img className="icon" src="/discord.svg"></img>
-			</a>
-			<a href="https://github.com/friesDAO" target="_blank">
-				<img className="icon" src="/github.svg"></img>
-			</a>
-			<a href="https://friesdao.gitbook.io/friesdao-docs/" target="_blank">
-				<img className="icon" src="/docs.svg"></img>
-			</a>
-			<a href="https://www.linkedin.com/company/friesdao/" target="_blank">
-				<img className="icon" src="/linkedin.svg"></img>
-			</a>
+			<div className="links">
+				<a href="https://twitter.com/friesDAO" target="_blank">
+					<img className="icon" src="/twitter.svg"></img>
+				</a>
+				<a href="https://discord.gg/friesdao" target="_blank">
+					<img className="icon" src="/discord.svg"></img>
+				</a>
+				<a href="https://github.com/friesDAO" target="_blank">
+					<img className="icon" src="/github.svg"></img>
+				</a>
+				<a href="https://friesdao.gitbook.io/friesdao-docs/" target="_blank">
+					<img className="icon" src="/docs.svg"></img>
+				</a>
+				<a href="https://www.linkedin.com/company/friesdao/" target="_blank">
+					<img className="icon" src="/linkedin.svg"></img>
+				</a>
+			</div>
+
+			<div>&copy; friesDAO LLC, a Wyoming company | <a className="underline">Operating Agreement</a></div>
 		</footer>
 		<style jsx>{`
             .footer {
                 width: 100%;
                 height: 80px;
-                display: flex;
+                padding: 0 max(calc(50vw - 500px), var(--side));
+                border-top: 1px solid var(--title);
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				align-items: center;
+				flex-wrap: wrap;
+            }
+
+			.links {
+				display: flex;
                 flex-direction: row;
                 justify-content: flex-start;
                 align-items: center;
                 gap: 48px;
-                padding: 0 max(calc(50vw - 500px), var(--side));
-                border-top: 1px solid var(--title);
-            }
+			}
+
+			.underline {
+				text-decoration: underline;
+			}
 
             .icon {
                 height: 24px;
             }
 
-            @media only screen and (max-width: 700px) {                
-                .footer {
+            @media only screen and (max-width: 850px) {                
+                .links {
                     gap: 30px;
                     justify-content: center;
                 }
+
+				.footer {
+					justify-content: center;
+					flex-direction: column;
+					height: 100px;
+					gap: 10px;
+				}
             }
 
 			@media only screen and (max-width: 400px) {
-				.footer {
+				.links {
 					gap: 20px;
 				}
 			}

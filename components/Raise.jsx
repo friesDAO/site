@@ -395,7 +395,7 @@ const Raise = () => {
                 
             </div>
             
-            <div className="token-information">Tokens are claimable, the raise is complete. For more token information, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
+            <div className="token-information">Tokens are claimable, the raise is complete. For more token info, please see <a target="_blank" href="https://friesdao.gitbook.io/friesdao-docs/logistics/usdfries-token">documentation</a>.</div>
 
             <style jsx>{`
                 .container {

@@ -244,7 +244,6 @@ const About = () => {
                     justify-content: center;
                     align-items: center;
                     gap: 50px;
-                    border-bottom: 4px solid var(--orange)
                 }
 
                 .split {
@@ -456,6 +455,7 @@ const Franchisees = () => {
                 justify-content: center;
                 align-items: center;
 				border-bottom: 4px solid var(--orange);
+				border-bottom: 4px solid var(--orange);
             }
 
             .list {
@@ -562,7 +562,7 @@ const NFT = () => (
 
 		<style jsx>{`
             .nft {
-				border-top: 4px solid var(--orange);
+				border-bottom: 4px solid var(--orange);
                 background-color: #fcf6ff;
                 display: flex;
                 flex-direction: column;
@@ -754,8 +754,8 @@ const Home = () => (
 		<Landing />
 		<Coverage />
 		<About />
-		<Graphic />
 		<NFT />
+		<Graphic />
 		<Franchisees />
 
 		<RaiseContainer />
