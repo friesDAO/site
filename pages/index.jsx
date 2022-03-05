@@ -435,7 +435,7 @@ const Franchisees = () => {
 						There are two paths you can take for friesDAO to help you acquire a store:</div>
 
 					<h2 className="point">conditional ownership</h2>
-					<div className="detail">If there is an existing store in your area available for sale, we can help you acquire the store in exchange for the rights to dictate how you spend a portion of the business's profits for a period of time. Afterwards, you will be "gifted" full ownership of the store.</div>
+					<div className="detail">If there is an existing store in your area for sale, we can help you acquire it and provide advice from seasoned franchise operators. In exchange, we will have decision making rights to a portion of the business's profits for a period of time. After we recuperate the initial amount, you will be "gifted" full ownership of the store.</div>
 
 					<h2 className="point">0% fee cash advance</h2>
 					<div className="detail">Apply for up to a $1M merchant cash advance in exchange for some free food promos to our community. To qualify for this offer, you will need to become a friesDAO store community member by purchasing vested FRIES tokens over the duration of the repayment period.</div>

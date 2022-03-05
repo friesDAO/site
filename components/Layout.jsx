@@ -176,7 +176,7 @@ const Footer = () => (
 				</a>
 			</div>
 
-			<div>&copy; friesDAO LLC, a Wyoming company | <a className="underline">Operating Agreement</a></div>
+			<div>&copy; friesDAO LLC, a Wyoming company | <a className="underline" href="https://fries.fund/friesDAO_Operating_Agreement.pdf" target="_blank">Operating Agreement</a></div>
 		</footer>
 		<style jsx>{`
             .footer {

@@ -354,8 +354,8 @@ const Raise = () => {
                             <h3 className="name">{raise.totalCap <= raise.totalPurchased ? "raise ended" : `raise ends at`}</h3>
                             <div className="value">{raise.totalCap <= raise.totalPurchased ? "" : `$${(+Number(fromWei(raise.totalCap.toString(), "mwei")).toFixed(0)).toLocaleString()}`}</div>
                         
-                            <h3 className="name">min goal</h3>
-                            <div className="value">${constants.raiseMin.toLocaleString()}</div>
+                            {/* <h3 className="name">min goal</h3>
+                            <div className="value">${constants.raiseMin.toLocaleString()}</div> */}
                         </div>
 
                         <div className="column">
@@ -365,8 +365,8 @@ const Raise = () => {
                             <h3 className="name">NFT reserved</h3>
                             <div className="value">{raise.nftReserved > 0 ? `yes (${raise.nftReserved})` : "no"}</div>
                             
-                            <h3 className="name">NFTs remaining</h3>
-                            <div className="value">{raise.nftsRemaining} {constants.nftPhases[constants.currentNFTPhase].name}</div>
+                            {/* <h3 className="name">NFTs remaining</h3>
+                            <div className="value">{raise.nftsRemaining} {constants.nftPhases[constants.currentNFTPhase].name}</div> */}
                         </div>
                     </div>
                 </div>
@@ -417,7 +417,7 @@ const Raise = () => {
 
                 .subcontainer {
                     height: 100%;
-                    padding: 32px 50px;
+                    padding: 64px 50px;
                     background-color: #ffffff;
                     border: 1px solid var(--gray);
                     box-shadow: 0 0 9px -2px var(--gray);
@@ -433,7 +433,7 @@ const Raise = () => {
                 .title {
                     font-size: 2.5rem;
                     text-align: center;
-                    margin-bottom: 20px;
+                    margin-bottom: 32px;
                     padding-bottom: 10px;
                     width: 100%;
                     border-bottom: 1px solid var(--orange);
@@ -442,11 +442,12 @@ const Raise = () => {
                 .name {
                     font-weight: 600;
                     font-size: 1.6rem;
+					margin-bottom: 4px;
                 }
 
                 .value {
                     font-size: 1.4rem;
-                    margin-bottom: 15px;
+                    margin-bottom: 20px;
                 }
 
                 .highlight {
