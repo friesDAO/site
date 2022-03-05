@@ -7,63 +7,56 @@ import EthereumContext from "../state/EthereumContext.js"
 import constants from "../data/constants.json"
 import Zooming from "../public/zooming.min.js"
 import Marquee from "react-fast-marquee";
+import { useState } from "react"
+import JoinModal from "../components/JoinModal"
 
 // Landing section
 
 const Landing = () => {
-    const { enabled, account, USDC, Sale, BN, toWei, fromWei } = useContext(EthereumContext)
-    const raiseProgress = useProgress(Sale, BN, toWei, fromWei)
-    return (
-        <>
-            <div className="section landing">
-                <img className="hero" src="/restaurant.png"></img>
-                <div className="text">
-                    <h1 className="title">we're buying fast food places</h1>
-                    <div className="desc">a decentralized social experiment where a crypto community builds and governs a fast food franchise empire</div>
-                    
-                    <div className="progress">
-                        <div className="amount">
-                            ${formatNumber(parse(raiseProgress.totalPurchased, 6))} raised
-                        </div>
-                        <div className="bar">
-                            
-                        </div>
+	return (
+		<>
+			<div className="section landing">
+				<img className="hero" src="/restaurant.png"></img>
+				<div className="text">
+					<h1 className="title">we're buying fast food places</h1>
+					<div className="desc">a decentralized social experiment where a crypto community builds and governs a fast food franchise empire via wisdom of the crowd</div>
 
-                        <div className="notch n-top"></div>
-                        <div className="notch n-bottom">
-                            {/* <div className="notch-text">min</div> */}
-                        </div>
-                    </div>
+					<div className="jump-links">
+						<a className="jump-link" href="#about">
+							for members
+							<div className="arrow">🡳</div>
+						</a>
 
-                    <a className="discord" href="#raise">
-                        claim $FRIES tokens
-                        <div className="arrow">➔</div>
-                    </a>
-                </div>
-            </div>
-            <style jsx>{`
+						<a className="jump-link" href="#franchisees">
+							for franchisees
+							<div className="arrow">🡳</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<style jsx>{`
                 .landing {
                     min-height: calc(100vh - 80px);
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-                    gap: 16px;
-                    padding: 0 max(calc(50vw - 500px), var(--side)) 80px max(calc(50vw - 550px), var(--side));
+                    gap: 32px;
+                    padding: 0 max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 550px), var(--side));
                 }
 
                 .hero {
                     width: 350px;
-                    margin-top: 12px;
+                    margin-top: 25px;
                 }
 
                 .text {
                     max-width: 620px;
                     display: flex;
                     flex-direction: column;
-                    justify-content: flex-start;
+                    justify-content: center;
                     align-items: center;
-                    gap: 10px;
+                    gap: 16px;
                     text-align: center;
                 }
 
@@ -80,7 +73,16 @@ const Landing = () => {
                     text-align: center;
                 }
 
-                .discord {
+				.jump-links {
+					display: flex;
+					flex-direction: row;
+					gap: 10px;
+					flex-wrap: wrap;
+					align-items: center;
+					justify-content: center;
+				}
+
+                .jump-link {
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
@@ -94,16 +96,17 @@ const Landing = () => {
                     font-weight: 600;
                 }
 
-                .discord:hover .arrow {
-                    left: 0.5rem;
+                .jump-link:hover .arrow {
+                    top: 0.3rem;
                 }
 
                 .arrow {
                     position: relative;
-                    left: 0;
+                    top: 0;
                     display: inline;
                     color: inherit;
-                    transition-duration: 250ms;
+					transition: 0.25s top;
+					transform: translateY(2px);
                     margin-left: 0.5rem;
                 }
 
@@ -122,83 +125,6 @@ const Landing = () => {
                     }
                 }
 
-                .progress {
-                    border: 2px solid var(--gray);
-                    width: 100%;
-                    height: 56px;
-                    border-radius: 10px;
-                    margin-bottom: 0px;
-                    position: relative;
-                    max-width: 450px;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                }
-
-                .bar {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: ${100 * parse(raiseProgress.totalPurchased, 6) / parse(raiseProgress.totalCap, 6)}%;
-                    padding: 0 10px 0 0;
-                    background-color: #7A83EA;
-                    height: 100%;
-                    border-radius: 10px;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-end;
-                    align-items: center;
-                    border: 2px solid white;
-                }
-
-                .amount {
-                    font-size: 1.6rem;
-                    z-index: 99;
-                    color: var(--black);
-                    font-weight: 700;
-                    text-shadow: -1px 1px 2px #fff,
-                    1px 1px 2px #fff,
-                    1px -1px 2px #fff,
-                    -1px -1px 2px #fff,
-                    -1px 1px 2px #fff,
-                    1px 1px 2px #fff,
-                    1px -1px 2px #fff,
-                    -1px -1px 2px #fff,
-                    -1px 1px 2px #fff,
-                    1px 1px 2px #fff,
-                    1px -1px 2px #fff,
-                    -1px -1px 2px #fff,
-                    -1px 1px 2px #fff,
-                    1px 1px 2px #fff,
-                    1px -1px 2px #fff,
-                    -1px -1px 2px #fff,
-                    -1px 1px 2px #fff,
-                    1px 1px 2px #fff,
-                    1px -1px 2px #fff,
-                    -1px -1px 2px #fff;
-                }
-
-                .notch {
-                    position: absolute;
-                    left: ${(constants.raiseMin * 100) / parse(raiseProgress.totalCap, 6)}%;
-                    height: 10px;
-                    width: 2px;
-                    background-color: #7A83EA;
-                }    
-
-                .notch-text {
-                    position: absolute;
-                    bottom: 0px;
-                    font-size: 1.2rem;
-                    color: #7A83EA;
-                    text-align: center;
-                    left: 50%;
-                    line-height: 1em;
-                    padding-top: 1px;
-                    border-top: 3px solid #7A83EA;
-                    transform: translate(-50%, 100%);
-                }
-
                 @media only screen and (max-height: 750px) {
                     .hero {
                         width: 250px;
@@ -214,11 +140,11 @@ const Landing = () => {
                     }
 
                     .hero {
-                        width: 200px;
+                        width: 250px;
                     }
 
                     .text {
-                        gap: 16px;
+                        gap: 8px;
                     }
 
                     .title {
@@ -226,33 +152,33 @@ const Landing = () => {
                     }
                 }
             `}</style>
-        </>
-    )
+		</>
+	)
 }
 
 // Media coverage section
 const Coverage = () => (
-    <>
-        <div className="section coverage">
-            <Marquee speed={50} gradientWidth={40}>
-                <a target="_blank" href="https://www.coindesk.com/business/2022/01/28/friesdao-wants-to-start-a-crypto-crowdfunded-fast-food-franchise/"><img src="/coindesk.png"></img></a>
-                <a target="_blank" href="https://www.investing.com/news/cryptocurrency-news/friesdao-bags-13m-usdc-in-first-48-hours-of-ongoing-whitelist-sale-2753354"><img src="/investing.png"></img></a>
-                <a target="_blank" href="https://www.yahoo.com/now/friesdao-crypto-community-mission-acquire-093005643.html"><img src="/yahoo.png"></img></a>
-                <a target="_blank" href="https://hackernoon.com/restaurant-focussed-dao-called-friesdao-is-raising-$969-million-to-run-a-fast-food-enterprise"><img src="/hackernoon.png"></img></a>
-                <a target="_blank" href="https://thespoon.tech/it-started-as-a-meme-now-friesdao-is-on-track-to-buy-a-restaurant-after-raising-over-4m-selling-nfts/"><img src="/spoon.png"></img></a>
-                <a target="_blank" href="https://www.coinspeaker.com/friesdao-seeks-acquire-fast-food-restaurants/"><img src="/coinspeaker.png"></img></a>
-                <a target="_blank" href="https://techstartups.com/2022/01/28/crypto-community-friesdao-wants-acquire-fast-food-restaurants/"><img src="/techstartups.png"></img></a>
-                <a target="_blank" href="https://www.theblockcrypto.com/post/135610/friesdao-raises-5-4-million-with-plan-to-buy-fast-food-restaurants"><img src="theblock.svg"></img></a>
-                <a target="_blank" href="https://www.thestreet.com/investing/friesdao-crypto-enthusiasts-want-to-buy-mcdonalds-subway"><img src="/thestreet.png"></img></a>
-                <a target="_blank" href="https://decrypt.co/92591/former-dominos-pizza-vp-joins-friesdao-advisor"><img src="./decrypt.png"></img></a>
-                <a target="_blank" href="https://www.nrn.com/quick-service/are-daos-new-restaurant-franchising-fundraising-model"><img src="./nrn.jpg"></img></a>
-                <a target="_blank" href="https://cointelegraph.com/news/friesdao-scoops-up-fast-food-franchises-as-part-of-its-crypto-governance-experiment"><img src="./cointelegraph.png"></img></a>
-                <a target="_blank" href="https://news.bitcoin.com/a-project-called-fries-dao-raises-5-4-million-to-purchase-fast-food-restaurants/"><img src="./bitcoincom.png"></img></a>
-                <a target="_blank" href="https://cryptonews.com/news/9-daos-pay-attention-right-now.htm"><img src="./cryptonews.png"></img></a>
-                <a target="_blank" href="https://bitcoinist.com/daos-are-having-a-moment-but-are-they-ready-for-the-mainstream/"><img src="./bitcoinist.png"></img></a>
-            </Marquee>
-        </div>
-        <style jsx>{`
+	<>
+		<div className="section coverage">
+			<Marquee speed={50} gradientWidth={40}>
+				<a target="_blank" href="https://www.coindesk.com/business/2022/01/28/friesdao-wants-to-start-a-crypto-crowdfunded-fast-food-franchise/"><img src="/coindesk.png"></img></a>
+				<a target="_blank" href="https://www.investing.com/news/cryptocurrency-news/friesdao-bags-13m-usdc-in-first-48-hours-of-ongoing-whitelist-sale-2753354"><img src="/investing.png"></img></a>
+				<a target="_blank" href="https://www.yahoo.com/now/friesdao-crypto-community-mission-acquire-093005643.html"><img src="/yahoo.png"></img></a>
+				<a target="_blank" href="https://hackernoon.com/restaurant-focussed-dao-called-friesdao-is-raising-$969-million-to-run-a-fast-food-enterprise"><img src="/hackernoon.png"></img></a>
+				<a target="_blank" href="https://thespoon.tech/it-started-as-a-meme-now-friesdao-is-on-track-to-buy-a-restaurant-after-raising-over-4m-selling-nfts/"><img src="/spoon.png"></img></a>
+				<a target="_blank" href="https://www.coinspeaker.com/friesdao-seeks-acquire-fast-food-restaurants/"><img src="/coinspeaker.png"></img></a>
+				<a target="_blank" href="https://techstartups.com/2022/01/28/crypto-community-friesdao-wants-acquire-fast-food-restaurants/"><img src="/techstartups.png"></img></a>
+				<a target="_blank" href="https://www.theblockcrypto.com/post/135610/friesdao-raises-5-4-million-with-plan-to-buy-fast-food-restaurants"><img src="theblock.svg"></img></a>
+				<a target="_blank" href="https://www.thestreet.com/investing/friesdao-crypto-enthusiasts-want-to-buy-mcdonalds-subway"><img src="/thestreet.png"></img></a>
+				<a target="_blank" href="https://decrypt.co/92591/former-dominos-pizza-vp-joins-friesdao-advisor"><img src="./decrypt.png"></img></a>
+				<a target="_blank" href="https://www.nrn.com/quick-service/are-daos-new-restaurant-franchising-fundraising-model"><img src="./nrn.jpg"></img></a>
+				<a target="_blank" href="https://cointelegraph.com/news/friesdao-scoops-up-fast-food-franchises-as-part-of-its-crypto-governance-experiment"><img src="./cointelegraph.png"></img></a>
+				<a target="_blank" href="https://news.bitcoin.com/a-project-called-fries-dao-raises-5-4-million-to-purchase-fast-food-restaurants/"><img src="./bitcoincom.png"></img></a>
+				<a target="_blank" href="https://cryptonews.com/news/9-daos-pay-attention-right-now.htm"><img src="./cryptonews.png"></img></a>
+				<a target="_blank" href="https://bitcoinist.com/daos-are-having-a-moment-but-are-they-ready-for-the-mainstream/"><img src="./bitcoinist.png"></img></a>
+			</Marquee>
+		</div>
+		<style jsx>{`
             .coverage {
                 padding: 40px 0px;
                 border-top: 3px solid var(--orange);
@@ -269,42 +195,49 @@ const Coverage = () => (
                 margin: 0px 30px;
             }
         `}</style>
-    </>
+	</>
 )
 
 // About friesDAO section
 
 const About = () => {
+	const [ modalActive, setModalActive ] = useState(false)
 
-    useEffect(() => {
-        new Zooming().listen('#flowchart')
-    }, [])
+	useEffect(() => {
+		new Zooming().listen('#flowchart')
+	}, [])
 
-    return (
-        <>
-            <div className="section about">
-                <h2 className="title">what's friesDAO doing?</h2>
+	return (
+		<>
+			<JoinModal modalActive={modalActive} setModalActive={setModalActive} />
+			<div className="section about" id="about">
+				<h2 className="title">what is friesDAO?</h2>
 
-                <div className="split">
-                    <img className="graphic" id="flowchart" src="/flowchart.svg" data-action="zoom" data-original="/flowchart.svg" />
-                    
-                    <div className="right">
-                        <h2 className="step">form a treasury</h2>
-                        <div className="details">gather USDC contributions (on Ethereum) from  community donors and distribute $FRIES governance tokens</div>
+				<div className="split">
+					<img className="graphic" id="flowchart" src="/flowchart.svg" data-action="zoom" data-original="/flowchart.svg" />
 
-                        <h2 className="step">purchase franchises</h2>
-                        <div className="details">negotiate with franchise owners and brands to buy well-known fast food stores using the friesDAO community treasury</div>
+					<div className="right">
+						<h2 className="step">buying franchises</h2>
+						<div className="details">we're a decentralized community that's pooled $5.4M to buy and/or finance a global network of fast food stores</div>
 
-                        <h2 className="step">expand the empire</h2>
-                        <div className="details">create a reproducible framework for community governance to influence store improvements or expansions</div>
+						<h2 className="step">making connections</h2>
+						<div className="details">from crypto enthusiasts to restaurant veterans, we're developing both friendships and business relationships</div>
 
-                        <h2 className="step">shape the utility</h2>
-                        <div className="details">participate in serious yet memeworthy discussions like prioritizing jobs for ourselves and getting NFT coupons for free food</div>
-                    </div>
-                </div>
-            </div>
+						<h2 className="step">enjoying perks</h2>
+						<div className="details">in addition to rights to decide on which brands to franchise under, friesDAO NFTs will enable perks such as free food</div>
 
-            <style jsx>{`
+						<h2 className="step">creating value</h2>
+						<div className="details">discover the power of network effects in real world decision-making to lay the foundations of the next DeFi evolution</div>
+					</div>
+				</div>
+
+				<button className="jump-link" onClick={() => {setModalActive(true)}}>
+					join friesDAO
+					<div className="arrow">➔</div>
+				</button>
+			</div>
+
+			<style jsx>{`
                 .about {
                     background-color: #fff5f0;
                     display: flex;
@@ -359,6 +292,34 @@ const About = () => {
                     margin-bottom: 0;
                 }
 
+				.jump-link {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: var(--orange);
+                    padding: 0.6rem 2rem;
+                    color: white;
+                    border-radius: 10px;
+                    font-size: 1.5rem;
+                    margin-top: 4px;
+                    font-weight: 600;
+                }
+
+                .jump-link:hover .arrow {
+                    left: 0.5rem;
+                }
+
+                .arrow {
+                    position: relative;
+                    left: 0;
+                    display: inline;
+                    color: inherit;
+					transition: 0.25s left;
+					transform: translateY(2px);
+                    margin-left: 0.5rem;
+                }
+
                 @media only screen and (max-width: 1000px) {
                     .split {
                         gap: 50px;
@@ -409,19 +370,19 @@ const About = () => {
                     }
                 }
             `}</style>
-        </>
-    )
+		</>
+	)
 }
 
 // graphic section
 
 const Graphic = () => (
-    <>
-        <div className="section graphic">
-            {/* <img className="graphic-img" src="/banner.png" /> */}
-        </div>
+	<>
+		<div className="section graphic">
+			{/* <img className="graphic-img" src="/banner.png" /> */}
+		</div>
 
-        <style jsx>{`
+		<style jsx>{`
             .graphic {
                 width: 100%;
                 height: 30vh;
@@ -448,48 +409,54 @@ const Graphic = () => (
                 }
             }
         `}</style>
-    </>
+	</>
 )
 
-// FAQ section
+// franchisees section
 
-const FAQ = () => (
-    <>
-        <div className="section faq">
-            <h2 className="title">FAQs</h2>
+const Franchisees = () => {
+	const [ copied, setCopied ] = useState(false)
 
-            <div className="list">
-                <h2 className="question">why are we doing this?</h2>
-                <div className="answer">A crypto community wondered if we could actually buy a McDonald's, the favorite employer of rekt traders. DAOs have recently began buying real world things, and we want to prove that we can bridge blockchain with fast food.</div>
+	function copyTextToClipboard(text) {
+		navigator.clipboard.writeText(text).then(() => {
+			setCopied(true)
+			setTimeout(() => {
+				setCopied(false)
+			}, 2000)
+		})
+	}
 
-                <h2 className="question">will we actually pull this off?</h2>
-                <div className="answer">Turns out some community members have lots of experience in the franchising world and have now offered advisement on how we can do this properly. Once we buy the first store successfully, the game plan will be shared so that any execution team can form within the DAO in a decentralized manner to request from the treasury to reproduce the process. If we fail to acquire a store in 1 year, your contribution is refundable (minus any treasury expenditures to date).</div>
+	return (
+		<>
+			<div className="section franchisees" id="franchisees">
+				<h2 className="title">for franchisees</h2>
 
-                <h2 className="question">do I get anything for donating?</h2>
-                <div className="answer">$FRIES tokens, which are symbolic recognition of your contribution, that provide you with membership participatory or governance rights.</div>
+				<div className="list">
+					<div className="detail">We can provide you with a rapid injection of capital as a faster, informal alternative to commercial lenders. Simply undergo a brief online interview and submit a simple budget plan that will be reviewed by the community for approval. No credit checks are necessary.
+						<br></br><br></br>
+						There are two paths you can take for friesDAO to help you acquire a store:</div>
 
-                <h2 className="question">do I own the stores?</h2>
-                <div className="answer">Due to regulations there is no ownership stake in the stores or its profits, but rather ownership in governance that impacts how we collectively grow and expand stores with those profits (stored in a public multisig wallet). As a decentralized community, we'll be exploring ways to create regulation compliant value accrual.</div>
+					<h2 className="point">conditional ownership</h2>
+					<div className="detail">If there is an existing store in your area available for sale, we can help you acquire the store in exchange for the rights to dictate how you spend a portion of the business's profits for a period of time. Afterwards, you will be "gifted" full ownership of the store.</div>
 
-                <h2 className="question">what's the grand vision?</h2>
-                <div className="answer">Imagine a major fast food store in every major city, materialized because of your vote. Go to one near you, flash your barcoded friesDAO NFT, and get that free burger. Fist-bump that dude next to you who did the same. Tell him you liked that $FRIES defi strategy he posted in Discord the other day. We're going to make history.</div>
-            </div>
+					<h2 className="point">0% fee cash advance</h2>
+					<div className="detail">Apply for up to a $1M merchant cash advance in exchange for some free food promos to our community. To qualify for this offer, you will need to become a friesDAO store community member by purchasing vested FRIES tokens over the duration of the repayment period</div>
+				</div>
 
-            <a className="docs" href="https://friesdao.gitbook.io/friesdao-docs/" target="_blank">
-                    read documentation
-                    <div className="arrow">➔</div>
-            </a>
-        </div>
+				<button className="inquire" onClick={() => { copyTextToClipboard("friesdao@protonmail.com") }} href="https://friesdao.gitbook.io/friesdao-docs/">
+					{copied ? "email copied!" : "inquire now"}
+					<i className="copy-icon fas fa-copy"></i>
+				</button>
+			</div>
 
-        <style jsx>{`
-            .faq {
-                background-color: #fff0f0;
+			<style jsx>{`
+            .franchisees {
+                // background-color: #fff0f0;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 50px;
-                border-top: 4px solid var(--orange)
+				border-bottom: 4px solid var(--orange);
             }
 
             .list {
@@ -501,26 +468,27 @@ const FAQ = () => (
             .title {
                 font-size: 4rem;
                 font-weight: bold;
-                color: var(--title);
-                white-space: nowrap;
+                color: var(--black);
+				margin-bottom: 50px;
+                text-align: center;
             }
 
-            .question {
+            .point {
                 font-size: 2.25rem;
-                color: var(--title);
+                color: var(--black);
                 margin-bottom: 10px;
             }
             
-            .answer {
+            .detail {
                 font-size: 1.3rem;
                 margin-bottom: 40px;
             }
 
-            .answer:last-child {
-                margin-bottom: 0;
+            .detail:last-child {
+                margin-bottom: 20px;
             }
 
-            .docs {
+            .inquire {
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
@@ -534,18 +502,10 @@ const FAQ = () => (
                 font-weight: 600;
             }
 
-            .docs:hover .arrow {
-                left: 0.5rem;
-            }
-
-            .arrow {
-                position: relative;
-                left: 0;
-                display: inline;
-                color: inherit;
-                transition-duration: 250ms;
-                margin-left: 0.5rem;
-            }
+			.copy-icon {
+				color: white;
+				margin-left: 0.5em;
+			}
 
             @media only screen and (max-width: 1000px) {
                 .answer {
@@ -553,55 +513,57 @@ const FAQ = () => (
                 }
             }
         `}</style>
-    </>
-)
+		</>
+	)
+}
 
 // NFT section
 const NFT = () => (
-    <>
-        <div className="section faq">
-            <h2 className="title">NFT memberships</h2>
-            <h3 className="subtitle">We're seeking to evolve NFT membership cards, complete with beautiful art and assorted traits, into perks such as food or discounts at our friesDAO network stores.</h3>
+	<>
+		<div className="section nft">
+			<h2 className="title">NFT memberships</h2>
+			<h3 className="subtitle">access special perks such as food or discounts at our friesDAO network stores</h3>
 
-            <div className="nft-list">
-                <div className="nft-container pre-release">
-                    <div className="nft-name">pre-release edition</div>
-                    <div className="nft-count">200 total</div>
-                    <img className="nft-img" src="nft.png" />
-                    <div className="nft-price">0 ETH</div>
-                    <div className="nft-rarity">for whitelist contributors</div>
-                </div>
+			<div className="nft-list">
+				<div className="nft-container pre-release">
+					<div className="nft-name">pre-release edition</div>
+					<div className="nft-count">200 total</div>
+					<img className="nft-img" src="nft.png" />
+					<div className="nft-price">0 ETH</div>
+					<div className="nft-rarity">for whitelist contributors</div>
+				</div>
 
-                <div className="nft-container limited">
-                    <div className="nft-name">limited edition</div>
-                    <div className="nft-count">350 total</div>
-                    <img className="nft-img" src="nft.png" />
-                    <div className="nft-price">0.03 ETH</div>
-                    <div className="nft-rarity">for general contributors</div>
-                </div>
+				<div className="nft-container limited">
+					<div className="nft-name">limited edition</div>
+					<div className="nft-count">350 total</div>
+					<img className="nft-img" src="nft.png" />
+					<div className="nft-price">0.03 ETH</div>
+					<div className="nft-rarity">for general contributors</div>
+				</div>
 
-                <div className="nft-container genesis">
-                    <div className="nft-name">genesis edition</div>
-                    <div className="nft-count">450 total</div>
-                    <img className="nft-img" src="nft.png" />
-                    <div className="nft-price">0.06 ETH</div>
-                    <div className="nft-rarity">for early participants</div>
-                </div>
+				<div className="nft-container genesis">
+					<div className="nft-name">genesis edition</div>
+					<div className="nft-count">450 total</div>
+					<img className="nft-img" src="nft.png" />
+					<div className="nft-price">0.06 ETH</div>
+					<div className="nft-rarity">for early participants</div>
+				</div>
 
-                <div className="nft-container standard">
-                    <div className="nft-name">standard edition</div>
-                    <div className="nft-count">6969 total</div>
-                    <img className="nft-img" src="nft.png" />
-                    <div className="nft-price">via staking</div>
-                    <div className="nft-rarity">for all participants</div>
-                </div>
-            </div>
+				<div className="nft-container standard">
+					<div className="nft-name">standard edition</div>
+					<div className="nft-count">6969 total</div>
+					<img className="nft-img" src="nft.png" />
+					<div className="nft-price">via staking</div>
+					<div className="nft-rarity">for all participants</div>
+				</div>
+			</div>
 
-            <h3 className="subsubtitle">Minting will be made available shortly after raise completes.</h3>
-        </div>
+			<h3 className="subsubtitle">Minting will be made available shortly after raise completes.</h3>
+		</div>
 
-        <style jsx>{`
-            .faq {
+		<style jsx>{`
+            .nft {
+				border-top: 4px solid var(--orange);
                 background-color: #fcf6ff;
                 display: flex;
                 flex-direction: column;
@@ -617,6 +579,7 @@ const NFT = () => (
                 justify-content: center;
                 width: 100%;
                 flex-wrap: wrap;
+				margin-top: 20px;
             }
 
             .title {
@@ -649,34 +612,35 @@ const NFT = () => (
                 border-radius: 10px;
                 padding: 24px 40px;
                 background-color: white;
+				width: 325px;
             }
 
             .nft-img {
-                height: 185px;
+                width: 100%;
                 margin: 24px 0;
             }
 
             .nft-name {
-                font-size: 1.65rem;
+                font-size: 1.4rem;
                 font-weight: bold;
                 color: var(--orange);
                 line-height: 1em;
             }
 
             .nft-count {
-                font-size: 1.5rem;
+                font-size: 1.25rem;
                 line-height: 1em;
                 margin-top: 8px;
             }
 
             .nft-price {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
                 line-height: 1em;
                 font-weight: bold;
             }
 
             .nft-rarity {
-                font-size: 1.5rem;
+                font-size: 1.3rem;
                 line-height: 1em;
                 margin-top: 4px;
             }
@@ -718,22 +682,22 @@ const NFT = () => (
                 }
             }
         `}</style>
-    </>
+	</>
 )
 
 // Raise $FRIES section
 
 const RaiseContainer = () => (
-    <>
-        <div className="section raise-container" id="raise">
-            <h2 className="title">treasury raise</h2>
-            <div className="notice">raise has ended, claiming is open</div>
-            <div className="content">
-                <Raise />
-            </div>
-        </div>
+	<>
+		<div className="section raise-container" id="raise">
+			<h2 className="title">treasury raise</h2>
+			<div className="notice">raise has ended, claiming is open</div>
+			<div className="content">
+				<Raise />
+			</div>
+		</div>
 
-        <style jsx>{`
+		<style jsx>{`
             .notice > a {
                 text-decoration: underline;
             }
@@ -781,34 +745,35 @@ const RaiseContainer = () => (
                 }
             }
         `}</style>
-    </>
+	</>
 )
 
 // Home page
 
 const Home = () => (
-    <>
-        <Landing />
-        <Coverage />
-        <About />
-        <Graphic />
-        <FAQ />
-        <NFT />
-        <RaiseContainer />
-        <style jsx global>{`
+	<>
+		<Landing />
+		<Coverage />
+		<About />
+		<Graphic />
+		<NFT />
+		<Franchisees />
+
+		<RaiseContainer />
+		<style jsx global>{`
             .section {
                 width: 100%;
                 height: auto;
-                padding: 10vh max(calc(50vw - 500px), var(--side)) calc(10vh + var(--side)) max(calc(50vw - 500px), var(--side));
+                padding: 10vh max(calc(50vw - 500px), var(--side)) 60px max(calc(50vw - 500px), var(--side));
             }
 
             @media only screen and (max-width: 700px) {
                 .section {
-                    padding: 5vh max(calc(50vw - 500px), var(--side)) calc(5vh + var(--side)) max(calc(50vw - 500px), var(--side));
+                    padding: 5vh max(calc(50vw - 500px), var(--side)) 40px max(calc(50vw - 500px), var(--side));
                 }
             }
         `}</style>
-    </>
+	</>
 )
 
 // Exports
