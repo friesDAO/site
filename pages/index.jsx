@@ -454,7 +454,6 @@ const Franchisees = () => {
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-				border-bottom: 4px solid var(--orange);
 				border-top: 4px solid var(--orange);
             }
 
@@ -758,7 +757,7 @@ const Home = () => (
 		<Graphic />
 		<Franchisees />
 
-		<RaiseContainer />
+		{/* <RaiseContainer /> */}
 		<style jsx global>{`
             .section {
                 width: 100%;
