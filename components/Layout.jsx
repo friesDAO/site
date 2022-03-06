@@ -27,7 +27,7 @@ const NavBar = () => {
 					<div className={`dropdown-contents${dropdownExpanded ? " shown" : ""}`}>
 						<div className="dropdown-link" onClick={() => { setModalActive(true) }}>join friesDAO<div className="arrow">➔</div></div>
 
-						<a href="https://app.fries.fund/" className="dropdown-link disabled">member app<div className="arrow">➔</div></a>
+						<a href="https://app.fries.fund/" className="dropdown-link">member app<div className="arrow">➔</div></a>
 
 						<a href="https://friesdao.gitbook.io/friesdao-docs/" target="_blank" className="dropdown-link">documentation<div className="arrow">➔</div></a>
 					</div>

@@ -216,16 +216,16 @@ const About = () => {
 					<img className="graphic" id="flowchart" src="/flowchart.svg" data-action="zoom" data-original="/flowchart.svg" />
 
 					<div className="right">
-						<h2 className="step">buying franchises</h2>
+						<h2 className="step">buy franchises</h2>
 						<div className="details">we're a decentralized community that's pooled $5.4M to buy and/or finance a global network of fast food stores</div>
 
-						<h2 className="step">making connections</h2>
+						<h2 className="step">make connections</h2>
 						<div className="details">from crypto enthusiasts to restaurant veterans, we're developing both friendships and business relationships</div>
 
-						<h2 className="step">enjoying perks</h2>
-						<div className="details">in addition to rights to decide on which brands to franchise under, friesDAO NFTs will enable perks such as free food</div>
+						<h2 className="step">enjoy perks</h2>
+						<div className="details">receive NFT-enabled perks at our stores in addition to rights to decide on which brands to franchise under</div>
 
-						<h2 className="step">creating value</h2>
+						<h2 className="step">create value</h2>
 						<div className="details">discover the power of network effects in real world decision-making to lay the foundations of the next DeFi evolution</div>
 					</div>
 				</div>
@@ -455,7 +455,7 @@ const Franchisees = () => {
                 justify-content: center;
                 align-items: center;
 				border-bottom: 4px solid var(--orange);
-				border-bottom: 4px solid var(--orange);
+				border-top: 4px solid var(--orange);
             }
 
             .list {

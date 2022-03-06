@@ -15,7 +15,7 @@ const JoinModal = ({ modalActive, setModalActive }) => {
 							<div className="option-desc">purchase 5000+ FRIES tokens, then access the <a className="underline" href="https://discord.gg/friesdao">members-only Discord</a></div>
 						</div>
 
-						<div className="join-option disabled">
+						<div className="join-option">
 							<a className="option-title underline" href="https://app.fries.fund/">member app</a>
 							<div className="option-desc">gain access to tools such as staking and governance</div>
 						</div>
@@ -85,6 +85,7 @@ const JoinModal = ({ modalActive, setModalActive }) => {
 					flex-direction: column;
 					align-items: center;
 					padding: 24px;
+					transition: 0.5s all
 				}
 
 				.join-option.disabled {
