@@ -14,7 +14,7 @@ const Metadata = ({ page }) => {
         <Head>
             <meta charSet="UTF-8"></meta>
             <meta name="viewport" content="width=device-width"></meta>
-            <meta name="description" content="we're pooling funds to buy a fast food franchise or two"></meta>
+            <meta name="description" content="a decentralized social experiment where a crypto community builds and governs a fast food franchise empire via wisdom of the crowd"></meta>
             <meta property="og:title" content={title}></meta>
             <meta property="og:type" content="website"></meta>
             <meta property="og:image" content={`https://${constants.host}/friesdao.png`}></meta>
@@ -23,7 +23,7 @@ const Metadata = ({ page }) => {
             <meta name="twitter:card" content="summary"></meta>
             <meta name="twitter:site" content="@friesdao"></meta>
             <meta name="twitter:title" content={title}></meta>
-            <meta name="twitter:description" content="we're pooling funds to buy a fast food franchise or two"></meta>
+            <meta name="twitter:description" content="a decentralized social experiment where a crypto community builds and governs a fast food franchise empire via wisdom of the crowd"></meta>
             <meta name="twitter:image" content={`https://${constants.host}/friesdao.png`}></meta>
             <meta name="twitter:creator" content="@friesdao"></meta>
 
