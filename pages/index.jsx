@@ -524,7 +524,7 @@ const NFT = () => (
 
 			<div className="nft-list">
 				<div className="nft-container pre-release">
-					<div className="nft-name">pre-release edition</div>
+					<div className="nft-name">founders edition</div>
 					<div className="nft-count">200 total</div>
 					<img className="nft-img" src="nft.png" />
 					<div className="nft-price">0 ETH</div>
@@ -532,7 +532,7 @@ const NFT = () => (
 				</div>
 
 				<div className="nft-container limited">
-					<div className="nft-name">limited edition</div>
+					<div className="nft-name">genesis edition</div>
 					<div className="nft-count">350 total</div>
 					<img className="nft-img" src="nft.png" />
 					<div className="nft-price">0.03 ETH</div>
@@ -540,7 +540,7 @@ const NFT = () => (
 				</div>
 
 				<div className="nft-container genesis">
-					<div className="nft-name">genesis edition</div>
+					<div className="nft-name">limited edition</div>
 					<div className="nft-count">450 total</div>
 					<img className="nft-img" src="nft.png" />
 					<div className="nft-price">0.06 ETH</div>
@@ -556,7 +556,7 @@ const NFT = () => (
 				</div>
 			</div>
 
-			<h3 className="subsubtitle">Minting will be made available in early March.</h3>
+			<h3 className="subsubtitle">minting is available in our <a href="https://app.fries.fund/">member app</a></h3>
 		</div>
 
 		<style jsx>{`
@@ -600,6 +600,10 @@ const NFT = () => (
                 font-weight: 400;
                 text-align: center;
             }
+
+			.subsubtitle > a {
+				text-decoration: underline;
+			}
 
             .nft-container {
                 display: flex;
